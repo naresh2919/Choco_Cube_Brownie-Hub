@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choco Cube</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=Barlow:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+ <link rel="icon" type="image/x-icon" href="Choco Cube.png">
+
+<style>
+/* ══════════════════════════════════════════
+   GLOBAL RESET & BASE
+   ══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --purple: #7b2fff;
+  --purple-light: #a855f7;
+  --purple-glow: rgba(123,47,255,0.35);
+  --purple-dim: rgba(123,47,255,0.15);
+  --white: #ffffff;
+  --off-white: #e8e8f0;
+  --gray: #888;
+  --dark: #08080f;
+  --dark2: #0d0d1a;
+  --dark3: #111122;
+  --border: rgba(123,47,255,0.2);
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--dark);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8,8,15,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 60px;
+}
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 2px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo span { color: var(--purple-light); }
+.logo img { height: 32px; width: 32px; object-fit: contain; }
+.cart-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--off-white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.cart-btn:hover {
+  border-color: var(--purple-light);
+  color: var(--purple-light);
+  box-shadow: 0 0 16px var(--purple-glow);
+}
+.cart-badge {
+  background: var(--purple);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+/* ── BILLBOARD ── */
+.billboard {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #050510;
+}
+.billboard-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(123,47,255,0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(168,85,247,0.12) 0%, transparent 60%);
+}
+.billboard-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, var(--dark) 100%);
+  z-index: 1;
+}
+.billboard-deco {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 50%;
+  z-index: 1;
+  opacity: 0.15;
+}
+.billboard-deco img { width: 100%; height: 100%; object-fit: cover; }
+.billboard-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60px 20px;
+}
+.billboard-tag {
+  display: inline-block;
+  background: var(--purple-dim);
+  border: 1px solid var(--border);
+  color: var(--purple-light);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+.billboard-content h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 8vw, 96px);
+  letter-spacing: 4px;
+  line-height: 1;
+  color: var(--white);
+  text-shadow: 0 0 60px rgba(123,47,255,0.4);
+  margin-bottom: 16px;
+}
+.billboard-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--gray);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.meta-fresh { color: var(--purple-light); }
+.meta-dot { width: 3px; height: 3px; background: #333; border-radius: 50%; }
+
+/* ── TABS ── */
+.tabs-wrap {
+  position: sticky;
+  top: 60px;
+  z-index: 99;
+  background: rgba(8,8,15,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #111122;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  padding: 0 16px;
+}
+.tabs-wrap::-webkit-scrollbar { display: none; }
+.tab {
+  background: none;
+  border: none;
+  color: #555;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tab:hover { color: var(--off-white); }
+.tab.active {
+  color: var(--white);
+  border-bottom-color: var(--purple);
+}
+.tab-count {
+  background: #1a1a2e;
+  color: #666;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+.tab.active .tab-count {
+  background: var(--purple-dim);
+  color: var(--purple-light);
+}
+
+/* ═══════════════════════════════════════════════
+   PURPLE NEON BROWNIE SECTION
+   ═══════════════════════════════════════════════ */
+.brownie-section {
+  position: relative;
+  background: var(--dark);
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 80px;
+}
+
+/* Ambient background orbs */
+.brownie-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 10% 20%, rgba(123,47,255,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 90% 60%, rgba(168,85,247,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 25% at 50% 90%, rgba(90,20,200,0.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Noise texture overlay */
+.brownie-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* Scanlines effect */
+.brownie-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(123,47,255,0.01) 2px,
+    rgba(123,47,255,0.01) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Brownie Header ── */
+.brownie-header {
+  position: relative;
+  z-index: 2;
+  padding: 52px 24px 36px;
+  text-align: center;
+}
+.brownie-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--purple-dim);
+  border: 1px solid var(--border);
+  color: var(--purple-light);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 4px;
+  margin-bottom: 18px;
+}
+.brownie-eyebrow::before,
+.brownie-eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--purple-light);
+  opacity: 0.5;
+}
+.brownie-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 88px);
+  letter-spacing: 6px;
+  line-height: 0.95;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.brownie-title em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--purple-light);
+  text-shadow: 0 0 40px var(--purple-glow);
+}
+.brownie-subtitle {
+  color: #444;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.brownie-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  color: #2a2a3a;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+.brownie-divider::before,
+.brownie-divider::after {
+  content: '';
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--purple-dim), transparent);
+}
+
+/* ── Brownie Grid ── */
+.brownie-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 0 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Brownie Card ── */
+.br-card {
+  position: relative;
+  background: var(--dark2);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #1a1a2e;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, box-shadow 0.3s;
+  animation: brCardIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes brCardIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+.br-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(123,47,255,0.5);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.6),
+    0 0 30px rgba(123,47,255,0.2),
+    inset 0 1px 0 rgba(168,85,247,0.1);
+}
+
+/* Glow line at top */
+.br-card-glow-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--purple), var(--purple-light), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.br-card:hover .br-card-glow-line { opacity: 1; }
+
+/* Card badge */
+.br-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(123,47,255,0.85);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  z-index: 3;
+  backdrop-filter: blur(4px);
+}
+.br-badge.new { background: rgba(123,47,255,0.9); }
+.br-badge.best { background: rgba(255,165,0,0.85); }
+.br-badge.hot { background: rgba(255,50,50,0.85); }
+
+/* Card image */
+.br-img-wrap {
+  position: relative;
+  height: 160px;
+  background: #080814;
+  overflow: hidden;
+}
+.br-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.3s;
+  filter: brightness(0.8) saturate(0.9);
+}
+.br-card:hover .br-img-wrap img {
+  transform: scale(1.1);
+  filter: brightness(1) saturate(1.1);
+}
+.br-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  background: radial-gradient(ellipse at center, #1a0a30, #080814);
+}
+
+/* Purple tint overlay on image */
+.br-img-tint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(123,47,255,0.08) 0%,
+    transparent 50%,
+    rgba(168,85,247,0.06) 100%
+  );
+  pointer-events: none;
+}
+.br-img-fade {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(to top, var(--dark2), transparent);
+}
+
+/* Card body */
+.br-body {
+  padding: 14px 16px 16px;
+}
+.br-name {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 900;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--white);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.br-desc {
+  color: #444;
+  font-size: 11px;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+/* Tags row */
+.br-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+.br-tag {
+  background: rgba(123,47,255,0.1);
+  border: 1px solid rgba(123,47,255,0.2);
+  color: #7750bb;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+
+.br-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.br-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+  color: var(--white);
+  line-height: 1;
+}
+.br-price span {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  color: #444;
+  font-weight: 400;
+  margin-left: 2px;
+}
+.br-add-btn {
+  background: transparent;
+  border: 1px solid rgba(123,47,255,0.35);
+  color: #7750bb;
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.br-add-btn:hover {
+  background: rgba(123,47,255,0.15);
+  border-color: var(--purple-light);
+  color: var(--purple-light);
+  box-shadow: 0 0 16px rgba(123,47,255,0.3);
+}
+.br-add-btn.added {
+  background: rgba(123,47,255,0.2);
+  border-color: var(--purple-light);
+  color: var(--purple-light);
+  box-shadow: 0 0 20px rgba(123,47,255,0.4);
+}
+
+/* Featured card — spans 2 cols on wide screens */
+.br-card.featured {
+  grid-column: span 2;
+}
+@media (max-width: 600px) {
+  .br-card.featured { grid-column: span 1; }
+}
+.br-card.featured .br-img-wrap { height: 220px; }
+.br-card.featured .br-name { font-size: 18px; }
+
+/* ── Floating particles ── */
+.br-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.br-particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: brFloat linear infinite;
+  opacity: 0;
+}
+@keyframes brFloat {
+  0%   { transform: translateY(100vh) scale(0.3); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(-100px) scale(1); opacity: 0; }
+}
+
+/* ── Section stats bar ── */
+.brownie-stats {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 24px 24px 32px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.br-stat {
+  text-align: center;
+}
+.br-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: var(--purple-light);
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px var(--purple-glow);
+}
+.br-stat-label {
+  font-size: 9px;
+  color: #444;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.br-stat-sep {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, transparent, #2a2a3a, transparent);
+}
+
+/* ═══════════════════════════════════════════════
+   TOPPINGS SECTION (normal dark style)
+   ═══════════════════════════════════════════════ */
+.grid-section {
+  padding: 32px 24px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.row-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #111;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+.card {
+  background: var(--dark2);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #1a1a2e;
+  transition: transform 0.25s, border-color 0.25s;
+  animation: cardIn 0.4s ease both;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(123,47,255,0.3);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+.card-thumb {
+  position: relative;
+  height: 130px;
+  background: #080814;
+  overflow: hidden;
+}
+.card-thumb-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(123,47,255,0.06), transparent);
+}
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  filter: brightness(0.8);
+  transition: filter 0.3s, transform 0.4s;
+}
+.card:hover .card-img {
+  filter: brightness(1);
+  transform: scale(1.06);
+}
+.card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+.card-body {
+  padding: 12px 14px 14px;
+}
+.card-name {
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--off-white);
+  margin-bottom: 4px;
+}
+.card-desc {
+  color: #3a3a4a;
+  font-size: 11px;
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+.add-btn {
+  background: transparent;
+  border: 1px solid #252535;
+  color: #555;
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.add-btn:hover {
+  border-color: var(--purple);
+  color: var(--purple-light);
+}
+.add-btn.added {
+  border-color: var(--purple-light);
+  color: var(--purple-light);
+}
+
+/* ═══════════════════════════════════════════════
+   BOO! COOL DRINKS (existing theme preserved)
+   ═══════════════════════════════════════════════ */
+.boo-section {
+  position: relative;
+  background: #080808;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 60px;
+}
+.boo-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 30%, rgba(255,69,0,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 35% at 85% 15%, rgba(180,0,200,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 50% 80%, rgba(0,100,255,0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.boo-particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.boo-particle { position: absolute; border-radius: 50%; animation: booFloat linear infinite; opacity: 0; }
+@keyframes booFloat {
+  0%   { transform: translateY(100vh) scale(0.5); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
+}
+.boo-header { position: relative; z-index: 2; text-align: center; padding: 48px 20px 32px; }
+.boo-new-badge {
+  display: inline-block; background: #ff4500; color: #fff; font-size: 10px; font-weight: 900;
+  letter-spacing: 3px; padding: 4px 12px; border-radius: 3px; text-transform: uppercase;
+  margin-bottom: 12px; animation: booNewPulse 2s ease-in-out infinite;
+}
+@keyframes booNewPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,69,0,0.5); }
+  50%       { box-shadow: 0 0 0 8px rgba(255,69,0,0); }
+}
+.boo-logo-wrap { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 6px; }
+.boo-logo-b, .boo-logo-exclaim { font-size: 72px; font-weight: 900; color: #fff; font-family: 'Arial Black', 'Bebas Neue', sans-serif; line-height: 1; letter-spacing: -2px; text-shadow: -4px 4px 0 #1a1a1a; }
+.boo-logo-o1 { font-size: 72px; font-weight: 900; color: #ff4500; font-family: 'Arial Black', 'Bebas Neue', sans-serif; line-height: 1; letter-spacing: -2px; text-shadow: -3px 3px 0 #7a1a00, 0 0 30px rgba(255,69,0,0.6); animation: booO1 3s ease-in-out infinite; }
+.boo-logo-o2 { font-size: 72px; font-weight: 900; color: #cc00cc; font-family: 'Arial Black', 'Bebas Neue', sans-serif; line-height: 1; letter-spacing: -2px; text-shadow: -3px 3px 0 #5a005a, 0 0 30px rgba(200,0,200,0.6); animation: booO2 3s ease-in-out infinite 0.3s; }
+@keyframes booO1 {
+  0%, 100% { text-shadow: -3px 3px 0 #7a1a00, 0 0 20px rgba(255,69,0,0.5); }
+  50%       { text-shadow: -3px 3px 0 #7a1a00, 0 0 45px rgba(255,69,0,0.9), 0 0 80px rgba(255,69,0,0.3); }
+}
+@keyframes booO2 {
+  0%, 100% { text-shadow: -3px 3px 0 #5a005a, 0 0 20px rgba(200,0,200,0.5); }
+  50%       { text-shadow: -3px 3px 0 #5a005a, 0 0 45px rgba(200,0,200,0.9), 0 0 80px rgba(200,0,200,0.3); }
+}
+.boo-tagline { color: #444; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-top: 6px; font-family: 'Barlow', sans-serif; }
+.boo-ornament { color: #2a2a2a; font-size: 13px; letter-spacing: 6px; margin-top: 10px; }
+.boo-grid { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; padding: 0 24px 32px; max-width: 1100px; margin: 0 auto; }
+.boo-card { position: relative; background: #111; border-radius: 14px; overflow: hidden; border: 1px solid #1e1e1e; transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), border-color 0.25s; animation: booCardIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+@keyframes booCardIn { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.boo-card:hover { transform: translateY(-6px) scale(1.02); border-color: var(--boo-accent, #ff4500); box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 20px var(--boo-glow, rgba(255,69,0,0.15)); }
+.boo-card-accent { height: 3px; width: 100%; background: var(--boo-bar, #ff4500); }
+.boo-card-new { position: absolute; top: 10px; left: 10px; background: #ff4500; color: #fff; font-size: 8px; font-weight: 900; letter-spacing: 2px; padding: 3px 7px; border-radius: 3px; text-transform: uppercase; z-index: 4; }
+.boo-card-thumb { position: relative; height: 130px; background: #0d0d0d; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.boo-card-thumb::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: linear-gradient(to top, #111, transparent); }
+.boo-card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; filter: brightness(0.85) contrast(1.1); }
+.boo-card:hover .boo-card-thumb img { transform: scale(1.08); filter: brightness(1) contrast(1.15); }
+.boo-card-thumb-placeholder { font-size: 52px; filter: grayscale(0.3); }
+.boo-card-body { padding: 10px 12px 13px; }
+.boo-card-name { color: #f0f0f0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; font-family: 'Barlow', sans-serif; }
+.boo-card-desc { color: #484848; font-size: 11px; line-height: 1.45; margin-bottom: 10px; font-family: 'Barlow', sans-serif; }
+.boo-card-footer { display: flex; align-items: center; justify-content: space-between; }
+.boo-card-price { color: #fff; font-size: 18px; font-weight: 800; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
+.boo-card-price span { font-size: 11px; color: #555; font-weight: 400; font-family: 'Barlow', sans-serif; }
+.boo-add-btn { background: transparent; border: 1px solid #2a2a2a; color: #666; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s; font-family: 'Barlow', sans-serif; position: relative; overflow: hidden; }
+.boo-add-btn:hover { border-color: var(--boo-accent, #ff4500); color: var(--boo-accent, #ff4500); box-shadow: 0 0 10px var(--boo-glow, rgba(255,69,0,0.25)); }
+.boo-add-btn.added { border-color: #22c55e; color: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.3); }
+.boo-bottom { position: relative; z-index: 2; text-align: center; padding: 10px 20px 20px; color: #222; font-size: 13px; letter-spacing: 6px; }
+
+/* ═══════════════════════════════════════════════
+   HYPNOTIC / DIRTY SODA SECTION
+   ═══════════════════════════════════════════════ */
+.hypnotic-section {
+  position: relative;
+  background: #050508;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 60px;
+}
+.hype-particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.hype-particle { position: absolute; animation: hypeFloat linear infinite; }
+@keyframes hypeFloat {
+  0%   { transform: translateY(0) scale(1); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { transform: translateY(-80px) scale(1.5); opacity: 0; }
+}
+.hype-header { position: relative; z-index: 2; text-align: center; padding: 52px 20px 36px; }
+.hype-eye { font-size: 36px; margin-bottom: 12px; animation: hypeEye 4s ease-in-out infinite; }
+@keyframes hypeEye { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px #7b2fff); } 50% { transform: scale(1.15); filter: drop-shadow(0 0 20px #a855f7); } }
+.hype-title { font-family: 'Bebas Neue', sans-serif; font-size: 64px; letter-spacing: 8px; color: #fff; text-shadow: 0 0 40px rgba(123,47,255,0.5); margin-bottom: 8px; }
+.hype-subtitle { color: #3a3a4a; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; font-family: 'Barlow', sans-serif; }
+.hype-ornament { color: #2a2a3a; font-size: 14px; letter-spacing: 4px; }
+.hype-grid { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 0 24px 32px; max-width: 1200px; margin: 0 auto; }
+.hype-card { position: relative; border-radius: 16px; overflow: hidden; background: #0a0a12; border: 1px solid #111122; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); animation: hypeCardIn 0.5s ease both; cursor: pointer; }
+@keyframes hypeCardIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+.hype-card:hover { transform: translateY(-8px); border-color: var(--glow-color, #7b2fff); box-shadow: 0 16px 50px rgba(0,0,0,0.7), 0 0 30px rgba(123,47,255,0.15); }
+.hype-card-border { position: absolute; inset: 0; border-radius: 16px; border: 1px solid transparent; background: linear-gradient(135deg, var(--glow-color, #7b2fff), transparent) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 5; }
+.hype-card:hover .hype-card-border { opacity: 1; }
+.hype-card-inner { position: relative; z-index: 2; }
+.hype-spell-tag { position: absolute; top: 10px; left: 10px; background: rgba(10,10,20,0.85); border: 1px solid #2a2a3a; color: #444; font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; z-index: 3; backdrop-filter: blur(4px); }
+.hype-img-wrap { position: relative; height: 150px; overflow: hidden; background: #050508; }
+.hype-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease, filter 0.3s; filter: brightness(0.75) saturate(0.85); }
+.hype-card:hover .hype-img { transform: scale(1.1); filter: brightness(1) saturate(1.1); }
+.hype-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+.hype-img-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: linear-gradient(to top, #0a0a12, transparent); }
+.hype-card-body { padding: 12px 14px 14px; }
+.hype-item-name { font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 0.8px; color: #d0d0e0; margin-bottom: 4px; font-family: 'Barlow', sans-serif; }
+.hype-item-desc { color: #333; font-size: 11px; line-height: 1.45; margin-bottom: 12px; font-family: 'Barlow', sans-serif; }
+.hype-card-footer { display: flex; align-items: center; justify-content: space-between; }
+.hype-price { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--glow-color, #7b2fff); text-shadow: 0 0 12px currentColor; }
+.hype-add-btn { background: transparent; border: 1px solid #1e1e2e; color: #555; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s; font-family: 'Barlow', sans-serif; }
+.hype-add-btn:hover { border-color: var(--glow-color, #7b2fff); color: var(--glow-color, #7b2fff); box-shadow: 0 0 12px rgba(123,47,255,0.25); }
+.hype-add-btn.added { border-color: #22c55e; color: #22c55e; }
+.hype-bottom-ornament { position: relative; z-index: 2; text-align: center; padding: 10px 20px 20px; color: #1a1a2a; font-size: 12px; letter-spacing: 5px; }
+
+/* ═══════════════════════════════════════════════
+   CART BAR, DRAWER, MODALS (preserved)
+   ═══════════════════════════════════════════════ */
+.spacer { height: 80px; }
+.cart-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(13,13,26,0.97);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(123,47,255,0.25);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  z-index: 200;
+  box-shadow: 0 -8px 40px rgba(123,47,255,0.1);
+}
+.cart-bar.visible { transform: translateY(0); }
+.bar-left { display: flex; align-items: center; gap: 10px; }
+.bar-items-count { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--purple-light); letter-spacing: 1px; line-height: 1; }
+.bar-label { color: #555; font-size: 12px; letter-spacing: 1px; }
+.bar-total { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--white); letter-spacing: 1px; margin-left: 6px; }
+.view-cart-btn {
+  background: var(--purple);
+  border: none;
+  color: #fff;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(123,47,255,0.4);
+}
+.view-cart-btn:hover { background: var(--purple-light); box-shadow: 0 4px 30px rgba(123,47,255,0.6); }
+
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 300; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.overlay.open { opacity: 1; pointer-events: all; }
+.drawer { position: fixed; right: 0; top: 0; bottom: 0; width: min(420px, 100vw); background: var(--dark2); border-left: 1px solid var(--border); z-index: 400; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); display: flex; flex-direction: column; }
+.drawer.open { transform: translateX(0); }
+.drawer-head { padding: 20px 24px; border-bottom: 1px solid #1a1a2e; display: flex; align-items: center; justify-content: space-between; }
+.drawer-title { display: flex; align-items: center; gap: 12px; }
+.red-line { width: 3px; height: 24px; background: var(--purple); border-radius: 2px; box-shadow: 0 0 10px var(--purple-glow); }
+.drawer-title h2 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; color: var(--white); }
+.close-btn { background: transparent; border: 1px solid #1e1e2e; color: #555; width: 36px; height: 36px; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+.close-btn:hover { border-color: var(--purple); color: var(--purple-light); }
+.drawer-items { flex: 1; overflow-y: auto; padding: 16px; scrollbar-width: thin; scrollbar-color: #1a1a2e transparent; }
+.empty-state { text-align: center; padding: 60px 20px; }
+.e-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
+.empty-state p { color: #444; font-size: 14px; line-height: 1.6; }
+.ci { display: flex; align-items: center; gap: 12px; background: var(--dark3); border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 1px solid #1a1a2e; }
+.ci-thumb { width: 48px; height: 48px; border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #080814; }
+.ci-img { width: 100%; height: 100%; object-fit: cover; }
+.ci-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.ci-info { flex: 1; min-width: 0; }
+.ci-name { font-weight: 700; font-size: 13px; color: var(--off-white); margin-bottom: 3px; }
+.ci-sub { color: #444; font-size: 11px; }
+.qty-ctrl { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.q-btn { background: #1a1a2e; border: 1px solid #252535; color: var(--off-white); width: 28px; height: 28px; border-radius: 6px; cursor: pointer; font-size: 16px; display: grid; place-items: center; transition: all 0.15s; }
+.q-btn:hover { border-color: var(--purple); color: var(--purple-light); }
+.q-num { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--white); min-width: 20px; text-align: center; }
+.drawer-foot { padding: 16px 24px 24px; border-top: 1px solid #1a1a2e; }
+.total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.total-label { color: #555; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+.total-amount { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--white); letter-spacing: 1px; }
+.order-btn { width: 100%; background: var(--purple); border: none; color: #fff; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; padding: 14px; border-radius: 10px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(123,47,255,0.4); margin-bottom: 10px; }
+.order-btn:disabled { background: #1a1a2e; color: #333; box-shadow: none; cursor: not-allowed; }
+.order-btn:not(:disabled):hover { background: var(--purple-light); box-shadow: 0 4px 30px rgba(123,47,255,0.6); }
+.secure-note { color: #333; font-size: 11px; text-align: center; letter-spacing: 0.5px; }
+
+/* Modals */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal-box { background: var(--dark2); border: 1px solid var(--border); border-radius: 20px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 40px rgba(123,47,255,0.15); }
+.modal-head { padding: 20px 24px; border-bottom: 1px solid #1a1a2e; display: flex; align-items: center; justify-content: space-between; }
+.modal-title-wrap { display: flex; align-items: center; gap: 12px; }
+.modal-icon { font-size: 28px; }
+.modal-heading { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); }
+.modal-sub { color: #555; font-size: 12px; margin-top: 1px; }
+.modal-close-btn { background: transparent; border: 1px solid #1e1e2e; color: #555; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+.modal-close-btn:hover { border-color: var(--purple); color: var(--purple-light); }
+.modal-body { padding: 20px 24px; }
+.order-summary-strip { background: var(--dark3); border-radius: 10px; padding: 14px; margin-bottom: 20px; border: 1px solid #1a1a2e; }
+.summary-label { color: #555; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+.summary-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.sum-chip { background: var(--purple-dim); border: 1px solid var(--border); color: var(--purple-light); font-size: 11px; padding: 3px 9px; border-radius: 5px; }
+.summary-total { color: var(--off-white); font-size: 13px; font-weight: 700; }
+.form-group { margin-bottom: 16px; }
+.form-label { display: block; color: #888; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+.req { color: var(--purple-light); }
+.opt { color: #444; font-weight: 400; text-transform: none; }
+.form-input { width: 100%; background: var(--dark3); border: 1px solid #1a1a2e; border-radius: 8px; color: var(--off-white); font-family: 'Barlow', sans-serif; font-size: 14px; padding: 10px 14px; transition: border-color 0.2s; outline: none; }
+.form-input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(123,47,255,0.1); }
+.form-input::placeholder { color: #2a2a3a; }
+.input-prefix-wrap { display: flex; align-items: center; }
+.input-prefix { background: var(--dark3); border: 1px solid #1a1a2e; border-right: none; border-radius: 8px 0 0 8px; padding: 10px 12px; color: #555; font-size: 13px; flex-shrink: 0; }
+.loc-pre { font-size: 16px; }
+.prefix-input { border-radius: 0 8px 8px 0; }
+.form-select { appearance: none; cursor: pointer; }
+.form-textarea { resize: vertical; min-height: 64px; }
+.char-count { color: #333; font-size: 10px; text-align: right; margin-top: 4px; }
+.field-err { display: none; color: #ef4444; font-size: 11px; margin-top: 4px; }
+.modal-foot { padding: 16px 24px 20px; border-top: 1px solid #1a1a2e; display: flex; gap: 10px; }
+.modal-cancel-btn { flex: 1; background: transparent; border: 1px solid #1a1a2e; color: #555; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 700; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+.modal-cancel-btn:hover { border-color: #333; color: #888; }
+.modal-confirm-btn { flex: 2; background: var(--purple); border: none; color: #fff; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+.modal-confirm-btn:disabled { background: #1a1a2e; color: #333; cursor: not-allowed; }
+.modal-confirm-btn:not(:disabled):hover { background: var(--purple-light); }
+
+.success-box { background: var(--dark2); border: 1px solid var(--border); border-radius: 20px; padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 40px rgba(123,47,255,0.2); }
+.success-anim { font-size: 52px; margin-bottom: 16px; animation: successPop 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes successPop { from { transform: scale(0); } to { transform: scale(1); } }
+.success-heading { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 3px; color: var(--white); margin-bottom: 8px; }
+.success-tagline { color: #555; font-size: 13px; margin-bottom: 20px; }
+.success-details { background: var(--dark3); border-radius: 10px; padding: 16px; text-align: left; border: 1px solid #1a1a2e; margin-bottom: 20px; }
+.success-customer { margin-bottom: 14px; }
+.sc-row { display: flex; justify-content: space-between; padding: 4px 0; }
+.sc-key { color: #555; font-size: 12px; }
+.sc-val { color: var(--off-white); font-size: 12px; font-weight: 600; }
+.success-divider { height: 1px; background: #1a1a2e; margin: 10px 0; }
+.success-item { display: flex; justify-content: space-between; color: #888; font-size: 12px; padding: 3px 0; }
+.success-total-row { display: flex; justify-content: space-between; font-weight: 700; font-size: 14px; color: var(--white); margin-top: 8px; padding-top: 8px; border-top: 1px solid #1a1a2e; }
+.success-done-btn { background: var(--purple); border: none; color: #fff; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; padding: 12px 32px; border-radius: 10px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(123,47,255,0.4); }
+.success-done-btn:hover { background: var(--purple-light); }
+
+/* ═══════════════════════════════════════════════
+   CONTACT & FOOTER
+   ═══════════════════════════════════════════════ */
+.contact-section { background: #050508; border-top: 1px solid #0d0d1a; padding: 60px 24px 0; }
+.contact-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; max-width: 1100px; margin: 0 auto 48px; }
+@media (max-width: 768px) { .contact-inner { grid-template-columns: 1fr; } }
+.contact-logo-txt { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; margin-bottom: 12px; }
+.contact-tagline { color: #555; font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
+.insta-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--purple-dim); border: 1px solid var(--border); color: var(--purple-light); font-size: 12px; padding: 8px 14px; border-radius: 20px; text-decoration: none; transition: all 0.2s; }
+.insta-pill:hover { background: rgba(123,47,255,0.25); border-color: var(--purple-light); }
+.contact-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+@media (max-width: 600px) { .contact-cols { grid-template-columns: 1fr; } }
+.col-title { font-weight: 800; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--purple-light); margin-bottom: 12px; }
+.col-addr { color: #555; font-size: 13px; line-height: 1.7; margin-bottom: 8px; }
+.map-link { color: var(--purple-light); font-size: 12px; text-decoration: none; transition: color 0.2s; }
+.map-link:hover { color: var(--purple); }
+.reach-links { display: flex; flex-direction: column; gap: 10px; }
+.reach-row { display: flex; align-items: center; gap: 10px; text-decoration: none; transition: opacity 0.2s; }
+.reach-row:hover { opacity: 0.7; }
+.reach-icon { font-size: 16px; }
+.reach-text { display: flex; flex-direction: column; gap: 1px; }
+.reach-label { color: #444; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+.reach-val { color: var(--off-white); font-size: 12px; font-weight: 600; }
+.hours-table { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+.hours-row { display: flex; justify-content: space-between; color: #555; font-size: 13px; }
+.hrs-val { color: var(--off-white); font-weight: 600; }
+.hours-note { color: #333; font-size: 11px; }
+.footer-bar { border-top: 1px solid #0d0d1a; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; }
+.footer-copy { color: #333; font-size: 12px; }
+.footer-dev { color: #333; font-size: 12px; }
+.footer-dev strong { color: #555; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo"><img src="Choco Cube.png" alt="Choco Cube"> Choco<span>Cube</span></div>
+  <div class="nav-right">
+    <button class="cart-btn" onclick="openCart()">
+      🛒 My Cart
+      <span class="cart-badge" id="cart-count">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- BILLBOARD -->
+<div class="billboard">
+  <div class="billboard-bg"></div>
+  <div class="billboard-vignette"></div>
+  <div class="billboard-deco"></div>
+  <div class="billboard-content">
+    <div class="billboard-tag">⬛ NOW SERVING</div>
+    <h1>Our Menu</h1>
+    <div class="billboard-meta">
+      <span class="meta-fresh">✦ Fresh Today</span>
+      <span class="meta-dot"></span>
+      <span>Takeaway Only</span>
+      <span class="meta-dot"></span>
+      <span>Madurai</span>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap" id="tabs"></div>
+
+<!-- BROWNIE SECTION (purple neon) -->
+<div class="brownie-section" id="brownie-section">
+  <div class="brownie-scanlines"></div>
+  <div class="br-particles" id="br-particles"></div>
+
+  <div class="brownie-header">
+    <div class="brownie-eyebrow">Freshly Baked</div>
+    <div class="brownie-title">DARK<br><em>BROWNIES</em></div>
+    <div class="brownie-subtitle">Fudgy · Rich · Handcrafted</div>
+    <div class="brownie-divider">✦ THE COLLECTION ✦</div>
+  </div>
+
+  <div class="brownie-stats">
+    <div class="br-stat"><div class="br-stat-num">9</div><div class="br-stat-label">Varieties</div></div>
+    <div class="br-stat-sep"></div>
+    <div class="br-stat"><div class="br-stat-num">₹30</div><div class="br-stat-label">Starting At</div></div>
+    <div class="br-stat-sep"></div>
+    <div class="br-stat"><div class="br-stat-num">100%</div><div class="br-stat-label">Handcrafted</div></div>
+  </div>
+
+  <div class="brownie-grid" id="brownie-grid"></div>
+</div>
+
+<!-- NORMAL GRID (Toppings) -->
+<div class="grid-section" id="normal-grid-section" style="display:none">
+  <div class="row-label" id="row-label"></div>
+  <div class="cards-grid" id="grid"></div>
+</div>
+
+<!-- BOO! COOL DRINKS -->
+<div class="boo-section" id="boo-section" style="display:none">
+  <div class="boo-particles" id="boo-particles"></div>
+  <svg style="position:absolute;pointer-events:none;z-index:1;top:10%;left:2%;width:120px;opacity:0.15" viewBox="0 0 100 80"><ellipse cx="30" cy="40" rx="28" ry="18" fill="#ff4500" transform="rotate(-20,30,40)"/><circle cx="82" cy="55" r="6" fill="#ff4500"/></svg>
+  <svg style="position:absolute;pointer-events:none;z-index:1;top:5%;right:2%;width:100px;opacity:0.12" viewBox="0 0 100 80"><ellipse cx="50" cy="35" rx="24" ry="15" fill="#cc00cc" transform="rotate(10,50,35)"/><circle cx="78" cy="20" r="5" fill="#cc00cc"/></svg>
+  <div class="boo-header">
+    <div class="boo-new-badge">✦ Now Chilling ✦</div>
+    <div class="boo-logo-wrap">
+      <span class="boo-logo-b">B</span><span class="boo-logo-o1">O</span><span class="boo-logo-o2">O</span><span class="boo-logo-exclaim">!</span>
+    </div>
+    <div class="boo-tagline">Cool Drinks · Refreshingly Dark</div>
+    <div class="boo-ornament">✦ ━━━━━ 🥤 ━━━━━ ✦</div>
+  </div>
+  <div class="boo-grid" id="boo-grid"></div>
+  <div class="boo-bottom">✦ ━━━━━ 💀 ━━━━━ ✦</div>
+</div>
+
+<!-- HYPNOTIC DIRTY SODA -->
+<div class="hypnotic-section" id="hypnotic-section" style="display:none">
+  <div class="hype-particles" id="hype-particles"></div>
+  <div class="hype-header">
+    <div class="hype-eye">👁</div>
+    <h2 class="hype-title">Dirty Soda</h2>
+    <div class="hype-subtitle">✦ Where Shadows Dance and Spells are Savored ✦</div>
+    <div class="hype-ornament">❧ ✦ ❧</div>
+  </div>
+  <div class="hype-grid" id="hype-grid"></div>
+  <div class="hype-bottom-ornament"><span>✦ ━━━━━━━━ ✦ ━━━━━━━━ ✦</span></div>
+</div>
+
+<div class="spacer"></div>
+
+<!-- CART BAR -->
+<div class="cart-bar" id="cart-bar">
+  <div class="bar-left">
+    <span class="bar-items-count" id="bar-count-txt">0</span>
+    <span class="bar-label">items in cart</span>
+    <span class="bar-total" id="bar-total-txt">₹0</span>
+  </div>
+  <button class="view-cart-btn" onclick="openCart()">VIEW CART →</button>
+</div>
+
+<!-- OVERLAY + DRAWER -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div class="drawer-title"><div class="red-line"></div><h2>YOUR CART</h2></div>
+    <button class="close-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div class="drawer-items" id="drawer-items"></div>
+  <div class="drawer-foot">
+    <div class="total-row">
+      <span class="total-label">Total</span>
+      <span class="total-amount" id="drawer-total">₹0</span>
+    </div>
+    <button class="order-btn" id="order-btn" disabled onclick="openCustomerModal()">PLACE ORDER</button>
+    <div class="secure-note">🔒 Takeaway pickup · No delivery charges</div>
+  </div>
+</div>
+
+<!-- CUSTOMER DETAILS MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleModalOverlayClick(event)">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title-wrap">
+        <div class="modal-icon">👤</div>
+        <div><h2 class="modal-heading">Your Details</h2><p class="modal-sub">Fill in your info for pickup</p></div>
+      </div>
+      <button class="modal-close-btn" onclick="closeCustomerModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="order-summary-strip" id="modal-order-summary"></div>
+      <div class="form-group">
+        <label class="form-label" for="cust-name">Full Name <span class="req">*</span></label>
+        <input class="form-input" type="text" id="cust-name" placeholder="e.g. Arjun Kumar" maxlength="60" oninput="validateForm()">
+        <div class="field-err" id="name-err">Please enter your name (min 2 characters)</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cust-phone">Mobile Number <span class="req">*</span></label>
+        <div class="input-prefix-wrap">
+          <span class="input-prefix">+91</span>
+          <input class="form-input prefix-input" type="tel" id="cust-phone" placeholder="98765 43210" maxlength="10" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'');validateForm()">
+        </div>
+        <div class="field-err" id="phone-err">Enter a valid 10-digit mobile number</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cust-location">Your Location / Area <span class="req">*</span></label>
+        <div class="input-prefix-wrap">
+          <span class="input-prefix loc-pre">📍</span>
+          <input class="form-input prefix-input" type="text" id="cust-location" placeholder="e.g. Anna Nagar, Madurai" maxlength="120" oninput="validateForm()">
+        </div>
+        <div class="field-err" id="location-err">Please enter your area or location</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cust-pickup">Pickup Time <span class="req">*</span></label>
+        <select class="form-input form-select" id="cust-pickup" onchange="validateForm()">
+          <option value="">— Choose a time slot —</option>
+        </select>
+        <div class="field-err" id="pickup-err">Please select a pickup time</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cust-note">Special Instructions <span class="opt">(optional)</span></label>
+        <textarea class="form-input form-textarea" id="cust-note" placeholder="Allergies, preferences, or special requests..." maxlength="200" rows="2" oninput="document.getElementById('note-chars').textContent=this.value.length+' / 200'"></textarea>
+        <div class="char-count" id="note-chars">0 / 200</div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="modal-cancel-btn" onclick="closeCustomerModal()">Cancel</button>
+      <button class="modal-confirm-btn" id="confirm-order-btn" disabled onclick="confirmOrder()">CONFIRM ORDER</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="success-overlay">
+  <div class="success-box">
+    <div class="success-anim">🎉</div>
+    <h2 class="success-heading">Order Confirmed!</h2>
+    <p class="success-tagline">We'll have it ready for pickup soon 🍫</p>
+    <div class="success-details" id="success-details"></div>
+    <button type="button" class="success-done-btn" onclick="closeSuccess()">DONE</button>
+  </div>
+</div>
+
+<!-- CONTACT + FOOTER -->
+<section class="contact-section">
+  <div class="contact-inner">
+    <div class="contact-brand">
+      <div class="contact-logo-txt">🍫 ChocoCube</div>
+      <p class="contact-tagline">Handcrafted brownies &amp; drinks,<br>fresh every day in Madurai.</p>
+      <a class="insta-pill" href="https://instagram.com/_ls_nareshkrishnan_2919_su__" target="_blank" rel="noopener">📸 &nbsp;@_ls_nareshkrishnan_2919_su__</a>
+    </div>
+    <div class="contact-cols">
+      <div class="contact-col">
+        <div class="col-title">📍 Find Us</div>
+        <p class="col-addr">No.1 Government Hospital Quarters,<br>Power House, Samayanallur,<br>Madurai – 625 402</p>
+        <a class="map-link" href="https://maps.google.com/?q=Government+Hospital+Madurai" target="_blank" rel="noopener">Open in Maps →</a>
+      </div>
+      <div class="contact-col">
+        <div class="col-title">📞 Reach Us</div>
+        <div class="reach-links">
+          <a class="reach-row" href="tel:+917871872910"><span class="reach-icon">📱</span><span class="reach-text"><span class="reach-label">Phone</span><span class="reach-val">+91 78718 72910</span></span></a>
+          <a class="reach-row" href="https://wa.me/916379376791" target="_blank" rel="noopener"><span class="reach-icon">💬</span><span class="reach-text"><span class="reach-label">WhatsApp</span><span class="reach-val">+91 63793 76791</span></span></a>
+          <a class="reach-row" href="mailto:nareshkrishnan2919@gmail.com"><span class="reach-icon">✉️</span><span class="reach-text"><span class="reach-label">Email</span><span class="reach-val">nareshkrishnan2919@gmail.com</span></span></a>
+        </div>
+      </div>
+      <div class="contact-col">
+        <div class="col-title">🕐 Hours</div>
+        <div class="hours-table">
+          <div class="hours-row"><span>Mon – Sat</span><span class="hrs-val">10 AM – 10 PM</span></div>
+          <div class="hours-row"><span>Sunday</span><span class="hrs-val">11 AM – 9 PM</span></div>
+        </div>
+        <p class="hours-note">Takeaway only · No delivery</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span class="footer-copy">© 2024 Choco Cube. All rights reserved.</span>
+    <span class="footer-dev">Developed by <strong>Nareshkrishnan</strong></span>
+  </div>
+</section>
+
+<script>
+const categories = [
+  { label: "Brownies", icon: "🍫", isBrownie: true, items: [
+    { name: "Chocolate Brownies",      price: 45, image: "Chocho.png",      desc: "Fudgy and rich with a crackly top and gooey center.", badge: "hot",  tags: ["Fudgy", "Rich"],      featured: false },
+    { name: "Brownie Fudge",           price: 50, image: "Chocho.png", desc: "Light and airy fudge made with high-quality cocoa.",  badge: "best", tags: ["Premium", "Airy"],    featured: true  },
+    { name: "Nuts Brownie",            price: 40, image: "Nuts.jpg.png",    desc: "Classic brownie with sweetness and satisfying crunch.",badge: null,   tags: ["Crunchy", "Classic"], featured: false },
+    { name: "Oreo Brownie",            price: 45, image: "oreo.jpg.png",    desc: "Layered with Oreo crumbles and rich dark ganache.",   badge: "new",  tags: ["Oreo", "Ganache"],    featured: false },
+    { name: "Brownie With Ice Cream",  price: 65, image: "icecream.png",    desc: "Warm brownie topped with a creamy scoop of ice cream.",badge: "best", tags: ["Warm", "Cold"],       featured: false },
+    { name: "Classic Brownies",        price: 30, image: "classic.png", desc: "The timeless original — fudgy, rich, perfectly sweet.",badge: null,   tags: ["OG", "Sweet"],        featured: false },
+    { name: "Peanut Butter Brownies",  price: 35, image: "Peanut.png",      desc: "Extra creamy brownie with smooth peanut butter swirl.",badge: null,   tags: ["Nutty", "Creamy"],    featured: false },
+  ]},
+  { label: "Toppings", icon: "🍫", items: [
+    { name: "Dark Chocolate Chips",  price: 15, image: "Dark.png",  desc: "Soft and chewy cookies loaded with chocolate chips." },
+    { name: "White Chocolate Chips", price: 25, image: "white.png", desc: "Moist and fluffy muffins bursting with chocolate flavor." },
+    { name: "Oreo Cookies",          price: 30, image: "oreo.png",  desc: "Light and airy cupcakes topped with rich chocolate frosting." },
+    { name: "Nuts",                  price: 20, image: "Nuts.png",  desc: "Glazed donuts with a decadent chocolate coating." },
+    { name: "Chocolate Fudge",       price: 35, image: "Fudge.png", desc: "Flaky croissants filled with smooth chocolate ganache." },
+  ]},
+  { label: "Cool Drinks", icon: "🥤", isCoolDrink: true, items: [
+    { name: "String",    price: 20, image: "String.jpg",    desc: "Refreshing and fizzy cola to complement your brownies.", booAccent: "#ff4500", booGlow: "rgba(255,69,0,0.25)",   booBar: "linear-gradient(90deg,#ff4500,#ff8c00)" },
+    { name: "Coca-Cola", price: 20, image: "cola.jpg",      desc: "Classic Coke with its signature taste and bubbles.",    booAccent: "#cc0000", booGlow: "rgba(200,0,0,0.25)",     booBar: "linear-gradient(90deg,#cc0000,#ff4444)" },
+    { name: "Pepsi",     price: 20, image: "PEPSI.jpg",     desc: "Crisp and zesty lemon-lime soda, perfect for refreshment.", booAccent: "#0055ff", booGlow: "rgba(0,85,255,0.25)", booBar: "linear-gradient(90deg,#0055ff,#00aaff)" },
+    { name: "Frooti",    price: 20, image: "Frooti.jpg",    desc: "Light and zesty mango soda, crisp and cold.",           booAccent: "#ff8c00", booGlow: "rgba(255,140,0,0.25)",   booBar: "linear-gradient(90deg,#ff8c00,#ffcc00)" },
+    { name: "Rose Milk", price: 40, image: "Rose Milk.png", desc: "Chilled fresh milk with rose syrup, sweet and soothing.", booAccent: "#e0007a", booGlow: "rgba(224,0,122,0.25)", booBar: "linear-gradient(90deg,#e0007a,#ff69b4)" },
+    { name: "Lassi",     price: 50, image: "Lassi.png",     desc: "Thick creamy yogurt drink, sweet or salted to taste.",  booAccent: "#cc00cc", booGlow: "rgba(200,0,200,0.25)",   booBar: "linear-gradient(90deg,#cc00cc,#aa00ff)" },
+  ]},
+  { label: "Dirty Soda (Mojitos)", icon: "🍹", isMojito: true, items: [
+    { name: "Virgin Mojito",          price: 50, image: "Virgin.png",      desc: "Refreshing blend of mint, lime, and soda.",               spell: "Potion of Clarity" },
+    { name: "Watermelon Mint Cooler", price: 50, image: "Watermelon.png",  desc: "Crisp and citrusy classic mojito perfection.",             spell: "Elixir of the Ancients" },
+    { name: "Virgin Blue Mojito",     price: 25, image: "Virgin Blue.png", desc: "Light and zesty lemon-lime soda, crisp and cold.",         spell: "Tropical Paradise Potion" },
+    { name: "Orange Mojito",          price: 60, image: "Orage.png",       desc: "Sweet and tangy orange twist on a classic.",              spell: "Crimson Love Potion" },
+    { name: "Malibu Sunset",          price: 50, image: "Malibu.png",      desc: "Bright and zesty lemon mojito, ultra refreshing.",         spell: "Sunfire Brew" },
+    { name: "Blueberry Mojito",       price: 50, image: "Blue.png",        desc: "Rich blueberry mojito with citrus notes.",                 spell: "Midnight Veil Potion" },
+    { name: "Pineapple Mojito",       price: 50, image: "Pinapple.png",    desc: "Tropical pineapple mojito, sweet and tangy.",              spell: "Golden Enchantment" },
+    { name: "Trabical Wave",          price: 50, image: "Trabical.png",    desc: "Floral Trabical for a premium experience.",                spell: "Dreamweaver Elixir" },
+  ]},
+];
+
+const BROWNIE_IDX   = categories.findIndex(c => c.isBrownie);
+const MOJITO_IDX    = categories.findIndex(c => c.isMojito);
+const COOLDRINK_IDX = categories.findIndex(c => c.isCoolDrink);
+let activeTab = 0, cart = {};
+const allItems = () => categories.flatMap(c => c.items);
+
+/* ── Brownie renderer ── */
+function renderBrownieGrid() {
+  const cat = categories[BROWNIE_IDX];
+  document.getElementById('brownie-grid').innerHTML = cat.items.map((item, idx) => {
+    const qty = cart[item.name] || 0;
+    const badgeHtml = item.badge
+      ? `<div class="br-badge ${item.badge}">${item.badge === 'new' ? '✦ NEW' : item.badge === 'best' ? '★ BEST' : '🔥 HOT'}</div>`
+      : '';
+    const tagsHtml = item.tags
+      ? `<div class="br-tags">${item.tags.map(t => `<span class="br-tag">${t}</span>`).join('')}</div>`
+      : '';
+    const imgHtml = item.image
+      ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=br-img-placeholder>🍫</div>'">`
+      : `<div class="br-img-placeholder">🍫</div>`;
+    return `
+    <div class="br-card${item.featured ? ' featured' : ''}" style="animation-delay:${idx * 0.07}s">
+      <div class="br-card-glow-line"></div>
+      ${badgeHtml}
+      <div class="br-img-wrap">
+        ${imgHtml}
+        <div class="br-img-tint"></div>
+        <div class="br-img-fade"></div>
+      </div>
+      <div class="br-body">
+        <div class="br-name">${item.name}</div>
+        <div class="br-desc">${item.desc}</div>
+        ${tagsHtml}
+        <div class="br-footer">
+          <div class="br-price">₹${item.price} <span>/ piece</span></div>
+          <button class="br-add-btn${qty > 0 ? ' added' : ''}"
+            onclick="addItem('${item.name.replace(/'/g,"\\'")}', ${item.price}, this)">
+            ${qty > 0 ? '✓ Added' : '+ Add'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  spawnBrParticles();
+}
+
+function spawnBrParticles() {
+  const el = document.getElementById('br-particles');
+  if (!el) return;
+  el.innerHTML = '';
+  const colors = ['#7b2fff','#a855f7','#c084fc','#6d28d9','#8b5cf6'];
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'br-particle';
+    const size = 3 + Math.random() * 6;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    p.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;background:${color};animation-delay:${Math.random()*10}s;animation-duration:${8+Math.random()*10}s;box-shadow:0 0 ${size*3}px ${color};opacity:0;`;
+    el.appendChild(p);
+  }
+}
+
+/* ── Image helpers ── */
+function itemThumb(item) {
+  return item.image
+    ? `<img class="card-img" src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=card-img-placeholder></div>'">`
+    : `<div class="card-img-placeholder"></div>`;
+}
+function itemThumbSmall(item) {
+  return item.image
+    ? `<img class="ci-img" src="${item.image}" alt="${item.name}" onerror="this.outerHTML='<div class=ci-img-placeholder>🍫</div>'">`
+    : `<div class="ci-img-placeholder">🍫</div>`;
+}
+
+/* ── BOO renderer ── */
+function renderBooGrid() {
+  const cat = categories[COOLDRINK_IDX];
+  document.getElementById('boo-grid').innerHTML = cat.items.map((item, idx) => {
+    const qty = cart[item.name] || 0;
+    const imgHtml = item.image
+      ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=boo-card-thumb-placeholder>🥤</div>'">`
+      : `<div class="boo-card-thumb-placeholder">🥤</div>`;
+    return `<div class="boo-card" style="--boo-accent:${item.booAccent};--boo-glow:${item.booGlow};animation-delay:${idx*0.07}s">
+      <div class="boo-card-accent" style="background:${item.booBar}"></div>
+      <div class="boo-card-new">NEW!</div>
+      <div class="boo-card-thumb">${imgHtml}</div>
+      <div class="boo-card-body">
+        <div class="boo-card-name">${item.name}</div>
+        <div class="boo-card-desc">${item.desc}</div>
+        <div class="boo-card-footer">
+          <div class="boo-card-price">₹${item.price} <span>/ bottle</span></div>
+          <button class="boo-add-btn${qty > 0 ? ' added' : ''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}',${item.price},this)">${qty > 0 ? '✓ ICED' : '+ ADD'}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  // particles
+  const el = document.getElementById('boo-particles');
+  if (!el) return;
+  el.innerHTML = '';
+  const colors = ['#ff4500','#cc00cc','#0055ff','#ff8c00','#e0007a','#22c55e'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'boo-particle';
+    const size = 4 + Math.random() * 8;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    p.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;background:${color};animation-delay:${Math.random()*8}s;animation-duration:${6+Math.random()*8}s;box-shadow:0 0 ${size*2}px ${color};opacity:0;`;
+    el.appendChild(p);
+  }
+}
+
+/* ── Hypnotic renderer ── */
+const mojitoGlows = ['#7b2fff','#2979ff','#00e5ff','#d500f9','#64ffda','#aa00ff','#00b0ff'];
+function renderHypnoGrid() {
+  const cat = categories[MOJITO_IDX];
+  document.getElementById('hype-grid').innerHTML = cat.items.map((item, idx) => {
+    const qty = cart[item.name] || 0;
+    const glow = mojitoGlows[idx % mojitoGlows.length];
+    return `<div class="hype-card" style="--glow-color:${glow};animation-delay:${idx*0.07}s">
+      <div class="hype-card-border"></div>
+      <div class="hype-card-inner">
+        <div class="hype-spell-tag">✦ ${item.spell}</div>
+        <div class="hype-img-wrap">
+          ${item.image ? `<img class="hype-img" src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=hype-img-placeholder>🍹</div>'">` : `<div class="hype-img-placeholder">🍹</div>`}
+          <div class="hype-img-fade"></div>
+        </div>
+        <div class="hype-card-body">
+          <div class="hype-item-name">${item.name}</div>
+          <div class="hype-item-desc">${item.desc}</div>
+          <div class="hype-card-footer">
+            <span class="hype-price">₹${item.price}</span>
+            <button class="hype-add-btn${qty > 0 ? ' added' : ''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}',${item.price},this)">${qty > 0 ? '✓ Brewed' : '⚗ Brew'}</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  // particles
+  const el = document.getElementById('hype-particles');
+  if (!el) return;
+  el.innerHTML = '';
+  const symbols = ['✦','★','✧','◆','⬡','👁','⚗'];
+  for (let i = 0; i < 22; i++) {
+    const s = document.createElement('span');
+    s.className = 'hype-particle';
+    s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*6}s;animation-duration:${4+Math.random()*5}s;font-size:${10+Math.random()*14}px;color:${mojitoGlows[Math.floor(Math.random()*mojitoGlows.length)]};opacity:${0.15+Math.random()*0.3}`;
+    el.appendChild(s);
+  }
+}
+
+/* ── Normal grid (toppings etc) ── */
+function renderGrid() {
+  const cat = categories[activeTab];
+  document.getElementById('row-label').textContent = cat.label;
+  document.getElementById('grid').innerHTML = cat.items.map((item, idx) => {
+    const qty = cart[item.name] || 0;
+    return `<div class="card" style="animation-delay:${idx*0.04}s">
+      <div class="card-thumb"><div class="card-thumb-bg"></div>${itemThumb(item)}</div>
+      <div class="card-body">
+        <div class="card-name">${item.name}</div>
+        <div class="card-desc">${item.desc}</div>
+        <div class="card-footer">
+          <span class="price">₹${item.price}</span>
+          <button class="add-btn${qty>0?' added':''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}',${item.price},this)">${qty>0?'✓ Added':'+ Add'}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── Tabs ── */
+function renderTabs() {
+  document.getElementById('tabs').innerHTML = categories.map((c, i) =>
+    `<button class="tab${i===activeTab?' active':''}${c.isMojito?' hype-tab':''}${c.isCoolDrink?' boo-tab':''}" onclick="setTab(${i})">${c.icon} ${c.label}<span class="tab-count">${c.items.length}</span></button>`
+  ).join('');
+}
+
+function setTab(i) {
+  activeTab = i;
+  renderTabs();
+  const isBrownie   = !!categories[i].isBrownie;
+  const isMojito    = !!categories[i].isMojito;
+  const isCoolDrink = !!categories[i].isCoolDrink;
+
+  document.getElementById('brownie-section').style.display    = isBrownie   ? 'block' : 'none';
+  document.getElementById('normal-grid-section').style.display = (!isMojito && !isCoolDrink && !isBrownie) ? 'block' : 'none';
+  document.getElementById('hypnotic-section').style.display   = isMojito    ? 'block' : 'none';
+  document.getElementById('boo-section').style.display        = isCoolDrink ? 'block' : 'none';
+
+  document.body.style.background = (isMojito || isCoolDrink || isBrownie) ? '#08080f' : '#08080f';
+
+  if (isBrownie)        renderBrownieGrid();
+  else if (isMojito)    renderHypnoGrid();
+  else if (isCoolDrink) renderBooGrid();
+  else                  renderGrid();
+}
+
+/* ── Cart logic ── */
+function addItem(name, price, btn) {
+  cart[name] = (cart[name] || 0) + 1;
+  const isMoji      = categories[MOJITO_IDX].items.some(i => i.name === name);
+  const isCoolDrink = categories[COOLDRINK_IDX].items.some(i => i.name === name);
+  const isBrownie   = categories[BROWNIE_IDX].items.some(i => i.name === name);
+  if (isMoji)           { btn.textContent = '✓ Brewed'; }
+  else if (isCoolDrink) { btn.textContent = '✓ ICED'; }
+  else if (isBrownie)   { btn.textContent = '✓ Added'; }
+  else                  { btn.textContent = '✓ Added'; }
+  btn.classList.add('added');
+  setTimeout(() => {
+    if (isMoji)           btn.textContent = '⚗ Brew';
+    else if (isCoolDrink) btn.textContent = '+ ADD';
+    else if (isBrownie)   btn.textContent = '+ Add';
+    else                  btn.textContent = '+ Add';
+    btn.classList.remove('added');
+  }, 1200);
+  updateState();
+}
+
+function calcTotals() {
+  let count = 0, total = 0;
+  Object.entries(cart).filter(([,q]) => q > 0).forEach(([name, qty]) => {
+    const item = allItems().find(i => i.name === name);
+    if (item) { count += qty; total += item.price * qty; }
+  });
+  return { count, total };
+}
+
+function updateState() {
+  const { count, total } = calcTotals();
+  document.getElementById('cart-count').textContent    = count;
+  document.getElementById('bar-count-txt').textContent = count;
+  document.getElementById('bar-total-txt').textContent = `₹${total}`;
+  document.getElementById('drawer-total').textContent  = `₹${total}`;
+  document.getElementById('order-btn').disabled        = count === 0;
+  document.getElementById('cart-bar').classList.toggle('visible', count > 0);
+}
+
+function renderDrawer() {
+  const entries = Object.entries(cart).filter(([,q]) => q > 0);
+  const el = document.getElementById('drawer-items');
+  if (!entries.length) {
+    el.innerHTML = `<div class="empty-state"><div class="e-icon">🛒</div><p>Your cart is empty.<br><strong>Add items from the menu</strong> to get started.</p></div>`;
+    return;
+  }
+  el.innerHTML = entries.map(([name, qty]) => {
+    const item = allItems().find(i => i.name === name);
+    return `<div class="ci"><div class="ci-thumb">${itemThumbSmall(item)}</div><div class="ci-info"><div class="ci-name">${name}</div><div class="ci-sub">₹${item.price} × ${qty} = ₹${item.price * qty}</div></div><div class="qty-ctrl"><button class="q-btn" onclick="changeQty('${name.replace(/'/g,"\\'")}', -1)">−</button><span class="q-num">${qty}</span><button class="q-btn" onclick="changeQty('${name.replace(/'/g,"\\'")}', 1)">+</button></div></div>`;
+  }).join('');
+}
+
+function changeQty(name, delta) {
+  cart[name] = (cart[name] || 0) + delta;
+  if (cart[name] <= 0) delete cart[name];
+  updateState(); renderDrawer();
+  if (categories[activeTab].isBrownie)    renderBrownieGrid();
+  else if (categories[activeTab].isMojito) renderHypnoGrid();
+  else if (categories[activeTab].isCoolDrink) renderBooGrid();
+  else renderGrid();
+}
+
+function openCart()  { renderDrawer(); document.getElementById('overlay').classList.add('open'); document.getElementById('drawer').classList.add('open'); }
+function closeCart() { document.getElementById('overlay').classList.remove('open'); document.getElementById('drawer').classList.remove('open'); }
+
+/* ── Time slots ── */
+function generateTimeSlots() {
+  const slots = [], now = new Date();
+  let h = now.getHours(), m = now.getMinutes();
+  m = m < 30 ? 30 : 60;
+  if (m === 60) { h++; m = 0; }
+  let count = 0;
+  while (count < 10 && h < 22) {
+    if (h >= 10) {
+      const p = h < 12 ? 'AM' : 'PM';
+      const dh = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+      const dm = m === 0 ? '00' : m;
+      slots.push(`${dh}:${dm} ${p}`);
+      count++;
+    }
+    m += 30;
+    if (m >= 60) { h++; m = 0; }
+  }
+  return slots;
+}
+
+/* ── Customer modal ── */
+function openCustomerModal() {
+  closeCart();
+  const entries = Object.entries(cart).filter(([,q]) => q > 0);
+  const { count, total } = calcTotals();
+  document.getElementById('modal-order-summary').innerHTML = `<div class="summary-label">Order Summary</div><div class="summary-chips">${entries.map(([n,q]) => `<span class="sum-chip">${n} ×${q}</span>`).join('')}</div><div class="summary-total">Total: <strong>₹${total}</strong> · ${count} item${count > 1 ? 's' : ''}</div>`;
+  const sel = document.getElementById('cust-pickup');
+  sel.innerHTML = '<option value="">— Choose a time slot —</option>';
+  generateTimeSlots().forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); });
+  ['cust-name','cust-phone','cust-location','cust-note'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('note-chars').textContent = '0 / 200';
+  ['name-err','phone-err','location-err','pickup-err'].forEach(id => document.getElementById(id).style.display = 'none');
+  validateForm();
+  document.getElementById('modal-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('cust-name').focus(), 200);
+}
+function closeCustomerModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+function handleModalOverlayClick(e) { if (e.target === document.getElementById('modal-overlay')) closeCustomerModal(); }
+
+function validateForm() {
+  const n  = document.getElementById('cust-name').value.trim();
+  const p  = document.getElementById('cust-phone').value.trim();
+  const l  = document.getElementById('cust-location').value.trim();
+  const pk = document.getElementById('cust-pickup').value;
+  document.getElementById('confirm-order-btn').disabled = !(n.length >= 2 && p.length === 10 && l.length >= 3 && pk !== '');
+}
+
+function confirmOrder() {
+  const name   = document.getElementById('cust-name').value.trim();
+  const phone  = document.getElementById('cust-phone').value.trim();
+  const loc    = document.getElementById('cust-location').value.trim();
+  const pickup = document.getElementById('cust-pickup').value;
+  const note   = document.getElementById('cust-note').value.trim();
+  if (name.length < 2 || phone.length !== 10 || loc.length < 3 || !pickup) return;
+  const entries = Object.entries(cart).filter(([,q]) => q > 0);
+  const { total } = calcTotals();
+  document.getElementById('success-details').innerHTML = `
+    <div class="success-customer">
+      <div class="sc-row"><span class="sc-key">👤 Name</span><span class="sc-val">${name}</span></div>
+      <div class="sc-row"><span class="sc-key">📱 Mobile</span><span class="sc-val">+91 ${phone}</span></div>
+      <div class="sc-row"><span class="sc-key">📍 Location</span><span class="sc-val">${loc}</span></div>
+      <div class="sc-row"><span class="sc-key">🕐 Pickup</span><span class="sc-val">${pickup}</span></div>
+      ${note ? `<div class="sc-row"><span class="sc-key">📝 Note</span><span class="sc-val">${note}</span></div>` : ''}
+    </div>
+    <div class="success-divider"></div>
+    ${entries.map(([n,q]) => { const it = allItems().find(i => i.name === n); return `<div class="success-item"><span>${n} ×${q}</span><span>₹${it.price*q}</span></div>`; }).join('')}
+    <div class="success-total-row"><span>Total</span><span>₹${total}</span></div>`;
+  closeCustomerModal();
+  document.getElementById('success-overlay').classList.add('open');
+  cart = {}; updateState(); renderDrawer();
+  if (categories[activeTab].isBrownie)          renderBrownieGrid();
+  else if (categories[activeTab].isMojito)       renderHypnoGrid();
+  else if (categories[activeTab].isCoolDrink)    renderBooGrid();
+  else                                           renderGrid();
+}
+
+function closeSuccess() { document.getElementById('success-overlay').classList.remove('open'); }
+
+/* ── Init ── */
+renderTabs();
+renderBrownieGrid(); // Brownies is tab 0
+
+async function confirmOrder() {
+  const name   = document.getElementById('cust-name').value.trim();
+  const phone  = document.getElementById('cust-phone').value.trim();
+  const loc    = document.getElementById('cust-location').value.trim();
+  const pickup = document.getElementById('cust-pickup').value;
+  const note   = document.getElementById('cust-note').value.trim();
+  if (name.length < 2 || phone.length !== 10 || loc.length < 3 || !pickup) return;
+
+  const entries = Object.entries(cart).filter(([, q]) => q > 0);
+  const { total } = calcTotals();
+
+  // Build payload matching your API schema
+  const payload = {
+    full_name: name,
+    mobile: phone,
+    location: loc,
+    pickup_time: pickup,
+    items: entries.map(([n, q]) => ({ name: n, qty: q })),
+    total: total,
+    special_instructions: note || ""
+  };
+
+  // Disable button & show loading state
+  const confirmBtn = document.getElementById('confirm-order-btn');
+  confirmBtn.disabled = true;
+  confirmBtn.textContent = 'PLACING ORDER...';
+
+  try {
+    const res = await fetch('https://browny-81re.onrender.com/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      throw new Error(`Server error: ${res.status}`);
+    }
+
+    // Success — show confirmation
+    document.getElementById('success-details').innerHTML = `
+      <div class="success-customer">
+        <div class="sc-row"><span class="sc-key">👤 Name</span><span class="sc-val">${name}</span></div>
+        <div class="sc-row"><span class="sc-key">📱 Mobile</span><span class="sc-val">+91 ${phone}</span></div>
+        <div class="sc-row"><span class="sc-key">📍 Location</span><span class="sc-val">${loc}</span></div>
+        <div class="sc-row"><span class="sc-key">🕐 Pickup</span><span class="sc-val">${pickup}</span></div>
+        ${note ? `<div class="sc-row"><span class="sc-key">📝 Note</span><span class="sc-val">${note}</span></div>` : ''}
+      </div>
+      <div class="success-divider"></div>
+      ${entries.map(([n, q]) => {
+        const it = allItems().find(i => i.name === n);
+        return `<div class="success-item"><span>${n} ×${q}</span><span>₹${it.price * q}</span></div>`;
+      }).join('')}
+      <div class="success-total-row"><span>Total</span><span>₹${total}</span></div>`;
+
+    closeCustomerModal();
+    document.getElementById('success-overlay').classList.add('open');
+
+    // Clear cart
+    cart = {};
+    updateState();
+    renderDrawer();
+    if (categories[activeTab].isBrownie)       renderBrownieGrid();
+    else if (categories[activeTab].isMojito)   renderHypnoGrid();
+    else if (categories[activeTab].isCoolDrink) renderBooGrid();
+    else                                        renderGrid();
+
+  } catch (err) {
+    // Show inline error without closing modal
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = 'CONFIRM ORDER';
+    confirmBtn.style.background = '#ef4444';
+    confirmBtn.textContent = '⚠ Failed — Retry';
+    setTimeout(() => {
+      confirmBtn.style.background = '';
+      confirmBtn.textContent = 'CONFIRM ORDER';
+      confirmBtn.disabled = false;
+    }, 3000);
+    console.error('Order failed:', err);
+  }
+}
+</script>
+</body>
+</html>
