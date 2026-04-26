@@ -41,6 +41,7 @@ nav {
   top: 0;
   z-index: 100;
   background: rgba(8,8,15,0.92);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -171,6 +172,7 @@ nav {
   top: 60px;
   z-index: 99;
   background: rgba(8,8,15,0.95);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid #111122;
   display: flex;
@@ -394,6 +396,7 @@ nav {
   padding: 3px 8px;
   border-radius: 4px;
   z-index: 3;
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
 .br-badge.new { background: rgba(123,47,255,0.9); }
@@ -830,7 +833,7 @@ nav {
 .hype-card-border { position: absolute; inset: 0; border-radius: 16px; border: 1px solid transparent; background: linear-gradient(135deg, var(--glow-color, #7b2fff), transparent) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 5; }
 .hype-card:hover .hype-card-border { opacity: 1; }
 .hype-card-inner { position: relative; z-index: 2; }
-.hype-spell-tag { position: absolute; top: 10px; left: 10px; background: rgba(10,10,20,0.85); border: 1px solid #2a2a3a; color: #444; font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; z-index: 3; backdrop-filter: blur(4px); }
+.hype-spell-tag { position: absolute; top: 10px; left: 10px; background: rgba(10,10,20,0.85); border: 1px solid #2a2a3a; color: #444; font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; z-index: 3; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
 .hype-img-wrap { position: relative; height: 150px; overflow: hidden; background: #050508; }
 .hype-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease, filter 0.3s; filter: brightness(0.75) saturate(0.85); }
 .hype-card:hover .hype-img { transform: scale(1.1); filter: brightness(1) saturate(1.1); }
@@ -854,6 +857,7 @@ nav {
   position: fixed;
   bottom: 0; left: 0; right: 0;
   background: rgba(13,13,26,0.97);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-top: 1px solid rgba(123,47,255,0.25);
   padding: 14px 24px;
@@ -887,7 +891,7 @@ nav {
 }
 .view-cart-btn:hover { background: var(--purple-light); box-shadow: 0 4px 30px rgba(123,47,255,0.6); }
 
-.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 300; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); z-index: 300; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .overlay.open { opacity: 1; pointer-events: all; }
 .drawer { position: fixed; right: 0; top: 0; bottom: 0; width: min(420px, 100vw); background: var(--dark2); border-left: 1px solid var(--border); z-index: 400; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); display: flex; flex-direction: column; }
 .drawer.open { transform: translateX(0); }
@@ -897,7 +901,10 @@ nav {
 .drawer-title h2 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; color: var(--white); }
 .close-btn { background: transparent; border: 1px solid #1e1e2e; color: #555; width: 36px; height: 36px; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
 .close-btn:hover { border-color: var(--purple); color: var(--purple-light); }
-.drawer-items { flex: 1; overflow-y: auto; padding: 16px; scrollbar-width: thin; scrollbar-color: #1a1a2e transparent; }
+.drawer-items { flex: 1; overflow-y: auto; padding: 16px; }
+.drawer-items::-webkit-scrollbar { width: 8px; }
+.drawer-items::-webkit-scrollbar-track { background: transparent; }
+.drawer-items::-webkit-scrollbar-thumb { background: #1a1a2e; border-radius: 4px; }
 .empty-state { text-align: center; padding: 60px 20px; }
 .e-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
 .empty-state p { color: #444; font-size: 14px; line-height: 1.6; }
@@ -922,7 +929,7 @@ nav {
 .secure-note { color: #333; font-size: 11px; text-align: center; letter-spacing: 0.5px; }
 
 /* Modals */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .modal-overlay.open { opacity: 1; pointer-events: all; }
 .modal-box { background: var(--dark2); border: 1px solid var(--border); border-radius: 20px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 40px rgba(123,47,255,0.15); }
 .modal-head { padding: 20px 24px; border-bottom: 1px solid #1a1a2e; display: flex; align-items: center; justify-content: space-between; }
@@ -1005,13 +1012,51 @@ nav {
 .hours-note { color: #333; font-size: 11px; }
 .footer-bar { border-top: 1px solid #0d0d1a; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; }
 .footer-copy { color: #333; font-size: 12px; }
-.footer-dev { color: #333; font-size: 12px; }
-.footer-dev strong { color: #555; }
+  .footer-dev { color: #333; font-size: 12px; }
+  .footer-dev strong { color: #555; }
+
+  .hidden { display: none; }
+  .packing-options { display: flex; gap: 10px; margin-top: 4px; }
+  .pack-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #1a1a2e;
+    background: var(--dark3);
+    color: #555;
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .pack-btn:hover {
+    border-color: var(--purple);
+    color: var(--purple-light);
+  }
+  .decor-blob {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .decor-blob--left {
+    top: 10%;
+    left: 2%;
+    width: 120px;
+    opacity: 0.15;
+  }
+  .decor-blob--right {
+    top: 5%;
+    right: 2%;
+    width: 100px;
+    opacity: 0.12;
+  }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
+ 
 <nav>
   <div class="logo"><img src="Choco Cube.png" alt="Choco Cube"> Choco<span>Cube</span></div>
   <div class="nav-right">
@@ -1067,16 +1112,16 @@ nav {
 </div>
 
 <!-- NORMAL GRID (Toppings) -->
-<div class="grid-section" id="normal-grid-section" style="display:none">
+<div class="grid-section hidden" id="normal-grid-section">
   <div class="row-label" id="row-label"></div>
   <div class="cards-grid" id="grid"></div>
 </div>
 
 <!-- BOO! COOL DRINKS -->
-<div class="boo-section" id="boo-section" style="display:none">
+<div class="boo-section hidden" id="boo-section">
   <div class="boo-particles" id="boo-particles"></div>
-  <svg style="position:absolute;pointer-events:none;z-index:1;top:10%;left:2%;width:120px;opacity:0.15" viewBox="0 0 100 80"><ellipse cx="30" cy="40" rx="28" ry="18" fill="#ff4500" transform="rotate(-20,30,40)"/><circle cx="82" cy="55" r="6" fill="#ff4500"/></svg>
-  <svg style="position:absolute;pointer-events:none;z-index:1;top:5%;right:2%;width:100px;opacity:0.12" viewBox="0 0 100 80"><ellipse cx="50" cy="35" rx="24" ry="15" fill="#cc00cc" transform="rotate(10,50,35)"/><circle cx="78" cy="20" r="5" fill="#cc00cc"/></svg>
+  <svg class="decor-blob decor-blob--left" viewBox="0 0 100 80"><ellipse cx="30" cy="40" rx="28" ry="18" fill="#ff4500" transform="rotate(-20,30,40)"/><circle cx="82" cy="55" r="6" fill="#ff4500"/></svg>
+  <svg class="decor-blob decor-blob--right" viewBox="0 0 100 80"><ellipse cx="50" cy="35" rx="24" ry="15" fill="#cc00cc" transform="rotate(10,50,35)"/><circle cx="78" cy="20" r="5" fill="#cc00cc"/></svg>
   <div class="boo-header">
     <div class="boo-new-badge">✦ Now Chilling ✦</div>
     <div class="boo-logo-wrap">
@@ -1090,7 +1135,7 @@ nav {
 </div>
 
 <!-- HYPNOTIC DIRTY SODA -->
-<div class="hypnotic-section" id="hypnotic-section" style="display:none">
+<div class="hypnotic-section hidden" id="hypnotic-section">
   <div class="hype-particles" id="hype-particles"></div>
   <div class="hype-header">
     <div class="hype-eye">👁</div>
@@ -1207,7 +1252,7 @@ nav {
     <div class="contact-cols">
       <div class="contact-col">
         <div class="col-title">📍 Find Us</div>
-        <p class="col-addr">No.1 Government Hospital Quarters,<br>Power House, Samayanallur,<br>Madurai – 625 402</p>
+        <p class="col-addr"> Samayanallur,No.1 Government Hospital Quarters,<br>Power House, Samayanallur,<br>Madurai – 625 402</p>
         <a class="map-link" href="https://maps.google.com/?q=Government+Hospital+Madurai" target="_blank" rel="noopener">Open in Maps →</a>
       </div>
       <div class="contact-col">
@@ -1233,14 +1278,27 @@ nav {
     <span class="footer-dev">Developed by <strong>Nareshkrishnan</strong></span>
   </div>
 </section>
+<div class="form-group">
+  <label class="form-label">Packing Charge <span class="req">*</span></label>
+  <  class="packing-options">
+    <button type="button" id="pack-yes" class="pack-btn" onclick="setPackaging(true)">
+      ✅ Yes — Add ₹15
+    </button>
+    <button type="button" id="pack-no" class="pack-btn" onclick="setPackaging(false)">
+      ❌ No Thanks
+    </button>
+  </div>
+  <div class="field-err" id="pack-err">Please select a packing option</div>
+</div>
 
 <script>
+  let activeTab = 0, cart = {};
 const categories = [
   { label: "Brownies", icon: "🍫", isBrownie: true, items: [
     { name: "Chocolate Brownies",      price: 45, image: "Chocho.png",      desc: "Fudgy and rich with a crackly top and gooey center.", badge: "hot",  tags: ["Fudgy", "Rich"],      featured: false },
     { name: "Brownie Fudge",           price: 50, image: "Chocho.png", desc: "Light and airy fudge made with high-quality cocoa.",  badge: "best", tags: ["Premium", "Airy"],    featured: true  },
     { name: "Nuts Brownie",            price: 40, image: "Nuts.jpg.png",    desc: "Classic brownie with sweetness and satisfying crunch.",badge: null,   tags: ["Crunchy", "Classic"], featured: false },
-    { name: "Oreo Brownie",            price: 45, image: "oreo.jpg.png",    desc: "Layered with Oreo crumbles and rich dark ganache.",   badge: "new",  tags: ["Oreo", "Ganache"],    featured: false },
+    { name: "Oreo Brownie",            price: 45, image: "oreo.jpg.png",    desc: "Layered with Oreo cr umbles and rich dark ganache.",   badge: "new",  tags: ["Oreo", "Ganache"],    featured: false },
     { name: "Brownie With Ice Cream",  price: 65, image: "icecream.png",    desc: "Warm brownie topped with a creamy scoop of ice cream.",badge: "best", tags: ["Warm", "Cold"],       featured: false },
     { name: "Classic Brownies",        price: 30, image: "classic.png", desc: "The timeless original — fudgy, rich, perfectly sweet.",badge: null,   tags: ["OG", "Sweet"],        featured: false },
     { name: "Peanut Butter Brownies",  price: 35, image: "Peanut.png",      desc: "Extra creamy brownie with smooth peanut butter swirl.",badge: null,   tags: ["Nutty", "Creamy"],    featured: false },
@@ -1275,7 +1333,6 @@ const categories = [
 const BROWNIE_IDX   = categories.findIndex(c => c.isBrownie);
 const MOJITO_IDX    = categories.findIndex(c => c.isMojito);
 const COOLDRINK_IDX = categories.findIndex(c => c.isCoolDrink);
-let activeTab = 0, cart = {};
 const allItems = () => categories.flatMap(c => c.items);
 
 /* ── Brownie renderer ── */
@@ -1698,6 +1755,785 @@ async function confirmOrder() {
     console.error('Order failed:', err);
   }
 }
+</script>
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║        ENCHANTED TOPPINGS SECTION — DROP-IN CODE            ║
+  ║                                                              ║
+  ║  HOW TO USE:                                                 ║
+  ║  1. Copy the CSS block into your <style> tag                 ║
+  ║  2. Replace your <div id="normal-grid-section"> with the     ║
+  ║     new HTML block below                                     ║
+  ║  3. Replace your renderGrid() function with the new one      ║
+  ║  4. Add the Google Fonts link to your <head>                 ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+
+<!-- ══════════════════════════════════════════════════════════
+     STEP 1: Add this to your <head> tag (after existing fonts)
+     ══════════════════════════════════════════════════════════ -->
+<!--
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+-->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     STEP 2: Add this CSS inside your existing <style> block
+     REPLACE the old .grid-section, .cards-grid, .card etc.
+     ══════════════════════════════════════════════════════════ -->
+<style id="ENCHANTED_TOPPINGS_CSS_COPY_INTO_STYLE_TAG">
+
+/* ═══════════════════════════════════════════════
+   ENCHANTED FOREST TOPPINGS SECTION
+   ═══════════════════════════════════════════════ */
+.enchanted-section {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+/* Live canvas background */
+#enchanted-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Mist layers */
+.ench-mist {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.ench-mist-layer {
+  position: absolute;
+  width: 200%;
+  height: 60%;
+  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(30,80,60,0.06), transparent);
+  animation: enchMistDrift linear infinite;
+}
+.ench-mist-layer.top-mist {
+  top: 20%;
+  animation-duration: 28s;
+}
+.ench-mist-layer.bottom-mist {
+  top: 55%;
+  animation-duration: 38s;
+  animation-direction: reverse;
+  opacity: 0.5;
+}
+@keyframes enchMistDrift {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+/* DOM sparkle particles */
+.ench-sparkles {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ench-sparkle {
+  position: absolute;
+  pointer-events: none;
+  font-family: 'Cormorant Garamond', serif;
+  animation: enchSparkle ease-in-out infinite;
+}
+@keyframes enchSparkle {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0.6) rotate(0deg); }
+  40%       { opacity: 1; transform: translateY(-18px) scale(1) rotate(15deg); }
+  70%       { opacity: 0.5; transform: translateY(-28px) scale(0.8) rotate(-8deg); }
+}
+
+/* Forest tree silhouettes */
+.ench-trees-top,
+.ench-trees-bottom {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: block;
+  margin-bottom: -2px;
+}
+.ench-trees-bottom {
+  margin-top: -2px;
+  margin-bottom: 0;
+}
+
+/* Section content */
+.ench-content {
+  position: relative;
+  z-index: 4;
+  padding: 0 20px 20px;
+}
+
+/* Header */
+.ench-header {
+  text-align: center;
+  padding: 10px 10px 24px;
+}
+.ench-rune-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: rgba(167,139,202,0.5);
+  font-size: 11px;
+  letter-spacing: 4px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  margin-bottom: 18px;
+}
+.ench-rune-line::before,
+.ench-rune-line::after {
+  content: '';
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(167,139,202,0.4), transparent);
+}
+.ench-main-title {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: clamp(26px, 5.5vw, 54px);
+  line-height: 1.05;
+  letter-spacing: 3px;
+  color: #e2d8b8;
+  text-shadow: 0 0 30px rgba(180,140,220,0.35), 0 0 80px rgba(80,40,140,0.2);
+  margin-bottom: 6px;
+}
+.ench-sub-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(100,140,90,0.6);
+  letter-spacing: 3px;
+  margin-top: 10px;
+}
+
+/* Stats row */
+.ench-stats {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin: 0 auto 28px;
+}
+.ench-stat {
+  padding: 8px 24px;
+  text-align: center;
+  border-right: 1px solid rgba(150,120,200,0.12);
+}
+.ench-stat:last-child { border-right: none; }
+.ench-stat-num {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 22px;
+  color: #b89de0;
+  text-shadow: 0 0 18px rgba(184,157,224,0.5);
+}
+.ench-stat-lbl {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: rgba(80,100,70,0.6);
+  letter-spacing: 2px;
+  margin-top: 3px;
+}
+
+/* Cards grid */
+.ench-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 18px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Individual card */
+.ench-card {
+  position: relative;
+  background: linear-gradient(160deg, rgba(5,12,22,0.97), rgba(8,4,18,0.99));
+  border: 1px solid rgba(80,110,60,0.18);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), border-color 0.4s, box-shadow 0.4s;
+  animation: enchCardRise 0.7s ease both;
+}
+@keyframes enchCardRise {
+  from { opacity: 0; transform: translateY(35px) scale(0.95); }
+  to   { opacity: 1; transform: none; }
+}
+.ench-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  border-color: rgba(167,139,202,0.45);
+  box-shadow:
+    0 28px 70px rgba(0,0,0,0.75),
+    0 0 50px rgba(90,50,150,0.12),
+    0 0 100px rgba(50,100,60,0.06),
+    inset 0 1px 0 rgba(200,170,240,0.1);
+}
+
+/* Shimmer line on top of card */
+.ench-card-shimmer {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(180,140,220,0.7),
+    rgba(210,180,255,0.9),
+    rgba(180,140,220,0.7),
+    transparent
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+.ench-card:hover .ench-card-shimmer { transform: scaleX(1); }
+
+/* Corner rune glyph */
+.ench-corner-rune {
+  position: absolute;
+  top: 9px;
+  right: 11px;
+  font-size: 10px;
+  color: rgba(150,120,200,0.2);
+  transition: color 0.4s, text-shadow 0.4s;
+  z-index: 6;
+  font-family: 'Cormorant Garamond', serif;
+}
+.ench-card:hover .ench-corner-rune {
+  color: rgba(200,170,240,0.7);
+  text-shadow: 0 0 8px rgba(200,170,240,0.6);
+}
+
+/* Badge */
+.ench-card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 5;
+  background: rgba(20,8,40,0.88);
+  border: 1px solid rgba(150,120,200,0.35);
+  color: #b89de0;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 3px 9px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.ench-card:hover .ench-card-badge {
+  border-color: rgba(180,140,220,0.6);
+  box-shadow: 0 0 12px rgba(150,100,220,0.2);
+}
+
+/* Card image */
+.ench-img-wrap {
+  position: relative;
+  height: 155px;
+  overflow: hidden;
+  background: #030810;
+}
+.ench-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.55) saturate(0.65) hue-rotate(8deg);
+  transition: transform 0.6s ease, filter 0.4s;
+}
+.ench-card:hover .ench-img-wrap img {
+  transform: scale(1.12);
+  filter: brightness(0.85) saturate(1.05);
+}
+.ench-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  background: radial-gradient(ellipse at 40% 40%, #0a1520, #030810);
+}
+
+/* Mystical tint overlay */
+.ench-overlay-tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg,
+    rgba(20,50,30,0.35),
+    rgba(50,20,90,0.25),
+    rgba(10,40,70,0.3)
+  );
+  transition: opacity 0.4s;
+}
+.ench-card:hover .ench-overlay-tint { opacity: 0.6; }
+
+/* Bokeh lights on image */
+.ench-bokeh-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 8px at 18% 25%, rgba(255,200,100,0.22), transparent 70%),
+    radial-gradient(circle 5px at 70% 55%, rgba(200,150,255,0.18), transparent 70%),
+    radial-gradient(circle 6px at 45% 78%, rgba(80,200,140,0.14), transparent 70%),
+    radial-gradient(circle 4px at 85% 20%, rgba(255,180,120,0.16), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.ench-card:hover .ench-bokeh-layer { opacity: 1; }
+
+/* Image bottom fade */
+.ench-img-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: linear-gradient(to top, rgba(5,12,22,0.98), transparent);
+}
+
+/* Card body */
+.ench-card-body { padding: 14px 16px 16px; }
+.ench-card-name {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 10.5px;
+  letter-spacing: 0.8px;
+  color: #d0c098;
+  margin-bottom: 7px;
+  line-height: 1.3;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+.ench-card:hover .ench-card-name {
+  color: #e8d8b0;
+  text-shadow: 0 0 20px rgba(220,190,140,0.3);
+}
+.ench-card-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: rgba(60,80,60,0.7);
+  font-size: 12px;
+  line-height: 1.65;
+  margin-bottom: 14px;
+  transition: color 0.3s;
+}
+.ench-card:hover .ench-card-desc { color: rgba(90,110,80,0.9); }
+
+/* Card footer */
+.ench-card-footer { display: flex; align-items: center; justify-content: space-between; }
+.ench-card-price {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 19px;
+  color: #b89de0;
+  text-shadow: 0 0 12px rgba(184,157,224,0.4);
+  line-height: 1;
+  transition: text-shadow 0.3s;
+}
+.ench-card:hover .ench-card-price { text-shadow: 0 0 22px rgba(200,170,240,0.7); }
+.ench-card-price span {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 10px;
+  color: rgba(60,80,50,0.5);
+  margin-left: 2px;
+}
+
+/* Add button */
+.ench-add-btn {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: 1px solid rgba(80,110,60,0.3);
+  color: rgba(90,120,70,0.8);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: all 0.35s;
+}
+.ench-add-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(80,110,60,0.12), rgba(140,100,200,0.12));
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.ench-add-btn:hover::before { opacity: 1; }
+.ench-add-btn:hover {
+  border-color: rgba(167,139,202,0.55);
+  color: #c4a8e8;
+  box-shadow: 0 0 18px rgba(140,100,200,0.18), inset 0 1px 0 rgba(180,140,220,0.1);
+}
+.ench-add-btn.added {
+  border-color: rgba(80,180,110,0.5);
+  color: #70d090;
+  box-shadow: 0 0 14px rgba(80,180,100,0.18);
+}
+
+/* Bottom ornament */
+.ench-bottom-orn {
+  text-align: center;
+  padding: 20px 20px 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: rgba(60,80,60,0.35);
+  font-size: 13px;
+  letter-spacing: 5px;
+}
+
+</style>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     STEP 3: Replace your <div id="normal-grid-section"> with this
+     ══════════════════════════════════════════════════════════ -->
+<div class="enchanted-section hidden" id="normal-grid-section">
+
+  <!-- Live Canvas Background -->
+  <canvas id="enchanted-canvas"></canvas>
+
+  <!-- Mist Layers -->
+  <div class="ench-mist">
+    <div class="ench-mist-layer top-mist"></div>
+    <div class="ench-mist-layer bottom-mist"></div>
+  </div>
+
+  <!-- DOM Sparkles -->
+  <div class="ench-sparkles" id="ench-sparkles"></div>
+
+  <!-- Forest Top Silhouette -->
+  <svg class="ench-trees-top" viewBox="0 0 1200 90" preserveAspectRatio="none">
+    <polygon points="0,90 40,18 80,90"    fill="#040e08" opacity="0.95"/>
+    <polygon points="30,90 75,4 120,90"   fill="#030d06" opacity="0.9"/>
+    <polygon points="90,90 130,25 170,90" fill="#040e08"/>
+    <polygon points="145,90 195,8 245,90" fill="#030c06"/>
+    <polygon points="210,90 250,30 290,90" fill="#050f09"/>
+    <polygon points="265,90 315,12 365,90" fill="#030d06"/>
+    <polygon points="340,90 380,22 420,90" fill="#040e08"/>
+    <polygon points="400,90 450,5 500,90"  fill="#030c06"/>
+    <polygon points="470,90 510,28 550,90" fill="#050f09"/>
+    <polygon points="530,90 580,10 630,90" fill="#030d06"/>
+    <polygon points="600,90 645,20 690,90" fill="#040e08"/>
+    <polygon points="665,90 715,6 765,90"  fill="#030c06"/>
+    <polygon points="740,90 780,26 820,90" fill="#050f09"/>
+    <polygon points="800,90 850,14 900,90" fill="#030d06"/>
+    <polygon points="870,90 910,22 950,90" fill="#040e08"/>
+    <polygon points="930,90 980,8 1030,90" fill="#030c06"/>
+    <polygon points="1000,90 1040,18 1080,90" fill="#050f09"/>
+    <polygon points="1060,90 1110,4 1160,90" fill="#030d06"/>
+    <polygon points="1130,90 1170,20 1200,90" fill="#040e08"/>
+    <rect x="0" y="78" width="1200" height="12" fill="#030810"/>
+  </svg>
+
+  <!-- Content -->
+  <div class="ench-content">
+    <div class="ench-header">
+      <div class="ench-rune-line">✦ &nbsp; enchanted add-ons &nbsp; ✦</div>
+      <div class="ench-main-title">Mystical<br>Toppings</div>
+      <div class="ench-sub-title">Gathered from the flavour forest · Cast with care</div>
+    </div>
+    <div class="ench-stats">
+      <div class="ench-stat">
+        <div class="ench-stat-num">5</div>
+        <div class="ench-stat-lbl">Enchantments</div>
+      </div>
+      <div class="ench-stat">
+        <div class="ench-stat-num">₹15</div>
+        <div class="ench-stat-lbl">From</div>
+      </div>
+      <div class="ench-stat">
+        <div class="ench-stat-num">100%</div>
+        <div class="ench-stat-lbl">Spellbound fresh</div>
+      </div>
+    </div>
+    <div class="ench-grid" id="grid"></div>
+    <div class="ench-bottom-orn">❧ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ❧</div>
+  </div>
+
+  <!-- Forest Bottom Silhouette -->
+  <svg class="ench-trees-bottom" viewBox="0 0 1200 90" preserveAspectRatio="none">
+    <rect x="0" y="0" width="1200" height="10" fill="#030810"/>
+    <polygon points="0,0 40,72 80,0"    fill="#040e08" opacity="0.95"/>
+    <polygon points="50,0 95,86 140,0"  fill="#030d06" opacity="0.9"/>
+    <polygon points="115,0 155,65 195,0" fill="#040e08"/>
+    <polygon points="175,0 225,88 275,0" fill="#030c06"/>
+    <polygon points="255,0 295,60 335,0" fill="#050f09"/>
+    <polygon points="315,0 365,82 415,0" fill="#030d06"/>
+    <polygon points="400,0 440,68 480,0" fill="#040e08"/>
+    <polygon points="460,0 510,85 560,0" fill="#030c06"/>
+    <polygon points="540,0 580,58 620,0" fill="#050f09"/>
+    <polygon points="600,0 650,80 700,0" fill="#030d06"/>
+    <polygon points="680,0 720,66 760,0" fill="#040e08"/>
+    <polygon points="740,0 790,86 840,0" fill="#030c06"/>
+    <polygon points="820,0 860,55 900,0" fill="#050f09"/>
+    <polygon points="880,0 930,78 980,0" fill="#030d06"/>
+    <polygon points="960,0 1000,64 1040,0" fill="#040e08"/>
+    <polygon points="1020,0 1070,84 1120,0" fill="#030c06"/>
+    <polygon points="1100,0 1140,60 1180,0" fill="#050f09"/>
+    <polygon points="1155,0 1190,76 1220,0" fill="#030d06"/>
+  </svg>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     STEP 4: Replace your renderGrid() function in your <script>
+     with this new version. Also add initEnchantedCanvas() call.
+     ══════════════════════════════════════════════════════════ -->
+<script id="ENCHANTED_TOPPINGS_JS_COPY_INTO_SCRIPT_TAG">
+
+/* ── Enchanted descriptions for toppings ── */
+const enchantedDescs = {
+  "Dark Chocolate Chips":  "Whispers of deep cocoa, gathered from the shadow groves.",
+  "White Chocolate Chips": "Pale as moonlight, sweet as a fairy's laughter.",
+  "Oreo Cookies":          "Crumbled relics of the night — darkly divine.",
+  "Nuts":                  "Sun-kissed nuts from the enchanted grove.",
+  "Chocolate Fudge":       "Liquid gold fudge — a spellbinding drizzle.",
+};
+const enchantedBadges = {
+  "Dark Chocolate Chips":  "Ancient Dark",
+  "White Chocolate Chips": "Moonlit",
+  "Oreo Cookies":          "Shadow Crust",
+  "Nuts":                  "Forest Harvest",
+  "Chocolate Fudge":       "Gilded Potion",
+};
+
+/* ── Replace your old renderGrid() with this ── */
+function renderGrid() {
+  const cat = categories[activeTab];
+  document.getElementById('grid').innerHTML = cat.items.map((item, idx) => {
+    const qty    = cart[item.name] || 0;
+    const badge  = enchantedBadges[item.name]  || 'Enchanted';
+    const desc   = enchantedDescs[item.name]   || item.desc;
+    const imgHtml = item.image
+      ? `<img src="${item.image}" alt="${item.name}"
+           onerror="this.parentElement.innerHTML='<div class=ench-img-placeholder>🍫</div><div class=ench-overlay-tint></div><div class=ench-bokeh-layer></div><div class=ench-img-fade></div>'">`
+      : `<div class="ench-img-placeholder">🍫</div>`;
+    return `
+    <div class="ench-card" style="animation-delay:${idx * 0.1}s">
+      <div class="ench-card-shimmer"></div>
+      <div class="ench-corner-rune">✦</div>
+      <div class="ench-card-badge">${badge}</div>
+      <div class="ench-img-wrap">
+        ${imgHtml}
+        <div class="ench-overlay-tint"></div>
+        <div class="ench-bokeh-layer"></div>
+        <div class="ench-img-fade"></div>
+      </div>
+      <div class="ench-card-body">
+        <div class="ench-card-name">${item.name}</div>
+        <div class="ench-card-desc">${desc}</div>
+        <div class="ench-card-footer">
+          <div class="ench-card-price">₹${item.price}<span>/ add-on</span></div>
+          <button class="ench-add-btn${qty > 0 ? ' added' : ''}"
+            onclick="addItem('${item.name.replace(/'/g,"\\'")}', ${item.price}, this)">
+            ${qty > 0 ? '✓ Enchanted' : '✦ Enchant'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  /* init canvas + sparkles once per section show */
+  initEnchantedCanvas();
+  spawnEnchSparkles();
+}
+
+/* ── Canvas particle + aurora + shooting star engine ── */
+let _enchFrame = 0, _enchParticles = [], _enchStars = [], _enchAuroras = [];
+let _enchCanvasReady = false;
+
+function initEnchantedCanvas() {
+  const canvas = document.getElementById('enchanted-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    const section = document.getElementById('normal-grid-section');
+    canvas.width  = section.offsetWidth  || window.innerWidth;
+    canvas.height = section.offsetHeight || window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* Particle class */
+  function Particle() { this.reset(true); }
+  Particle.prototype.reset = function(rand) {
+    this.x = Math.random() * canvas.width;
+    this.y = rand ? Math.random() * canvas.height : canvas.height + 10;
+    this.r  = 0.8 + Math.random() * 2.2;
+    this.vy = -(0.15 + Math.random() * 0.4);
+    this.vx = (Math.random() - 0.5) * 0.2;
+    this.life = 0;
+    this.maxLife = 180 + Math.random() * 240;
+    const pals = [[255,200,100],[200,160,255],[100,210,150],[255,170,110],[160,200,255]];
+    this.rgb = pals[Math.floor(Math.random() * pals.length)];
+    this.ts  = 0.02 + Math.random() * 0.04;
+    this.to  = Math.random() * Math.PI * 2;
+    this.wb  = Math.random() * Math.PI * 2;
+    this.ws  = 0.01 + Math.random() * 0.02;
+  };
+  Particle.prototype.tick = function() {
+    this.life++; this.wb += this.ws;
+    this.x += this.vx + Math.sin(this.wb) * 0.15;
+    this.y += this.vy;
+    if (this.life > this.maxLife || this.y < -10) this.reset(false);
+  };
+  Particle.prototype.draw = function() {
+    const t  = this.life / this.maxLife;
+    const fd = t < 0.1 ? t / 0.1 : t > 0.8 ? (1 - t) / 0.2 : 1;
+    const tw = 0.5 + 0.5 * Math.sin(this.life * this.ts + this.to);
+    const a  = fd * tw * 0.85;
+    const [r,g,b] = this.rgb;
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${r},${g},${b},${a})`; ctx.fill();
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.r * 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${r},${g},${b},${a * 0.2})`; ctx.fill();
+  };
+
+  /* Shooting star class */
+  function ShootingStar() { this.active = false; this.nextAt = Date.now() + 3000 + Math.random() * 6000; }
+  ShootingStar.prototype.tick = function() {
+    if (!this.active) {
+      if (Date.now() > this.nextAt) {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height * 0.4;
+        this.len   = 60 + Math.random() * 120;
+        this.angle = Math.PI / 4 + Math.random() * 0.4;
+        this.speed = 4 + Math.random() * 6;
+        this.life  = 0;
+        this.maxLife = 30 + Math.random() * 30;
+        this.active = true;
+      }
+      return;
+    }
+    this.life++;
+    this.x += Math.cos(this.angle) * this.speed;
+    this.y += Math.sin(this.angle) * this.speed;
+    if (this.life > this.maxLife) {
+      this.active = false;
+      this.nextAt = Date.now() + 4000 + Math.random() * 8000;
+    }
+  };
+  ShootingStar.prototype.draw = function() {
+    if (!this.active) return;
+    const a = (1 - this.life / this.maxLife) * 0.7;
+    const grd = ctx.createLinearGradient(
+      this.x - Math.cos(this.angle) * this.len,
+      this.y - Math.sin(this.angle) * this.len,
+      this.x, this.y
+    );
+    grd.addColorStop(0, 'rgba(200,180,255,0)');
+    grd.addColorStop(1, `rgba(220,200,255,${a})`);
+    ctx.strokeStyle = grd; ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(this.x - Math.cos(this.angle)*this.len, this.y - Math.sin(this.angle)*this.len);
+    ctx.lineTo(this.x, this.y);
+    ctx.stroke();
+  };
+
+  /* Aurora class */
+  function Aurora(yFrac, col, phase) {
+    this.yFrac = yFrac; this.col = col; this.phase = phase;
+    this.amp = 12 + Math.random() * 20;
+  }
+  Aurora.prototype.draw = function(f) {
+    const y = this.yFrac * canvas.height;
+    const W = canvas.width;
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 4) {
+      const w = Math.sin(x * 0.008 + f * 0.4 + this.phase) * this.amp
+              + Math.sin(x * 0.015 + f * 0.25) * 8;
+      if (x === 0) ctx.moveTo(x, y + w); else ctx.lineTo(x, y + w);
+    }
+    ctx.lineTo(W, y + 60); ctx.lineTo(0, y + 60); ctx.closePath();
+    ctx.fillStyle = this.col; ctx.fill();
+  };
+
+  /* Build particles */
+  const count = Math.floor((canvas.width * canvas.height) / 12000);
+  _enchParticles = Array.from({ length: count }, () => new Particle());
+  _enchStars     = [new ShootingStar(), new ShootingStar(), new ShootingStar()];
+  _enchAuroras   = [
+    new Aurora(0.3, 'rgba(30,90,50,0.025)',  0),
+    new Aurora(0.5, 'rgba(60,30,120,0.02)',  2),
+    new Aurora(0.7, 'rgba(20,70,100,0.02)',  4),
+  ];
+
+  /* Static star positions (deterministic) */
+  const staticStars = Array.from({ length: 200 }, (_, i) => ({
+    x: (Math.sin(i * 127.1) * 0.5 + 0.5),
+    y: (Math.sin(i * 311.7) * 0.5 + 0.5) * 0.7,
+  }));
+
+  if (_enchCanvasReady) return; /* don't double-start loop */
+  _enchCanvasReady = true;
+
+  (function loop() {
+    if (!document.getElementById('normal-grid-section') ||
+        document.getElementById('normal-grid-section').style.display === 'none') {
+      _enchCanvasReady = false; return;
+    }
+    requestAnimationFrame(loop);
+    _enchFrame++;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    /* Deep bg */
+    const bg = ctx.createRadialGradient(
+      canvas.width/2, canvas.height*0.3, 0,
+      canvas.width/2, canvas.height*0.3, Math.max(canvas.width, canvas.height)*0.8
+    );
+    bg.addColorStop(0, 'rgba(8,16,30,1)');
+    bg.addColorStop(0.4, 'rgba(5,10,20,1)');
+    bg.addColorStop(1, 'rgba(3,8,16,1)');
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    /* Static stars */
+    staticStars.forEach((s, i) => {
+      const a = 0.2 + 0.15 * Math.sin(_enchFrame * 0.02 + i);
+      ctx.beginPath();
+      ctx.arc(s.x * canvas.width, s.y * canvas.height, 0.35, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(220,200,255,${a})`; ctx.fill();
+    });
+
+    _enchAuroras.forEach(a => a.draw(_enchFrame));
+    _enchStars.forEach(s => { s.tick(); s.draw(); });
+    _enchParticles.forEach(p => { p.tick(); p.draw(); });
+  })();
+}
+
+/* ── Spawn DOM sparkle glyphs ── */
+function spawnEnchSparkles() {
+  const el = document.getElementById('ench-sparkles');
+  if (!el || el.children.length > 0) return;
+  const glyphs = ['✦','✧','⋆','✵','✺','⁂'];
+  for (let i = 0; i < 18; i++) {
+    const s   = document.createElement('div');
+    s.className = 'ench-sparkle';
+    const sz  = 8 + Math.random() * 10;
+    const dur = 3 + Math.random() * 5;
+    const del = Math.random() * 6;
+    s.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${8 + Math.random()*84}%;
+      font-size:${sz}px;
+      color:rgba(190,160,240,${0.2 + Math.random()*0.3});
+      animation-duration:${dur}s;
+      animation-delay:${del}s;
+    `;
+    s.textContent = glyphs[i % glyphs.length];
+    el.appendChild(s);
+  }
+}
+
 </script>
 </body>
 </html>
