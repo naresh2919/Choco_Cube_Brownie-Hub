@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Choco Cube</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=Barlow:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
- <link rel="icon" type="image/x-icon" href="Choco Cube.png">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="Choco Cube.png">
 
 <style>
 /* ══════════════════════════════════════════
@@ -25,6 +25,12 @@
   --dark2: #0d0d1a;
   --dark3: #111122;
   --border: rgba(123,47,255,0.2);
+  /* Cyberpunk green vars */
+  --neon: #00ff41;
+  --neon-dim: rgba(0,255,65,0.15);
+  --neon-glow: rgba(0,255,65,0.4);
+  --cp-dark: #020402;
+  --cp-card: #070e07;
 }
 
 body {
@@ -117,14 +123,6 @@ nav {
   background: linear-gradient(to bottom, transparent 60%, var(--dark) 100%);
   z-index: 1;
 }
-.billboard-deco {
-  position: absolute;
-  right: 0; top: 0; bottom: 0;
-  width: 50%;
-  z-index: 1;
-  opacity: 0.15;
-}
-.billboard-deco img { width: 100%; height: 100%; object-fit: cover; }
 .billboard-content {
   position: relative;
   z-index: 2;
@@ -200,10 +198,7 @@ nav {
   gap: 6px;
 }
 .tab:hover { color: var(--off-white); }
-.tab.active {
-  color: var(--white);
-  border-bottom-color: var(--purple);
-}
+.tab.active { color: var(--white); border-bottom-color: var(--purple); }
 .tab-count {
   background: #1a1a2e;
   color: #666;
@@ -211,10 +206,7 @@ nav {
   padding: 2px 6px;
   border-radius: 10px;
 }
-.tab.active .tab-count {
-  background: var(--purple-dim);
-  color: var(--purple-light);
-}
+.tab.active .tab-count { background: var(--purple-dim); color: var(--purple-light); }
 
 /* ═══════════════════════════════════════════════
    PURPLE NEON BROWNIE SECTION
@@ -226,8 +218,6 @@ nav {
   overflow: hidden;
   padding-bottom: 80px;
 }
-
-/* Ambient background orbs */
 .brownie-section::before {
   content: '';
   position: absolute;
@@ -239,8 +229,6 @@ nav {
   pointer-events: none;
   z-index: 0;
 }
-
-/* Noise texture overlay */
 .brownie-section::after {
   content: '';
   position: absolute;
@@ -250,23 +238,13 @@ nav {
   z-index: 0;
   opacity: 0.5;
 }
-
-/* Scanlines effect */
 .brownie-scanlines {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(123,47,255,0.01) 2px,
-    rgba(123,47,255,0.01) 4px
-  );
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(123,47,255,0.01) 2px, rgba(123,47,255,0.01) 4px);
   pointer-events: none;
   z-index: 1;
 }
-
-/* ── Brownie Header ── */
 .brownie-header {
   position: relative;
   z-index: 2;
@@ -288,8 +266,7 @@ nav {
   border-radius: 4px;
   margin-bottom: 18px;
 }
-.brownie-eyebrow::before,
-.brownie-eyebrow::after {
+.brownie-eyebrow::before, .brownie-eyebrow::after {
   content: '';
   display: inline-block;
   width: 20px;
@@ -328,16 +305,13 @@ nav {
   font-size: 12px;
   letter-spacing: 3px;
 }
-.brownie-divider::before,
-.brownie-divider::after {
+.brownie-divider::before, .brownie-divider::after {
   content: '';
   flex: 1;
   max-width: 80px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--purple-dim), transparent);
 }
-
-/* ── Brownie Grid ── */
 .brownie-grid {
   position: relative;
   z-index: 2;
@@ -348,8 +322,6 @@ nav {
   max-width: 1200px;
   margin: 0 auto;
 }
-
-/* ── Brownie Card ── */
 .br-card {
   position: relative;
   background: var(--dark2);
@@ -367,13 +339,8 @@ nav {
 .br-card:hover {
   transform: translateY(-8px) scale(1.02);
   border-color: rgba(123,47,255,0.5);
-  box-shadow:
-    0 20px 60px rgba(0,0,0,0.6),
-    0 0 30px rgba(123,47,255,0.2),
-    inset 0 1px 0 rgba(168,85,247,0.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 30px rgba(123,47,255,0.2), inset 0 1px 0 rgba(168,85,247,0.1);
 }
-
-/* Glow line at top */
 .br-card-glow-line {
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--purple), var(--purple-light), transparent);
@@ -381,8 +348,6 @@ nav {
   transition: opacity 0.3s;
 }
 .br-card:hover .br-card-glow-line { opacity: 1; }
-
-/* Card badge */
 .br-badge {
   position: absolute;
   top: 12px;
@@ -402,8 +367,6 @@ nav {
 .br-badge.new { background: rgba(123,47,255,0.9); }
 .br-badge.best { background: rgba(255,165,0,0.85); }
 .br-badge.hot { background: rgba(255,50,50,0.85); }
-
-/* Card image */
 .br-img-wrap {
   position: relative;
   height: 160px;
@@ -417,10 +380,7 @@ nav {
   transition: transform 0.5s ease, filter 0.3s;
   filter: brightness(0.8) saturate(0.9);
 }
-.br-card:hover .br-img-wrap img {
-  transform: scale(1.1);
-  filter: brightness(1) saturate(1.1);
-}
+.br-card:hover .br-img-wrap img { transform: scale(1.1); filter: brightness(1) saturate(1.1); }
 .br-img-placeholder {
   width: 100%;
   height: 100%;
@@ -430,17 +390,10 @@ nav {
   font-size: 48px;
   background: radial-gradient(ellipse at center, #1a0a30, #080814);
 }
-
-/* Purple tint overlay on image */
 .br-img-tint {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(123,47,255,0.08) 0%,
-    transparent 50%,
-    rgba(168,85,247,0.06) 100%
-  );
+  background: linear-gradient(135deg, rgba(123,47,255,0.08) 0%, transparent 50%, rgba(168,85,247,0.06) 100%);
   pointer-events: none;
 }
 .br-img-fade {
@@ -449,11 +402,7 @@ nav {
   height: 60px;
   background: linear-gradient(to top, var(--dark2), transparent);
 }
-
-/* Card body */
-.br-body {
-  padding: 14px 16px 16px;
-}
+.br-body { padding: 14px 16px 16px; }
 .br-name {
   font-family: 'Barlow', sans-serif;
   font-weight: 900;
@@ -464,20 +413,8 @@ nav {
   margin-bottom: 6px;
   line-height: 1.2;
 }
-.br-desc {
-  color: #444;
-  font-size: 11px;
-  line-height: 1.5;
-  margin-bottom: 14px;
-}
-
-/* Tags row */
-.br-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 14px;
-}
+.br-desc { color: #444; font-size: 11px; line-height: 1.5; margin-bottom: 14px; }
+.br-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
 .br-tag {
   background: rgba(123,47,255,0.1);
   border: 1px solid rgba(123,47,255,0.2);
@@ -489,13 +426,7 @@ nav {
   padding: 2px 7px;
   border-radius: 3px;
 }
-
-.br-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
+.br-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .br-price {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 26px;
@@ -503,13 +434,7 @@ nav {
   color: var(--white);
   line-height: 1;
 }
-.br-price span {
-  font-family: 'Barlow', sans-serif;
-  font-size: 11px;
-  color: #444;
-  font-weight: 400;
-  margin-left: 2px;
-}
+.br-price span { font-family: 'Barlow', sans-serif; font-size: 11px; color: #444; font-weight: 400; margin-left: 2px; }
 .br-add-btn {
   background: transparent;
   border: 1px solid rgba(123,47,255,0.35);
@@ -526,51 +451,20 @@ nav {
   position: relative;
   overflow: hidden;
 }
-.br-add-btn:hover {
-  background: rgba(123,47,255,0.15);
-  border-color: var(--purple-light);
-  color: var(--purple-light);
-  box-shadow: 0 0 16px rgba(123,47,255,0.3);
-}
-.br-add-btn.added {
-  background: rgba(123,47,255,0.2);
-  border-color: var(--purple-light);
-  color: var(--purple-light);
-  box-shadow: 0 0 20px rgba(123,47,255,0.4);
-}
-
-/* Featured card — spans 2 cols on wide screens */
-.br-card.featured {
-  grid-column: span 2;
-}
-@media (max-width: 600px) {
-  .br-card.featured { grid-column: span 1; }
-}
+.br-add-btn:hover { background: rgba(123,47,255,0.15); border-color: var(--purple-light); color: var(--purple-light); box-shadow: 0 0 16px rgba(123,47,255,0.3); }
+.br-add-btn.added { background: rgba(123,47,255,0.2); border-color: var(--purple-light); color: var(--purple-light); box-shadow: 0 0 20px rgba(123,47,255,0.4); }
+.br-card.featured { grid-column: span 2; }
+@media (max-width: 600px) { .br-card.featured { grid-column: span 1; } }
 .br-card.featured .br-img-wrap { height: 220px; }
 .br-card.featured .br-name { font-size: 18px; }
-
-/* ── Floating particles ── */
-.br-particles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-}
-.br-particle {
-  position: absolute;
-  border-radius: 50%;
-  animation: brFloat linear infinite;
-  opacity: 0;
-}
+.br-particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.br-particle { position: absolute; border-radius: 50%; animation: brFloat linear infinite; opacity: 0; }
 @keyframes brFloat {
   0%   { transform: translateY(100vh) scale(0.3); opacity: 0; }
   10%  { opacity: 1; }
   90%  { opacity: 0.4; }
   100% { transform: translateY(-100px) scale(1); opacity: 0; }
 }
-
-/* ── Section stats bar ── */
 .brownie-stats {
   position: relative;
   z-index: 2;
@@ -582,161 +476,421 @@ nav {
   max-width: 700px;
   margin: 0 auto;
 }
-.br-stat {
-  text-align: center;
-}
-.br-stat-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;
-  color: var(--purple-light);
-  letter-spacing: 2px;
-  text-shadow: 0 0 20px var(--purple-glow);
-}
-.br-stat-label {
-  font-size: 9px;
-  color: #444;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-top: 2px;
-}
-.br-stat-sep {
-  width: 1px;
-  height: 36px;
-  background: linear-gradient(to bottom, transparent, #2a2a3a, transparent);
-}
+.br-stat { text-align: center; }
+.br-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--purple-light); letter-spacing: 2px; text-shadow: 0 0 20px var(--purple-glow); }
+.br-stat-label { font-size: 9px; color: #444; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+.br-stat-sep { width: 1px; height: 36px; background: linear-gradient(to bottom, transparent, #2a2a3a, transparent); }
 
 /* ═══════════════════════════════════════════════
-   TOPPINGS SECTION (normal dark style)
+   CYBERPUNK TOPPINGS SECTION
    ═══════════════════════════════════════════════ */
-.grid-section {
-  padding: 32px 24px 48px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.row-label {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 4px;
-  color: #333;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #111;
-}
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
-}
-.card {
-  background: var(--dark2);
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid #1a1a2e;
-  transition: transform 0.25s, border-color 0.25s;
-  animation: cardIn 0.4s ease both;
-}
-@keyframes cardIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: none; }
-}
-.card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(123,47,255,0.3);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-}
-.card-thumb {
+.cp-section {
   position: relative;
-  height: 130px;
-  background: #080814;
-  overflow: hidden;
-}
-.card-thumb-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, rgba(123,47,255,0.06), transparent);
-}
-.card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: relative;
-  filter: brightness(0.8);
-  transition: filter 0.3s, transform 0.4s;
-}
-.card:hover .card-img {
-  filter: brightness(1);
-  transform: scale(1.06);
-}
-.card-img-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-}
-.card-body {
-  padding: 12px 14px 14px;
-}
-.card-name {
-  font-weight: 800;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--off-white);
-  margin-bottom: 4px;
-}
-.card-desc {
-  color: #3a3a4a;
-  font-size: 11px;
-  line-height: 1.45;
-  margin-bottom: 12px;
-}
-.card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.price {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  color: var(--white);
-  letter-spacing: 1px;
-}
-.add-btn {
-  background: transparent;
-  border: 1px solid #252535;
-  color: #555;
-  font-family: 'Barlow', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.add-btn:hover {
-  border-color: var(--purple);
-  color: var(--purple-light);
-}
-.add-btn.added {
-  border-color: var(--purple-light);
-  color: var(--purple-light);
-}
-
-/* ═══════════════════════════════════════════════
-   BOO! COOL DRINKS (existing theme preserved)
-   ═══════════════════════════════════════════════ */
-.boo-section {
-  position: relative;
-  background: #080808;
+  background: var(--cp-dark);
   min-height: 100vh;
   overflow: hidden;
   padding-bottom: 60px;
 }
+.cp-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,255,65,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,65,0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+.cp-bg-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 30%, rgba(0,255,65,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 80% 70%, rgba(160,255,0,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cp-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.22) 3px, rgba(0,0,0,0.22) 4px);
+  pointer-events: none;
+  z-index: 1;
+}
+.cp-header {
+  position: relative;
+  z-index: 2;
+  padding: 52px 24px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.cp-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--neon);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cp-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: var(--neon);
+  box-shadow: 0 0 8px var(--neon);
+}
+.cp-big-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 14vw, 130px);
+  line-height: 0.88;
+  letter-spacing: 2px;
+  color: #fff;
+  position: relative;
+  margin-bottom: 0;
+}
+.cp-big-title .outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(0,255,65,0.6);
+}
+.cp-big-title .filled {
+  color: var(--neon);
+  text-shadow: 0 0 30px rgba(0,255,65,0.5), 0 0 80px rgba(0,255,65,0.2);
+}
+.cp-glitch-wrap {
+  position: relative;
+  display: inline-block;
+}
+.cp-glitch-wrap::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 3px; top: 0;
+  color: var(--neon);
+  clip-path: polygon(0 30%, 100% 30%, 100% 55%, 0 55%);
+  opacity: 0.6;
+  animation: cpGlitch1 5s infinite;
+}
+.cp-glitch-wrap::after {
+  content: attr(data-text);
+  position: absolute;
+  left: -3px; top: 0;
+  color: #ff0080;
+  clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+  opacity: 0.5;
+  animation: cpGlitch2 5s infinite 0.4s;
+}
+@keyframes cpGlitch1 {
+  0%, 88%, 100% { transform: none; opacity: 0; }
+  90% { transform: translateX(-4px); opacity: 0.7; }
+  93% { transform: translateX(4px); opacity: 0.5; }
+  95% { transform: none; opacity: 0; }
+}
+@keyframes cpGlitch2 {
+  0%, 85%, 100% { transform: none; opacity: 0; }
+  87% { transform: translateX(4px); opacity: 0.6; }
+  91% { transform: translateX(-2px); opacity: 0.4; }
+  93% { transform: none; opacity: 0; }
+}
+.cp-kanji-block { text-align: right; padding-top: 10px; }
+.cp-kanji {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  line-height: 1.1;
+  color: rgba(255,255,255,0.07);
+  letter-spacing: 4px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  display: inline-block;
+  border-right: 1px solid rgba(0,255,65,0.15);
+  padding-right: 12px;
+}
+.cp-kanji .k-accent { color: rgba(0,255,65,0.22); }
+.cp-subtitle-row {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid rgba(0,255,65,0.12);
+  padding-bottom: 16px;
+}
+.cp-tag-line {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+.cp-stats-row { display: flex; gap: 28px; }
+.cp-stat { text-align: right; }
+.cp-stat-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--neon);
+  letter-spacing: 1px;
+  line-height: 1;
+  text-shadow: 0 0 16px rgba(0,255,65,0.6);
+}
+.cp-stat-l { font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,0.25); text-transform: uppercase; }
+
+/* Ticker */
+.cp-ticker-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.cp-ticker {
+  background: var(--neon);
+  padding: 7px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.cp-ticker-inner {
+  display: inline-flex;
+  gap: 48px;
+  animation: cpTicker 22s linear infinite;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: #020402;
+}
+@keyframes cpTicker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Cards grid */
+.cp-grid {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2px 24px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2px;
+}
+.cp-card {
+  position: relative;
+  background: var(--cp-card);
+  border: 1px solid rgba(0,255,65,0.07);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  animation: cpCardIn 0.5s ease both;
+}
+@keyframes cpCardIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+.cp-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,255,65,0.04), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 1;
+}
+.cp-card:hover {
+  border-color: rgba(0,255,65,0.45);
+  transform: scale(1.025);
+  box-shadow: 0 0 0 1px rgba(0,255,65,0.25), 0 20px 50px rgba(0,0,0,0.85), inset 0 0 30px rgba(0,255,65,0.03);
+  z-index: 5;
+}
+.cp-card:hover::before { opacity: 1; }
+.cp-card-corner-tag {
+  position: absolute;
+  top: 0; right: 0;
+  background: var(--neon);
+  color: #020402;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  z-index: 5;
+}
+.cp-card-num {
+  position: absolute;
+  top: 10px; left: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  color: rgba(0,255,65,0.3);
+  letter-spacing: 2px;
+  z-index: 5;
+}
+.cp-img-wrap {
+  position: relative;
+  height: 170px;
+  overflow: hidden;
+  background: #040a04;
+}
+.cp-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5) saturate(0.5) contrast(1.2);
+  transition: filter 0.4s, transform 0.5s;
+}
+.cp-card:hover .cp-img-wrap img {
+  filter: brightness(0.75) saturate(0.85) contrast(1.3);
+  transform: scale(1.1);
+}
+.cp-img-ph {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px;
+  background: #040a04;
+}
+.cp-img-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(0,255,65,0.1), transparent 60%),
+    linear-gradient(to top, var(--cp-card) 0%, transparent 55%);
+  pointer-events: none;
+}
+.cp-img-scan {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,255,65,0.9), transparent);
+  animation: cpScanDown 2.5s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cp-card:hover .cp-img-scan { opacity: 1; }
+@keyframes cpScanDown {
+  0%   { top: 0%; }
+  100% { top: 100%; }
+}
+.cp-card-body {
+  padding: 14px 14px 16px;
+  position: relative;
+  z-index: 2;
+}
+.cp-card-body::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 14px; right: 14px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--neon), transparent);
+  opacity: 0.18;
+  transition: opacity 0.3s;
+}
+.cp-card:hover .cp-card-body::before { opacity: 0.55; }
+.cp-item-code {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(0,255,65,0.35);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.cp-item-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 5px;
+  line-height: 1;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+.cp-card:hover .cp-item-name {
+  color: var(--neon);
+  text-shadow: 0 0 20px rgba(0,255,65,0.4);
+}
+.cp-item-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.cp-card-footer { display: flex; align-items: center; justify-content: space-between; }
+.cp-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+.cp-price small {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.22);
+  font-weight: 400;
+}
+.cp-add-btn {
+  background: transparent;
+  border: 1px solid rgba(0,255,65,0.28);
+  color: rgba(0,255,65,0.65);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.cp-add-btn:hover {
+  background: rgba(0,255,65,0.12);
+  border-color: var(--neon);
+  color: var(--neon);
+  box-shadow: 0 0 20px rgba(0,255,65,0.25);
+}
+.cp-add-btn.added {
+  background: rgba(0,255,65,0.18);
+  border-color: var(--neon);
+  color: var(--neon);
+  box-shadow: 0 0 24px rgba(0,255,65,0.35);
+}
+.cp-bottom-bar {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 28px auto 0;
+  padding: 18px 24px 0;
+  border-top: 1px solid rgba(0,255,65,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cp-bottom-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(0,255,65,0.18);
+}
+.cp-bottom-deco { display: flex; gap: 5px; }
+.cp-dot { width: 6px; height: 6px; border: 1px solid rgba(0,255,65,0.3); transform: rotate(45deg); }
+.cp-dot:first-child { background: rgba(0,255,65,0.4); }
+
+/* ═══════════════════════════════════════════════
+   BOO! COOL DRINKS
+   ═══════════════════════════════════════════════ */
+.boo-section { position: relative; background: #080808; min-height: 100vh; overflow: hidden; padding-bottom: 60px; }
 .boo-section::before {
   content: '';
   position: absolute;
@@ -797,21 +951,18 @@ nav {
 .boo-card-footer { display: flex; align-items: center; justify-content: space-between; }
 .boo-card-price { color: #fff; font-size: 18px; font-weight: 800; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
 .boo-card-price span { font-size: 11px; color: #555; font-weight: 400; font-family: 'Barlow', sans-serif; }
-.boo-add-btn { background: transparent; border: 1px solid #2a2a2a; color: #666; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s; font-family: 'Barlow', sans-serif; position: relative; overflow: hidden; }
+.boo-add-btn { background: transparent; border: 1px solid #2a2a2a; color: #666; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s; font-family: 'Barlow', sans-serif; }
 .boo-add-btn:hover { border-color: var(--boo-accent, #ff4500); color: var(--boo-accent, #ff4500); box-shadow: 0 0 10px var(--boo-glow, rgba(255,69,0,0.25)); }
 .boo-add-btn.added { border-color: #22c55e; color: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.3); }
 .boo-bottom { position: relative; z-index: 2; text-align: center; padding: 10px 20px 20px; color: #222; font-size: 13px; letter-spacing: 6px; }
+.decor-blob { position: absolute; pointer-events: none; z-index: 1; }
+.decor-blob--left { top: 10%; left: 2%; width: 120px; opacity: 0.15; }
+.decor-blob--right { top: 5%; right: 2%; width: 100px; opacity: 0.12; }
 
 /* ═══════════════════════════════════════════════
    HYPNOTIC / DIRTY SODA SECTION
    ═══════════════════════════════════════════════ */
-.hypnotic-section {
-  position: relative;
-  background: #050508;
-  min-height: 100vh;
-  overflow: hidden;
-  padding-bottom: 60px;
-}
+.hypnotic-section { position: relative; background: #050508; min-height: 100vh; overflow: hidden; padding-bottom: 60px; }
 .hype-particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
 .hype-particle { position: absolute; animation: hypeFloat linear infinite; }
 @keyframes hypeFloat {
@@ -850,7 +1001,7 @@ nav {
 .hype-bottom-ornament { position: relative; z-index: 2; text-align: center; padding: 10px 20px 20px; color: #1a1a2a; font-size: 12px; letter-spacing: 5px; }
 
 /* ═══════════════════════════════════════════════
-   CART BAR, DRAWER, MODALS (preserved)
+   CART BAR, DRAWER, MODALS
    ═══════════════════════════════════════════════ */
 .spacer { height: 80px; }
 .cart-bar {
@@ -874,23 +1025,8 @@ nav {
 .bar-items-count { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--purple-light); letter-spacing: 1px; line-height: 1; }
 .bar-label { color: #555; font-size: 12px; letter-spacing: 1px; }
 .bar-total { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--white); letter-spacing: 1px; margin-left: 6px; }
-.view-cart-btn {
-  background: var(--purple);
-  border: none;
-  color: #fff;
-  font-family: 'Barlow', sans-serif;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 10px 22px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 4px 20px rgba(123,47,255,0.4);
-}
+.view-cart-btn { background: var(--purple); border: none; color: #fff; font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 10px 22px; border-radius: 8px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(123,47,255,0.4); }
 .view-cart-btn:hover { background: var(--purple-light); box-shadow: 0 4px 30px rgba(123,47,255,0.6); }
-
 .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); z-index: 300; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .overlay.open { opacity: 1; pointer-events: all; }
 .drawer { position: fixed; right: 0; top: 0; bottom: 0; width: min(420px, 100vw); background: var(--dark2); border-left: 1px solid var(--border); z-index: 400; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); display: flex; flex-direction: column; }
@@ -966,6 +1102,9 @@ nav {
 .modal-confirm-btn { flex: 2; background: var(--purple); border: none; color: #fff; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
 .modal-confirm-btn:disabled { background: #1a1a2e; color: #333; cursor: not-allowed; }
 .modal-confirm-btn:not(:disabled):hover { background: var(--purple-light); }
+.packing-options { display: flex; gap: 10px; margin-top: 4px; }
+.pack-btn { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #1a1a2e; background: var(--dark3); color: #555; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.pack-btn:hover { border-color: var(--purple); color: var(--purple-light); }
 
 .success-box { background: var(--dark2); border: 1px solid var(--border); border-radius: 20px; padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 40px rgba(123,47,255,0.2); }
 .success-anim { font-size: 52px; margin-bottom: 16px; animation: successPop 0.5s cubic-bezier(0.34,1.56,0.64,1); }
@@ -983,9 +1122,7 @@ nav {
 .success-done-btn { background: var(--purple); border: none; color: #fff; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; padding: 12px 32px; border-radius: 10px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(123,47,255,0.4); }
 .success-done-btn:hover { background: var(--purple-light); }
 
-/* ═══════════════════════════════════════════════
-   CONTACT & FOOTER
-   ═══════════════════════════════════════════════ */
+/* CONTACT & FOOTER */
 .contact-section { background: #050508; border-top: 1px solid #0d0d1a; padding: 60px 24px 0; }
 .contact-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; max-width: 1100px; margin: 0 auto 48px; }
 @media (max-width: 768px) { .contact-inner { grid-template-columns: 1fr; } }
@@ -1012,51 +1149,14 @@ nav {
 .hours-note { color: #333; font-size: 11px; }
 .footer-bar { border-top: 1px solid #0d0d1a; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; }
 .footer-copy { color: #333; font-size: 12px; }
-  .footer-dev { color: #333; font-size: 12px; }
-  .footer-dev strong { color: #555; }
-
-  .hidden { display: none; }
-  .packing-options { display: flex; gap: 10px; margin-top: 4px; }
-  .pack-btn {
-    flex: 1;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #1a1a2e;
-    background: var(--dark3);
-    color: #555;
-    font-family: 'Barlow', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .pack-btn:hover {
-    border-color: var(--purple);
-    color: var(--purple-light);
-  }
-  .decor-blob {
-    position: absolute;
-    pointer-events: none;
-    z-index: 1;
-  }
-  .decor-blob--left {
-    top: 10%;
-    left: 2%;
-    width: 120px;
-    opacity: 0.15;
-  }
-  .decor-blob--right {
-    top: 5%;
-    right: 2%;
-    width: 100px;
-    opacity: 0.12;
-  }
+.footer-dev { color: #333; font-size: 12px; }
+.footer-dev strong { color: #555; }
+.hidden { display: none; }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
- 
 <nav>
   <div class="logo"><img src="Choco Cube.png" alt="Choco Cube"> Choco<span>Cube</span></div>
   <div class="nav-right">
@@ -1071,7 +1171,6 @@ nav {
 <div class="billboard">
   <div class="billboard-bg"></div>
   <div class="billboard-vignette"></div>
-  <div class="billboard-deco"></div>
   <div class="billboard-content">
     <div class="billboard-tag">⬛ NOW SERVING</div>
     <h1>Our Menu</h1>
@@ -1088,18 +1187,16 @@ nav {
 <!-- TABS -->
 <div class="tabs-wrap" id="tabs"></div>
 
-<!-- BROWNIE SECTION (purple neon) -->
+<!-- BROWNIE SECTION -->
 <div class="brownie-section" id="brownie-section">
   <div class="brownie-scanlines"></div>
   <div class="br-particles" id="br-particles"></div>
-
   <div class="brownie-header">
     <div class="brownie-eyebrow">Freshly Baked</div>
     <div class="brownie-title">DARK<br><em>BROWNIES</em></div>
     <div class="brownie-subtitle">Fudgy · Rich · Handcrafted</div>
     <div class="brownie-divider">✦ THE COLLECTION ✦</div>
   </div>
-
   <div class="brownie-stats">
     <div class="br-stat"><div class="br-stat-num">9</div><div class="br-stat-label">Varieties</div></div>
     <div class="br-stat-sep"></div>
@@ -1107,14 +1204,66 @@ nav {
     <div class="br-stat-sep"></div>
     <div class="br-stat"><div class="br-stat-num">100%</div><div class="br-stat-label">Handcrafted</div></div>
   </div>
-
   <div class="brownie-grid" id="brownie-grid"></div>
 </div>
 
-<!-- NORMAL GRID (Toppings) -->
-<div class="grid-section hidden" id="normal-grid-section">
-  <div class="row-label" id="row-label"></div>
-  <div class="cards-grid" id="grid"></div>
+<!-- ════════════════════════════════════════
+     CYBERPUNK TOPPINGS SECTION
+     ════════════════════════════════════════ -->
+<div class="cp-section hidden" id="normal-grid-section">
+  <div class="cp-bg-grid"></div>
+  <div class="cp-bg-glow"></div>
+  <div class="cp-scanlines"></div>
+
+  <div class="cp-header">
+    <div>
+      <div class="cp-eyebrow">LEVEL UP YOUR ORDER</div>
+      <div class="cp-big-title">
+        <div class="cp-glitch-wrap" data-text="DARK">DARK</div><br>
+        <span class="outline">ADD</span><span class="filled">-ONS</span>
+      </div>
+    </div>
+    <div class="cp-kanji-block">
+      <div class="cp-kanji">添<span class="k-accent">加</span>物</div>
+    </div>
+  </div>
+
+  <div class="cp-subtitle-row">
+    <div class="cp-tag-line">TOPPINGS · UPGRADES · ENHANCEMENTS</div>
+    <div class="cp-stats-row">
+      <div class="cp-stat"><div class="cp-stat-n">5</div><div class="cp-stat-l">Flavours</div></div>
+      <div class="cp-stat"><div class="cp-stat-n">₹15</div><div class="cp-stat-l">From</div></div>
+      <div class="cp-stat"><div class="cp-stat-n">100%</div><div class="cp-stat-l">Fresh</div></div>
+    </div>
+  </div>
+
+  <div class="cp-ticker-wrap">
+    <div class="cp-ticker">
+      <div class="cp-ticker-inner">
+        <span>DARK CHOCOLATE CHIPS</span><span>✦</span>
+        <span>WHITE CHOCOLATE</span><span>✦</span>
+        <span>OREO COOKIES</span><span>✦</span>
+        <span>NUTS</span><span>✦</span>
+        <span>CHOCOLATE FUDGE</span><span>✦</span>
+        <span>DARK CHOCOLATE CHIPS</span><span>✦</span>
+        <span>WHITE CHOCOLATE</span><span>✦</span>
+        <span>OREO COOKIES</span><span>✦</span>
+        <span>NUTS</span><span>✦</span>
+        <span>CHOCOLATE FUDGE</span><span>✦</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cp-grid" id="grid"></div>
+
+  <div class="cp-bottom-bar">
+    <div class="cp-bottom-text">CHOCO CUBE · MADURAI · TOPPINGS</div>
+    <div class="cp-bottom-deco">
+      <div class="cp-dot"></div>
+      <div class="cp-dot"></div>
+      <div class="cp-dot"></div>
+    </div>
+  </div>
 </div>
 
 <!-- BOO! COOL DRINKS -->
@@ -1252,7 +1401,7 @@ nav {
     <div class="contact-cols">
       <div class="contact-col">
         <div class="col-title">📍 Find Us</div>
-        <p class="col-addr"> Samayanallur,No.1 Government Hospital Quarters,<br>Power House, Samayanallur,<br>Madurai – 625 402</p>
+        <p class="col-addr">Samayanallur, No.1 Government Hospital Quarters,<br>Power House, Samayanallur,<br>Madurai – 625 402</p>
         <a class="map-link" href="https://maps.google.com/?q=Government+Hospital+Madurai" target="_blank" rel="noopener">Open in Maps →</a>
       </div>
       <div class="contact-col">
@@ -1278,37 +1427,26 @@ nav {
     <span class="footer-dev">Developed by <strong>Nareshkrishnan</strong></span>
   </div>
 </section>
-<div class="form-group">
-  <label class="form-label">Packing Charge <span class="req">*</span></label>
-  <  class="packing-options">
-    <button type="button" id="pack-yes" class="pack-btn" onclick="setPackaging(true)">
-      ✅ Yes — Add ₹15
-    </button>
-    <button type="button" id="pack-no" class="pack-btn" onclick="setPackaging(false)">
-      ❌ No Thanks
-    </button>
-  </div>
-  <div class="field-err" id="pack-err">Please select a packing option</div>
-</div>
 
 <script>
-  let activeTab = 0, cart = {};
+let activeTab = 0, cart = {};
+
 const categories = [
   { label: "Brownies", icon: "🍫", isBrownie: true, items: [
-    { name: "Chocolate Brownies",      price: 45, image: "Chocho.png",      desc: "Fudgy and rich with a crackly top and gooey center.", badge: "hot",  tags: ["Fudgy", "Rich"],      featured: false },
-    { name: "Brownie Fudge",           price: 50, image: "Chocho.png", desc: "Light and airy fudge made with high-quality cocoa.",  badge: "best", tags: ["Premium", "Airy"],    featured: true  },
-    { name: "Nuts Brownie",            price: 40, image: "Nuts.jpg.png",    desc: "Classic brownie with sweetness and satisfying crunch.",badge: null,   tags: ["Crunchy", "Classic"], featured: false },
-    { name: "Oreo Brownie",            price: 45, image: "oreo.jpg.png",    desc: "Layered with Oreo cr umbles and rich dark ganache.",   badge: "new",  tags: ["Oreo", "Ganache"],    featured: false },
-    { name: "Brownie With Ice Cream",  price: 65, image: "icecream.png",    desc: "Warm brownie topped with a creamy scoop of ice cream.",badge: "best", tags: ["Warm", "Cold"],       featured: false },
-    { name: "Classic Brownies",        price: 30, image: "classic.png", desc: "The timeless original — fudgy, rich, perfectly sweet.",badge: null,   tags: ["OG", "Sweet"],        featured: false },
-    { name: "Peanut Butter Brownies",  price: 35, image: "Peanut.png",      desc: "Extra creamy brownie with smooth peanut butter swirl.",badge: null,   tags: ["Nutty", "Creamy"],    featured: false },
+    { name: "Chocolate Brownies",      price: 45, image: "Chocho.png",   desc: "Fudgy and rich with a crackly top and gooey center.", badge: "hot",  tags: ["Fudgy", "Rich"],      featured: false },
+    { name: "Brownie Fudge",           price: 50, image: "Chocho.png",   desc: "Light and airy fudge made with high-quality cocoa.",  badge: "best", tags: ["Premium", "Airy"],    featured: true  },
+    { name: "Nuts Brownie",            price: 40, image: "Nuts.jpg.png", desc: "Classic brownie with sweetness and satisfying crunch.",badge: null,   tags: ["Crunchy", "Classic"], featured: false },
+    { name: "Oreo Brownie",            price: 45, image: "oreo.jpg.png", desc: "Layered with Oreo crumbles and rich dark ganache.",   badge: "new",  tags: ["Oreo", "Ganache"],    featured: false },
+    { name: "Brownie With Ice Cream",  price: 65, image: "icecream.png", desc: "Warm brownie topped with a creamy scoop of ice cream.",badge: "best", tags: ["Warm", "Cold"],       featured: false },
+    { name: "Classic Brownies",        price: 30, image: "classic.png",  desc: "The timeless original — fudgy, rich, perfectly sweet.",badge: null,   tags: ["OG", "Sweet"],        featured: false },
+    { name: "Peanut Butter Brownies",  price: 35, image: "Peanut.png",   desc: "Extra creamy brownie with smooth peanut butter swirl.",badge: null,   tags: ["Nutty", "Creamy"],    featured: false },
   ]},
   { label: "Toppings", icon: "🍫", items: [
-    { name: "Dark Chocolate Chips",  price: 15, image: "Dark.png",  desc: "Soft and chewy cookies loaded with chocolate chips." },
-    { name: "White Chocolate Chips", price: 25, image: "white.png", desc: "Moist and fluffy muffins bursting with chocolate flavor." },
-    { name: "Oreo Cookies",          price: 30, image: "oreo.png",  desc: "Light and airy cupcakes topped with rich chocolate frosting." },
-    { name: "Nuts",                  price: 20, image: "Nuts.png",  desc: "Glazed donuts with a decadent chocolate coating." },
-    { name: "Chocolate Fudge",       price: 35, image: "Fudge.png", desc: "Flaky croissants filled with smooth chocolate ganache." },
+    { name: "Dark Chocolate Chips",  price: 15, image: "Dark.png",  emoji: "🍫", tag: "SHADOW", code: "TPC-001", desc: "Rich cocoa depth from the shadow groves. Pure intense darkness." },
+    { name: "White Chocolate Chips", price: 25, image: "white.png", emoji: "🤍", tag: "LUNAR",  code: "TPC-002", desc: "Pale moonlit sweetness. Creamy, smooth, hypnotic." },
+    { name: "Oreo Cookies",          price: 30, image: "oreo.png",  emoji: "⬛", tag: "VOID",   code: "TPC-003", desc: "Crumbled night relics. Dark cookie crushed to perfection." },
+    { name: "Nuts",                  price: 20, image: "Nuts.png",  emoji: "🌰", tag: "WILD",   code: "TPC-004", desc: "Sun-kissed crunch. Harvested raw from the forest grove." },
+    { name: "Chocolate Fudge",       price: 35, image: "Fudge.png", emoji: "💛", tag: "GOLD",   code: "TPC-005", desc: "Liquid gold drizzle. A gilded finishing spell." },
   ]},
   { label: "Cool Drinks", icon: "🥤", isCoolDrink: true, items: [
     { name: "String",    price: 20, image: "String.jpg",    desc: "Refreshing and fizzy cola to complement your brownies.", booAccent: "#ff4500", booGlow: "rgba(255,69,0,0.25)",   booBar: "linear-gradient(90deg,#ff4500,#ff8c00)" },
@@ -1319,14 +1457,14 @@ const categories = [
     { name: "Lassi",     price: 50, image: "Lassi.png",     desc: "Thick creamy yogurt drink, sweet or salted to taste.",  booAccent: "#cc00cc", booGlow: "rgba(200,0,200,0.25)",   booBar: "linear-gradient(90deg,#cc00cc,#aa00ff)" },
   ]},
   { label: "Dirty Soda (Mojitos)", icon: "🍹", isMojito: true, items: [
-    { name: "Virgin Mojito",          price: 50, image: "Virgin.png",      desc: "Refreshing blend of mint, lime, and soda.",               spell: "Potion of Clarity" },
-    { name: "Watermelon Mint Cooler", price: 50, image: "Watermelon.png",  desc: "Crisp and citrusy classic mojito perfection.",             spell: "Elixir of the Ancients" },
-    { name: "Virgin Blue Mojito",     price: 25, image: "Virgin Blue.png", desc: "Light and zesty lemon-lime soda, crisp and cold.",         spell: "Tropical Paradise Potion" },
-    { name: "Orange Mojito",          price: 60, image: "Orage.png",       desc: "Sweet and tangy orange twist on a classic.",              spell: "Crimson Love Potion" },
-    { name: "Malibu Sunset",          price: 50, image: "Malibu.png",      desc: "Bright and zesty lemon mojito, ultra refreshing.",         spell: "Sunfire Brew" },
-    { name: "Blueberry Mojito",       price: 50, image: "Blue.png",        desc: "Rich blueberry mojito with citrus notes.",                 spell: "Midnight Veil Potion" },
-    { name: "Pineapple Mojito",       price: 50, image: "Pinapple.png",    desc: "Tropical pineapple mojito, sweet and tangy.",              spell: "Golden Enchantment" },
-    { name: "Trabical Wave",          price: 50, image: "Trabical.png",    desc: "Floral Trabical for a premium experience.",                spell: "Dreamweaver Elixir" },
+    { name: "Virgin Mojito",          price: 50, image: "Virgin.png",     desc: "Refreshing blend of mint, lime, and soda.",               spell: "Potion of Clarity" },
+    { name: "Watermelon Mint Cooler", price: 50, image: "Watermelon.png", desc: "Crisp and citrusy classic mojito perfection.",             spell: "Elixir of the Ancients" },
+    { name: "Virgin Blue Mojito",     price: 25, image: "Virgin Blue.png",desc: "Light and zesty lemon-lime soda, crisp and cold.",         spell: "Tropical Paradise Potion" },
+    { name: "Orange Mojito",          price: 60, image: "Orage.png",      desc: "Sweet and tangy orange twist on a classic.",              spell: "Crimson Love Potion" },
+    { name: "Malibu Sunset",          price: 50, image: "Malibu.png",     desc: "Bright and zesty lemon mojito, ultra refreshing.",         spell: "Sunfire Brew" },
+    { name: "Blueberry Mojito",       price: 50, image: "Blue.png",       desc: "Rich blueberry mojito with citrus notes.",                 spell: "Midnight Veil Potion" },
+    { name: "Pineapple Mojito",       price: 50, image: "Pinapple.png",   desc: "Tropical pineapple mojito, sweet and tangy.",              spell: "Golden Enchantment" },
+    { name: "Trabical Wave",          price: 50, image: "Trabical.png",   desc: "Floral Trabical for a premium experience.",                spell: "Dreamweaver Elixir" },
   ]},
 ];
 
@@ -1353,19 +1491,14 @@ function renderBrownieGrid() {
     <div class="br-card${item.featured ? ' featured' : ''}" style="animation-delay:${idx * 0.07}s">
       <div class="br-card-glow-line"></div>
       ${badgeHtml}
-      <div class="br-img-wrap">
-        ${imgHtml}
-        <div class="br-img-tint"></div>
-        <div class="br-img-fade"></div>
-      </div>
+      <div class="br-img-wrap">${imgHtml}<div class="br-img-tint"></div><div class="br-img-fade"></div></div>
       <div class="br-body">
         <div class="br-name">${item.name}</div>
         <div class="br-desc">${item.desc}</div>
         ${tagsHtml}
         <div class="br-footer">
           <div class="br-price">₹${item.price} <span>/ piece</span></div>
-          <button class="br-add-btn${qty > 0 ? ' added' : ''}"
-            onclick="addItem('${item.name.replace(/'/g,"\\'")}', ${item.price}, this)">
+          <button class="br-add-btn${qty > 0 ? ' added' : ''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}', ${item.price}, this)">
             ${qty > 0 ? '✓ Added' : '+ Add'}
           </button>
         </div>
@@ -1390,16 +1523,37 @@ function spawnBrParticles() {
   }
 }
 
-/* ── Image helpers ── */
-function itemThumb(item) {
-  return item.image
-    ? `<img class="card-img" src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=card-img-placeholder></div>'">`
-    : `<div class="card-img-placeholder"></div>`;
-}
-function itemThumbSmall(item) {
-  return item.image
-    ? `<img class="ci-img" src="${item.image}" alt="${item.name}" onerror="this.outerHTML='<div class=ci-img-placeholder>🍫</div>'">`
-    : `<div class="ci-img-placeholder">🍫</div>`;
+/* ── Cyberpunk Toppings renderer ── */
+function renderGrid() {
+  const cat = categories[activeTab];
+  document.getElementById('grid').innerHTML = cat.items.map((item, idx) => {
+    const qty = cart[item.name] || 0;
+    const imgHtml = item.image
+      ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=cp-img-ph>${item.emoji || '🍫'}</div><div class=cp-img-overlay></div><div class=cp-img-scan></div>'">`
+      : `<div class="cp-img-ph">${item.emoji || '🍫'}</div>`;
+    return `
+    <div class="cp-card" style="animation-delay:${idx * 0.08}s">
+      <div class="cp-card-corner-tag">${item.tag || 'ADD-ON'}</div>
+      <div class="cp-card-num">${item.code || `TPC-00${idx+1}`}</div>
+      <div class="cp-img-wrap">
+        ${imgHtml}
+        <div class="cp-img-overlay"></div>
+        <div class="cp-img-scan"></div>
+      </div>
+      <div class="cp-card-body">
+        <div class="cp-item-code">TOPPING // ADD-ON</div>
+        <div class="cp-item-name">${item.name}</div>
+        <div class="cp-item-desc">${item.desc}</div>
+        <div class="cp-card-footer">
+          <div class="cp-price">₹${item.price} <small>/ piece</small></div>
+          <button class="cp-add-btn${qty > 0 ? ' added' : ''}"
+            onclick="addItem('${item.name.replace(/'/g,"\\'")}', ${item.price}, this)">
+            ${qty > 0 ? '✓ ADDED' : '+ ADD'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 /* ── BOO renderer ── */
@@ -1424,7 +1578,6 @@ function renderBooGrid() {
       </div>
     </div>`;
   }).join('');
-  // particles
   const el = document.getElementById('boo-particles');
   if (!el) return;
   el.innerHTML = '';
@@ -1465,7 +1618,6 @@ function renderHypnoGrid() {
       </div>
     </div>`;
   }).join('');
-  // particles
   const el = document.getElementById('hype-particles');
   if (!el) return;
   el.innerHTML = '';
@@ -1479,30 +1631,17 @@ function renderHypnoGrid() {
   }
 }
 
-/* ── Normal grid (toppings etc) ── */
-function renderGrid() {
-  const cat = categories[activeTab];
-  document.getElementById('row-label').textContent = cat.label;
-  document.getElementById('grid').innerHTML = cat.items.map((item, idx) => {
-    const qty = cart[item.name] || 0;
-    return `<div class="card" style="animation-delay:${idx*0.04}s">
-      <div class="card-thumb"><div class="card-thumb-bg"></div>${itemThumb(item)}</div>
-      <div class="card-body">
-        <div class="card-name">${item.name}</div>
-        <div class="card-desc">${item.desc}</div>
-        <div class="card-footer">
-          <span class="price">₹${item.price}</span>
-          <button class="add-btn${qty>0?' added':''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}',${item.price},this)">${qty>0?'✓ Added':'+ Add'}</button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+/* ── Image helpers ── */
+function itemThumbSmall(item) {
+  return item.image
+    ? `<img class="ci-img" src="${item.image}" alt="${item.name}" onerror="this.outerHTML='<div class=ci-img-placeholder>🍫</div>'">`
+    : `<div class="ci-img-placeholder">🍫</div>`;
 }
 
 /* ── Tabs ── */
 function renderTabs() {
   document.getElementById('tabs').innerHTML = categories.map((c, i) =>
-    `<button class="tab${i===activeTab?' active':''}${c.isMojito?' hype-tab':''}${c.isCoolDrink?' boo-tab':''}" onclick="setTab(${i})">${c.icon} ${c.label}<span class="tab-count">${c.items.length}</span></button>`
+    `<button class="tab${i===activeTab?' active':''}" onclick="setTab(${i})">${c.icon} ${c.label}<span class="tab-count">${c.items.length}</span></button>`
   ).join('');
 }
 
@@ -1512,13 +1651,12 @@ function setTab(i) {
   const isBrownie   = !!categories[i].isBrownie;
   const isMojito    = !!categories[i].isMojito;
   const isCoolDrink = !!categories[i].isCoolDrink;
+  const isTopping   = !isBrownie && !isMojito && !isCoolDrink;
 
   document.getElementById('brownie-section').style.display    = isBrownie   ? 'block' : 'none';
-  document.getElementById('normal-grid-section').style.display = (!isMojito && !isCoolDrink && !isBrownie) ? 'block' : 'none';
+  document.getElementById('normal-grid-section').style.display = isTopping   ? 'block' : 'none';
   document.getElementById('hypnotic-section').style.display   = isMojito    ? 'block' : 'none';
   document.getElementById('boo-section').style.display        = isCoolDrink ? 'block' : 'none';
-
-  document.body.style.background = (isMojito || isCoolDrink || isBrownie) ? '#08080f' : '#08080f';
 
   if (isBrownie)        renderBrownieGrid();
   else if (isMojito)    renderHypnoGrid();
@@ -1532,15 +1670,18 @@ function addItem(name, price, btn) {
   const isMoji      = categories[MOJITO_IDX].items.some(i => i.name === name);
   const isCoolDrink = categories[COOLDRINK_IDX].items.some(i => i.name === name);
   const isBrownie   = categories[BROWNIE_IDX].items.some(i => i.name === name);
-  if (isMoji)           { btn.textContent = '✓ Brewed'; }
-  else if (isCoolDrink) { btn.textContent = '✓ ICED'; }
-  else if (isBrownie)   { btn.textContent = '✓ Added'; }
-  else                  { btn.textContent = '✓ Added'; }
+  const isTopping   = !isMoji && !isCoolDrink && !isBrownie;
+
+  if (isMoji)           btn.textContent = '✓ Brewed';
+  else if (isCoolDrink) btn.textContent = '✓ ICED';
+  else if (isTopping)   btn.textContent = '✓ ADDED';
+  else                  btn.textContent = '✓ Added';
   btn.classList.add('added');
+
   setTimeout(() => {
     if (isMoji)           btn.textContent = '⚗ Brew';
     else if (isCoolDrink) btn.textContent = '+ ADD';
-    else if (isBrownie)   btn.textContent = '+ Add';
+    else if (isTopping)   btn.textContent = '+ ADD';
     else                  btn.textContent = '+ Add';
     btn.classList.remove('added');
   }, 1200);
@@ -1583,10 +1724,10 @@ function changeQty(name, delta) {
   cart[name] = (cart[name] || 0) + delta;
   if (cart[name] <= 0) delete cart[name];
   updateState(); renderDrawer();
-  if (categories[activeTab].isBrownie)    renderBrownieGrid();
-  else if (categories[activeTab].isMojito) renderHypnoGrid();
-  else if (categories[activeTab].isCoolDrink) renderBooGrid();
-  else renderGrid();
+  if (categories[activeTab].isBrownie)          renderBrownieGrid();
+  else if (categories[activeTab].isMojito)       renderHypnoGrid();
+  else if (categories[activeTab].isCoolDrink)    renderBooGrid();
+  else                                           renderGrid();
 }
 
 function openCart()  { renderDrawer(); document.getElementById('overlay').classList.add('open'); document.getElementById('drawer').classList.add('open'); }
@@ -1640,41 +1781,6 @@ function validateForm() {
   document.getElementById('confirm-order-btn').disabled = !(n.length >= 2 && p.length === 10 && l.length >= 3 && pk !== '');
 }
 
-function confirmOrder() {
-  const name   = document.getElementById('cust-name').value.trim();
-  const phone  = document.getElementById('cust-phone').value.trim();
-  const loc    = document.getElementById('cust-location').value.trim();
-  const pickup = document.getElementById('cust-pickup').value;
-  const note   = document.getElementById('cust-note').value.trim();
-  if (name.length < 2 || phone.length !== 10 || loc.length < 3 || !pickup) return;
-  const entries = Object.entries(cart).filter(([,q]) => q > 0);
-  const { total } = calcTotals();
-  document.getElementById('success-details').innerHTML = `
-    <div class="success-customer">
-      <div class="sc-row"><span class="sc-key">👤 Name</span><span class="sc-val">${name}</span></div>
-      <div class="sc-row"><span class="sc-key">📱 Mobile</span><span class="sc-val">+91 ${phone}</span></div>
-      <div class="sc-row"><span class="sc-key">📍 Location</span><span class="sc-val">${loc}</span></div>
-      <div class="sc-row"><span class="sc-key">🕐 Pickup</span><span class="sc-val">${pickup}</span></div>
-      ${note ? `<div class="sc-row"><span class="sc-key">📝 Note</span><span class="sc-val">${note}</span></div>` : ''}
-    </div>
-    <div class="success-divider"></div>
-    ${entries.map(([n,q]) => { const it = allItems().find(i => i.name === n); return `<div class="success-item"><span>${n} ×${q}</span><span>₹${it.price*q}</span></div>`; }).join('')}
-    <div class="success-total-row"><span>Total</span><span>₹${total}</span></div>`;
-  closeCustomerModal();
-  document.getElementById('success-overlay').classList.add('open');
-  cart = {}; updateState(); renderDrawer();
-  if (categories[activeTab].isBrownie)          renderBrownieGrid();
-  else if (categories[activeTab].isMojito)       renderHypnoGrid();
-  else if (categories[activeTab].isCoolDrink)    renderBooGrid();
-  else                                           renderGrid();
-}
-
-function closeSuccess() { document.getElementById('success-overlay').classList.remove('open'); }
-
-/* ── Init ── */
-renderTabs();
-renderBrownieGrid(); // Brownies is tab 0
-
 async function confirmOrder() {
   const name   = document.getElementById('cust-name').value.trim();
   const phone  = document.getElementById('cust-phone').value.trim();
@@ -1686,18 +1792,12 @@ async function confirmOrder() {
   const entries = Object.entries(cart).filter(([, q]) => q > 0);
   const { total } = calcTotals();
 
-  // Build payload matching your API schema
   const payload = {
-    full_name: name,
-    mobile: phone,
-    location: loc,
-    pickup_time: pickup,
+    full_name: name, mobile: phone, location: loc, pickup_time: pickup,
     items: entries.map(([n, q]) => ({ name: n, qty: q })),
-    total: total,
-    special_instructions: note || ""
+    total: total, special_instructions: note || ""
   };
 
-  // Disable button & show loading state
   const confirmBtn = document.getElementById('confirm-order-btn');
   confirmBtn.disabled = true;
   confirmBtn.textContent = 'PLACING ORDER...';
@@ -1708,12 +1808,8 @@ async function confirmOrder() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
 
-    if (!res.ok) {
-      throw new Error(`Server error: ${res.status}`);
-    }
-
-    // Success — show confirmation
     document.getElementById('success-details').innerHTML = `
       <div class="success-customer">
         <div class="sc-row"><span class="sc-key">👤 Name</span><span class="sc-val">${name}</span></div>
@@ -1731,809 +1827,26 @@ async function confirmOrder() {
 
     closeCustomerModal();
     document.getElementById('success-overlay').classList.add('open');
-
-    // Clear cart
-    cart = {};
-    updateState();
-    renderDrawer();
-    if (categories[activeTab].isBrownie)       renderBrownieGrid();
-    else if (categories[activeTab].isMojito)   renderHypnoGrid();
-    else if (categories[activeTab].isCoolDrink) renderBooGrid();
-    else                                        renderGrid();
+    cart = {}; updateState(); renderDrawer();
+    if (categories[activeTab].isBrownie)          renderBrownieGrid();
+    else if (categories[activeTab].isMojito)       renderHypnoGrid();
+    else if (categories[activeTab].isCoolDrink)    renderBooGrid();
+    else                                           renderGrid();
 
   } catch (err) {
-    // Show inline error without closing modal
     confirmBtn.disabled = false;
-    confirmBtn.textContent = 'CONFIRM ORDER';
     confirmBtn.style.background = '#ef4444';
     confirmBtn.textContent = '⚠ Failed — Retry';
-    setTimeout(() => {
-      confirmBtn.style.background = '';
-      confirmBtn.textContent = 'CONFIRM ORDER';
-      confirmBtn.disabled = false;
-    }, 3000);
+    setTimeout(() => { confirmBtn.style.background = ''; confirmBtn.textContent = 'CONFIRM ORDER'; confirmBtn.disabled = false; }, 3000);
     console.error('Order failed:', err);
   }
 }
-</script>
-<!DOCTYPE html>
-<!--
-  ╔══════════════════════════════════════════════════════════════╗
-  ║        ENCHANTED TOPPINGS SECTION — DROP-IN CODE            ║
-  ║                                                              ║
-  ║  HOW TO USE:                                                 ║
-  ║  1. Copy the CSS block into your <style> tag                 ║
-  ║  2. Replace your <div id="normal-grid-section"> with the     ║
-  ║     new HTML block below                                     ║
-  ║  3. Replace your renderGrid() function with the new one      ║
-  ║  4. Add the Google Fonts link to your <head>                 ║
-  ╚══════════════════════════════════════════════════════════════╝
--->
 
-<!-- ══════════════════════════════════════════════════════════
-     STEP 1: Add this to your <head> tag (after existing fonts)
-     ══════════════════════════════════════════════════════════ -->
-<!--
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
--->
+function closeSuccess() { document.getElementById('success-overlay').classList.remove('open'); }
 
-
-<!-- ══════════════════════════════════════════════════════════
-     STEP 2: Add this CSS inside your existing <style> block
-     REPLACE the old .grid-section, .cards-grid, .card etc.
-     ══════════════════════════════════════════════════════════ -->
-<style id="ENCHANTED_TOPPINGS_CSS_COPY_INTO_STYLE_TAG">
-
-/* ═══════════════════════════════════════════════
-   ENCHANTED FOREST TOPPINGS SECTION
-   ═══════════════════════════════════════════════ */
-.enchanted-section {
-  position: relative;
-  min-height: 100vh;
-  overflow: hidden;
-  padding-bottom: 20px;
-}
-
-/* Live canvas background */
-#enchanted-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Mist layers */
-.ench-mist {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-.ench-mist-layer {
-  position: absolute;
-  width: 200%;
-  height: 60%;
-  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(30,80,60,0.06), transparent);
-  animation: enchMistDrift linear infinite;
-}
-.ench-mist-layer.top-mist {
-  top: 20%;
-  animation-duration: 28s;
-}
-.ench-mist-layer.bottom-mist {
-  top: 55%;
-  animation-duration: 38s;
-  animation-direction: reverse;
-  opacity: 0.5;
-}
-@keyframes enchMistDrift {
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0%); }
-}
-
-/* DOM sparkle particles */
-.ench-sparkles {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  overflow: hidden;
-}
-.ench-sparkle {
-  position: absolute;
-  pointer-events: none;
-  font-family: 'Cormorant Garamond', serif;
-  animation: enchSparkle ease-in-out infinite;
-}
-@keyframes enchSparkle {
-  0%, 100% { opacity: 0; transform: translateY(0) scale(0.6) rotate(0deg); }
-  40%       { opacity: 1; transform: translateY(-18px) scale(1) rotate(15deg); }
-  70%       { opacity: 0.5; transform: translateY(-28px) scale(0.8) rotate(-8deg); }
-}
-
-/* Forest tree silhouettes */
-.ench-trees-top,
-.ench-trees-bottom {
-  position: relative;
-  z-index: 3;
-  width: 100%;
-  display: block;
-  margin-bottom: -2px;
-}
-.ench-trees-bottom {
-  margin-top: -2px;
-  margin-bottom: 0;
-}
-
-/* Section content */
-.ench-content {
-  position: relative;
-  z-index: 4;
-  padding: 0 20px 20px;
-}
-
-/* Header */
-.ench-header {
-  text-align: center;
-  padding: 10px 10px 24px;
-}
-.ench-rune-line {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  color: rgba(167,139,202,0.5);
-  font-size: 11px;
-  letter-spacing: 4px;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  margin-bottom: 18px;
-}
-.ench-rune-line::before,
-.ench-rune-line::after {
-  content: '';
-  flex: 1;
-  max-width: 80px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(167,139,202,0.4), transparent);
-}
-.ench-main-title {
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: clamp(26px, 5.5vw, 54px);
-  line-height: 1.05;
-  letter-spacing: 3px;
-  color: #e2d8b8;
-  text-shadow: 0 0 30px rgba(180,140,220,0.35), 0 0 80px rgba(80,40,140,0.2);
-  margin-bottom: 6px;
-}
-.ench-sub-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 13px;
-  color: rgba(100,140,90,0.6);
-  letter-spacing: 3px;
-  margin-top: 10px;
-}
-
-/* Stats row */
-.ench-stats {
-  display: flex;
-  justify-content: center;
-  gap: 0;
-  margin: 0 auto 28px;
-}
-.ench-stat {
-  padding: 8px 24px;
-  text-align: center;
-  border-right: 1px solid rgba(150,120,200,0.12);
-}
-.ench-stat:last-child { border-right: none; }
-.ench-stat-num {
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 22px;
-  color: #b89de0;
-  text-shadow: 0 0 18px rgba(184,157,224,0.5);
-}
-.ench-stat-lbl {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 11px;
-  color: rgba(80,100,70,0.6);
-  letter-spacing: 2px;
-  margin-top: 3px;
-}
-
-/* Cards grid */
-.ench-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 18px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-/* Individual card */
-.ench-card {
-  position: relative;
-  background: linear-gradient(160deg, rgba(5,12,22,0.97), rgba(8,4,18,0.99));
-  border: 1px solid rgba(80,110,60,0.18);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), border-color 0.4s, box-shadow 0.4s;
-  animation: enchCardRise 0.7s ease both;
-}
-@keyframes enchCardRise {
-  from { opacity: 0; transform: translateY(35px) scale(0.95); }
-  to   { opacity: 1; transform: none; }
-}
-.ench-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  border-color: rgba(167,139,202,0.45);
-  box-shadow:
-    0 28px 70px rgba(0,0,0,0.75),
-    0 0 50px rgba(90,50,150,0.12),
-    0 0 100px rgba(50,100,60,0.06),
-    inset 0 1px 0 rgba(200,170,240,0.1);
-}
-
-/* Shimmer line on top of card */
-.ench-card-shimmer {
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent,
-    rgba(180,140,220,0.7),
-    rgba(210,180,255,0.9),
-    rgba(180,140,220,0.7),
-    transparent
-  );
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s ease;
-}
-.ench-card:hover .ench-card-shimmer { transform: scaleX(1); }
-
-/* Corner rune glyph */
-.ench-corner-rune {
-  position: absolute;
-  top: 9px;
-  right: 11px;
-  font-size: 10px;
-  color: rgba(150,120,200,0.2);
-  transition: color 0.4s, text-shadow 0.4s;
-  z-index: 6;
-  font-family: 'Cormorant Garamond', serif;
-}
-.ench-card:hover .ench-corner-rune {
-  color: rgba(200,170,240,0.7);
-  text-shadow: 0 0 8px rgba(200,170,240,0.6);
-}
-
-/* Badge */
-.ench-card-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 5;
-  background: rgba(20,8,40,0.88);
-  border: 1px solid rgba(150,120,200,0.35);
-  color: #b89de0;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 10px;
-  letter-spacing: 1px;
-  padding: 3px 9px;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-.ench-card:hover .ench-card-badge {
-  border-color: rgba(180,140,220,0.6);
-  box-shadow: 0 0 12px rgba(150,100,220,0.2);
-}
-
-/* Card image */
-.ench-img-wrap {
-  position: relative;
-  height: 155px;
-  overflow: hidden;
-  background: #030810;
-}
-.ench-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.55) saturate(0.65) hue-rotate(8deg);
-  transition: transform 0.6s ease, filter 0.4s;
-}
-.ench-card:hover .ench-img-wrap img {
-  transform: scale(1.12);
-  filter: brightness(0.85) saturate(1.05);
-}
-.ench-img-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
-  background: radial-gradient(ellipse at 40% 40%, #0a1520, #030810);
-}
-
-/* Mystical tint overlay */
-.ench-overlay-tint {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(135deg,
-    rgba(20,50,30,0.35),
-    rgba(50,20,90,0.25),
-    rgba(10,40,70,0.3)
-  );
-  transition: opacity 0.4s;
-}
-.ench-card:hover .ench-overlay-tint { opacity: 0.6; }
-
-/* Bokeh lights on image */
-.ench-bokeh-layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle 8px at 18% 25%, rgba(255,200,100,0.22), transparent 70%),
-    radial-gradient(circle 5px at 70% 55%, rgba(200,150,255,0.18), transparent 70%),
-    radial-gradient(circle 6px at 45% 78%, rgba(80,200,140,0.14), transparent 70%),
-    radial-gradient(circle 4px at 85% 20%, rgba(255,180,120,0.16), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-.ench-card:hover .ench-bokeh-layer { opacity: 1; }
-
-/* Image bottom fade */
-.ench-img-fade {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50px;
-  background: linear-gradient(to top, rgba(5,12,22,0.98), transparent);
-}
-
-/* Card body */
-.ench-card-body { padding: 14px 16px 16px; }
-.ench-card-name {
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 10.5px;
-  letter-spacing: 0.8px;
-  color: #d0c098;
-  margin-bottom: 7px;
-  line-height: 1.3;
-  transition: color 0.3s, text-shadow 0.3s;
-}
-.ench-card:hover .ench-card-name {
-  color: #e8d8b0;
-  text-shadow: 0 0 20px rgba(220,190,140,0.3);
-}
-.ench-card-desc {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  color: rgba(60,80,60,0.7);
-  font-size: 12px;
-  line-height: 1.65;
-  margin-bottom: 14px;
-  transition: color 0.3s;
-}
-.ench-card:hover .ench-card-desc { color: rgba(90,110,80,0.9); }
-
-/* Card footer */
-.ench-card-footer { display: flex; align-items: center; justify-content: space-between; }
-.ench-card-price {
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 19px;
-  color: #b89de0;
-  text-shadow: 0 0 12px rgba(184,157,224,0.4);
-  line-height: 1;
-  transition: text-shadow 0.3s;
-}
-.ench-card:hover .ench-card-price { text-shadow: 0 0 22px rgba(200,170,240,0.7); }
-.ench-card-price span {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 10px;
-  color: rgba(60,80,50,0.5);
-  margin-left: 2px;
-}
-
-/* Add button */
-.ench-add-btn {
-  position: relative;
-  overflow: hidden;
-  background: transparent;
-  border: 1px solid rgba(80,110,60,0.3);
-  color: rgba(90,120,70,0.8);
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 12px;
-  letter-spacing: 1px;
-  padding: 7px 14px;
-  cursor: pointer;
-  transition: all 0.35s;
-}
-.ench-add-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(80,110,60,0.12), rgba(140,100,200,0.12));
-  opacity: 0;
-  transition: opacity 0.35s;
-}
-.ench-add-btn:hover::before { opacity: 1; }
-.ench-add-btn:hover {
-  border-color: rgba(167,139,202,0.55);
-  color: #c4a8e8;
-  box-shadow: 0 0 18px rgba(140,100,200,0.18), inset 0 1px 0 rgba(180,140,220,0.1);
-}
-.ench-add-btn.added {
-  border-color: rgba(80,180,110,0.5);
-  color: #70d090;
-  box-shadow: 0 0 14px rgba(80,180,100,0.18);
-}
-
-/* Bottom ornament */
-.ench-bottom-orn {
-  text-align: center;
-  padding: 20px 20px 10px;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  color: rgba(60,80,60,0.35);
-  font-size: 13px;
-  letter-spacing: 5px;
-}
-
-</style>
-
-
-<!-- ══════════════════════════════════════════════════════════
-     STEP 3: Replace your <div id="normal-grid-section"> with this
-     ══════════════════════════════════════════════════════════ -->
-<div class="enchanted-section hidden" id="normal-grid-section">
-
-  <!-- Live Canvas Background -->
-  <canvas id="enchanted-canvas"></canvas>
-
-  <!-- Mist Layers -->
-  <div class="ench-mist">
-    <div class="ench-mist-layer top-mist"></div>
-    <div class="ench-mist-layer bottom-mist"></div>
-  </div>
-
-  <!-- DOM Sparkles -->
-  <div class="ench-sparkles" id="ench-sparkles"></div>
-
-  <!-- Forest Top Silhouette -->
-  <svg class="ench-trees-top" viewBox="0 0 1200 90" preserveAspectRatio="none">
-    <polygon points="0,90 40,18 80,90"    fill="#040e08" opacity="0.95"/>
-    <polygon points="30,90 75,4 120,90"   fill="#030d06" opacity="0.9"/>
-    <polygon points="90,90 130,25 170,90" fill="#040e08"/>
-    <polygon points="145,90 195,8 245,90" fill="#030c06"/>
-    <polygon points="210,90 250,30 290,90" fill="#050f09"/>
-    <polygon points="265,90 315,12 365,90" fill="#030d06"/>
-    <polygon points="340,90 380,22 420,90" fill="#040e08"/>
-    <polygon points="400,90 450,5 500,90"  fill="#030c06"/>
-    <polygon points="470,90 510,28 550,90" fill="#050f09"/>
-    <polygon points="530,90 580,10 630,90" fill="#030d06"/>
-    <polygon points="600,90 645,20 690,90" fill="#040e08"/>
-    <polygon points="665,90 715,6 765,90"  fill="#030c06"/>
-    <polygon points="740,90 780,26 820,90" fill="#050f09"/>
-    <polygon points="800,90 850,14 900,90" fill="#030d06"/>
-    <polygon points="870,90 910,22 950,90" fill="#040e08"/>
-    <polygon points="930,90 980,8 1030,90" fill="#030c06"/>
-    <polygon points="1000,90 1040,18 1080,90" fill="#050f09"/>
-    <polygon points="1060,90 1110,4 1160,90" fill="#030d06"/>
-    <polygon points="1130,90 1170,20 1200,90" fill="#040e08"/>
-    <rect x="0" y="78" width="1200" height="12" fill="#030810"/>
-  </svg>
-
-  <!-- Content -->
-  <div class="ench-content">
-    <div class="ench-header">
-      <div class="ench-rune-line">✦ &nbsp; enchanted add-ons &nbsp; ✦</div>
-      <div class="ench-main-title">Mystical<br>Toppings</div>
-      <div class="ench-sub-title">Gathered from the flavour forest · Cast with care</div>
-    </div>
-    <div class="ench-stats">
-      <div class="ench-stat">
-        <div class="ench-stat-num">5</div>
-        <div class="ench-stat-lbl">Enchantments</div>
-      </div>
-      <div class="ench-stat">
-        <div class="ench-stat-num">₹15</div>
-        <div class="ench-stat-lbl">From</div>
-      </div>
-      <div class="ench-stat">
-        <div class="ench-stat-num">100%</div>
-        <div class="ench-stat-lbl">Spellbound fresh</div>
-      </div>
-    </div>
-    <div class="ench-grid" id="grid"></div>
-    <div class="ench-bottom-orn">❧ &nbsp;&nbsp; ✦ &nbsp;&nbsp; ❧</div>
-  </div>
-
-  <!-- Forest Bottom Silhouette -->
-  <svg class="ench-trees-bottom" viewBox="0 0 1200 90" preserveAspectRatio="none">
-    <rect x="0" y="0" width="1200" height="10" fill="#030810"/>
-    <polygon points="0,0 40,72 80,0"    fill="#040e08" opacity="0.95"/>
-    <polygon points="50,0 95,86 140,0"  fill="#030d06" opacity="0.9"/>
-    <polygon points="115,0 155,65 195,0" fill="#040e08"/>
-    <polygon points="175,0 225,88 275,0" fill="#030c06"/>
-    <polygon points="255,0 295,60 335,0" fill="#050f09"/>
-    <polygon points="315,0 365,82 415,0" fill="#030d06"/>
-    <polygon points="400,0 440,68 480,0" fill="#040e08"/>
-    <polygon points="460,0 510,85 560,0" fill="#030c06"/>
-    <polygon points="540,0 580,58 620,0" fill="#050f09"/>
-    <polygon points="600,0 650,80 700,0" fill="#030d06"/>
-    <polygon points="680,0 720,66 760,0" fill="#040e08"/>
-    <polygon points="740,0 790,86 840,0" fill="#030c06"/>
-    <polygon points="820,0 860,55 900,0" fill="#050f09"/>
-    <polygon points="880,0 930,78 980,0" fill="#030d06"/>
-    <polygon points="960,0 1000,64 1040,0" fill="#040e08"/>
-    <polygon points="1020,0 1070,84 1120,0" fill="#030c06"/>
-    <polygon points="1100,0 1140,60 1180,0" fill="#050f09"/>
-    <polygon points="1155,0 1190,76 1220,0" fill="#030d06"/>
-  </svg>
-
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════════
-     STEP 4: Replace your renderGrid() function in your <script>
-     with this new version. Also add initEnchantedCanvas() call.
-     ══════════════════════════════════════════════════════════ -->
-<script id="ENCHANTED_TOPPINGS_JS_COPY_INTO_SCRIPT_TAG">
-
-/* ── Enchanted descriptions for toppings ── */
-const enchantedDescs = {
-  "Dark Chocolate Chips":  "Whispers of deep cocoa, gathered from the shadow groves.",
-  "White Chocolate Chips": "Pale as moonlight, sweet as a fairy's laughter.",
-  "Oreo Cookies":          "Crumbled relics of the night — darkly divine.",
-  "Nuts":                  "Sun-kissed nuts from the enchanted grove.",
-  "Chocolate Fudge":       "Liquid gold fudge — a spellbinding drizzle.",
-};
-const enchantedBadges = {
-  "Dark Chocolate Chips":  "Ancient Dark",
-  "White Chocolate Chips": "Moonlit",
-  "Oreo Cookies":          "Shadow Crust",
-  "Nuts":                  "Forest Harvest",
-  "Chocolate Fudge":       "Gilded Potion",
-};
-
-/* ── Replace your old renderGrid() with this ── */
-function renderGrid() {
-  const cat = categories[activeTab];
-  document.getElementById('grid').innerHTML = cat.items.map((item, idx) => {
-    const qty    = cart[item.name] || 0;
-    const badge  = enchantedBadges[item.name]  || 'Enchanted';
-    const desc   = enchantedDescs[item.name]   || item.desc;
-    const imgHtml = item.image
-      ? `<img src="${item.image}" alt="${item.name}"
-           onerror="this.parentElement.innerHTML='<div class=ench-img-placeholder>🍫</div><div class=ench-overlay-tint></div><div class=ench-bokeh-layer></div><div class=ench-img-fade></div>'">`
-      : `<div class="ench-img-placeholder">🍫</div>`;
-    return `
-    <div class="ench-card" style="animation-delay:${idx * 0.1}s">
-      <div class="ench-card-shimmer"></div>
-      <div class="ench-corner-rune">✦</div>
-      <div class="ench-card-badge">${badge}</div>
-      <div class="ench-img-wrap">
-        ${imgHtml}
-        <div class="ench-overlay-tint"></div>
-        <div class="ench-bokeh-layer"></div>
-        <div class="ench-img-fade"></div>
-      </div>
-      <div class="ench-card-body">
-        <div class="ench-card-name">${item.name}</div>
-        <div class="ench-card-desc">${desc}</div>
-        <div class="ench-card-footer">
-          <div class="ench-card-price">₹${item.price}<span>/ add-on</span></div>
-          <button class="ench-add-btn${qty > 0 ? ' added' : ''}"
-            onclick="addItem('${item.name.replace(/'/g,"\\'")}', ${item.price}, this)">
-            ${qty > 0 ? '✓ Enchanted' : '✦ Enchant'}
-          </button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-
-  /* init canvas + sparkles once per section show */
-  initEnchantedCanvas();
-  spawnEnchSparkles();
-}
-
-/* ── Canvas particle + aurora + shooting star engine ── */
-let _enchFrame = 0, _enchParticles = [], _enchStars = [], _enchAuroras = [];
-let _enchCanvasReady = false;
-
-function initEnchantedCanvas() {
-  const canvas = document.getElementById('enchanted-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  function resize() {
-    const section = document.getElementById('normal-grid-section');
-    canvas.width  = section.offsetWidth  || window.innerWidth;
-    canvas.height = section.offsetHeight || window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  /* Particle class */
-  function Particle() { this.reset(true); }
-  Particle.prototype.reset = function(rand) {
-    this.x = Math.random() * canvas.width;
-    this.y = rand ? Math.random() * canvas.height : canvas.height + 10;
-    this.r  = 0.8 + Math.random() * 2.2;
-    this.vy = -(0.15 + Math.random() * 0.4);
-    this.vx = (Math.random() - 0.5) * 0.2;
-    this.life = 0;
-    this.maxLife = 180 + Math.random() * 240;
-    const pals = [[255,200,100],[200,160,255],[100,210,150],[255,170,110],[160,200,255]];
-    this.rgb = pals[Math.floor(Math.random() * pals.length)];
-    this.ts  = 0.02 + Math.random() * 0.04;
-    this.to  = Math.random() * Math.PI * 2;
-    this.wb  = Math.random() * Math.PI * 2;
-    this.ws  = 0.01 + Math.random() * 0.02;
-  };
-  Particle.prototype.tick = function() {
-    this.life++; this.wb += this.ws;
-    this.x += this.vx + Math.sin(this.wb) * 0.15;
-    this.y += this.vy;
-    if (this.life > this.maxLife || this.y < -10) this.reset(false);
-  };
-  Particle.prototype.draw = function() {
-    const t  = this.life / this.maxLife;
-    const fd = t < 0.1 ? t / 0.1 : t > 0.8 ? (1 - t) / 0.2 : 1;
-    const tw = 0.5 + 0.5 * Math.sin(this.life * this.ts + this.to);
-    const a  = fd * tw * 0.85;
-    const [r,g,b] = this.rgb;
-    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${r},${g},${b},${a})`; ctx.fill();
-    ctx.beginPath(); ctx.arc(this.x, this.y, this.r * 2.5, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${r},${g},${b},${a * 0.2})`; ctx.fill();
-  };
-
-  /* Shooting star class */
-  function ShootingStar() { this.active = false; this.nextAt = Date.now() + 3000 + Math.random() * 6000; }
-  ShootingStar.prototype.tick = function() {
-    if (!this.active) {
-      if (Date.now() > this.nextAt) {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height * 0.4;
-        this.len   = 60 + Math.random() * 120;
-        this.angle = Math.PI / 4 + Math.random() * 0.4;
-        this.speed = 4 + Math.random() * 6;
-        this.life  = 0;
-        this.maxLife = 30 + Math.random() * 30;
-        this.active = true;
-      }
-      return;
-    }
-    this.life++;
-    this.x += Math.cos(this.angle) * this.speed;
-    this.y += Math.sin(this.angle) * this.speed;
-    if (this.life > this.maxLife) {
-      this.active = false;
-      this.nextAt = Date.now() + 4000 + Math.random() * 8000;
-    }
-  };
-  ShootingStar.prototype.draw = function() {
-    if (!this.active) return;
-    const a = (1 - this.life / this.maxLife) * 0.7;
-    const grd = ctx.createLinearGradient(
-      this.x - Math.cos(this.angle) * this.len,
-      this.y - Math.sin(this.angle) * this.len,
-      this.x, this.y
-    );
-    grd.addColorStop(0, 'rgba(200,180,255,0)');
-    grd.addColorStop(1, `rgba(220,200,255,${a})`);
-    ctx.strokeStyle = grd; ctx.lineWidth = 1.2;
-    ctx.beginPath();
-    ctx.moveTo(this.x - Math.cos(this.angle)*this.len, this.y - Math.sin(this.angle)*this.len);
-    ctx.lineTo(this.x, this.y);
-    ctx.stroke();
-  };
-
-  /* Aurora class */
-  function Aurora(yFrac, col, phase) {
-    this.yFrac = yFrac; this.col = col; this.phase = phase;
-    this.amp = 12 + Math.random() * 20;
-  }
-  Aurora.prototype.draw = function(f) {
-    const y = this.yFrac * canvas.height;
-    const W = canvas.width;
-    ctx.beginPath();
-    for (let x = 0; x <= W; x += 4) {
-      const w = Math.sin(x * 0.008 + f * 0.4 + this.phase) * this.amp
-              + Math.sin(x * 0.015 + f * 0.25) * 8;
-      if (x === 0) ctx.moveTo(x, y + w); else ctx.lineTo(x, y + w);
-    }
-    ctx.lineTo(W, y + 60); ctx.lineTo(0, y + 60); ctx.closePath();
-    ctx.fillStyle = this.col; ctx.fill();
-  };
-
-  /* Build particles */
-  const count = Math.floor((canvas.width * canvas.height) / 12000);
-  _enchParticles = Array.from({ length: count }, () => new Particle());
-  _enchStars     = [new ShootingStar(), new ShootingStar(), new ShootingStar()];
-  _enchAuroras   = [
-    new Aurora(0.3, 'rgba(30,90,50,0.025)',  0),
-    new Aurora(0.5, 'rgba(60,30,120,0.02)',  2),
-    new Aurora(0.7, 'rgba(20,70,100,0.02)',  4),
-  ];
-
-  /* Static star positions (deterministic) */
-  const staticStars = Array.from({ length: 200 }, (_, i) => ({
-    x: (Math.sin(i * 127.1) * 0.5 + 0.5),
-    y: (Math.sin(i * 311.7) * 0.5 + 0.5) * 0.7,
-  }));
-
-  if (_enchCanvasReady) return; /* don't double-start loop */
-  _enchCanvasReady = true;
-
-  (function loop() {
-    if (!document.getElementById('normal-grid-section') ||
-        document.getElementById('normal-grid-section').style.display === 'none') {
-      _enchCanvasReady = false; return;
-    }
-    requestAnimationFrame(loop);
-    _enchFrame++;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    /* Deep bg */
-    const bg = ctx.createRadialGradient(
-      canvas.width/2, canvas.height*0.3, 0,
-      canvas.width/2, canvas.height*0.3, Math.max(canvas.width, canvas.height)*0.8
-    );
-    bg.addColorStop(0, 'rgba(8,16,30,1)');
-    bg.addColorStop(0.4, 'rgba(5,10,20,1)');
-    bg.addColorStop(1, 'rgba(3,8,16,1)');
-    ctx.fillStyle = bg; ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    /* Static stars */
-    staticStars.forEach((s, i) => {
-      const a = 0.2 + 0.15 * Math.sin(_enchFrame * 0.02 + i);
-      ctx.beginPath();
-      ctx.arc(s.x * canvas.width, s.y * canvas.height, 0.35, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(220,200,255,${a})`; ctx.fill();
-    });
-
-    _enchAuroras.forEach(a => a.draw(_enchFrame));
-    _enchStars.forEach(s => { s.tick(); s.draw(); });
-    _enchParticles.forEach(p => { p.tick(); p.draw(); });
-  })();
-}
-
-/* ── Spawn DOM sparkle glyphs ── */
-function spawnEnchSparkles() {
-  const el = document.getElementById('ench-sparkles');
-  if (!el || el.children.length > 0) return;
-  const glyphs = ['✦','✧','⋆','✵','✺','⁂'];
-  for (let i = 0; i < 18; i++) {
-    const s   = document.createElement('div');
-    s.className = 'ench-sparkle';
-    const sz  = 8 + Math.random() * 10;
-    const dur = 3 + Math.random() * 5;
-    const del = Math.random() * 6;
-    s.style.cssText = `
-      left:${Math.random()*100}%;
-      top:${8 + Math.random()*84}%;
-      font-size:${sz}px;
-      color:rgba(190,160,240,${0.2 + Math.random()*0.3});
-      animation-duration:${dur}s;
-      animation-delay:${del}s;
-    `;
-    s.textContent = glyphs[i % glyphs.length];
-    el.appendChild(s);
-  }
-}
-
+/* ── Init ── */
+renderTabs();
+renderBrownieGrid();
 </script>
 </body>
 </html>
