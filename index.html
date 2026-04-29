@@ -25,13 +25,11 @@
   --dark2: #0d0d1a;
   --dark3: #111122;
   --border: rgba(123,47,255,0.2);
-  /* Cyberpunk green vars */
   --neon: #00ff41;
   --neon-dim: rgba(0,255,65,0.15);
   --neon-glow: rgba(0,255,65,0.4);
   --cp-dark: #020402;
   --cp-card: #070e07;
-  /* NIGHTCLUB / NEON PINK VARS */
   --nk-pink: #ff1f6e;
   --nk-rose: #ff4d8d;
   --nk-crimson: #c40042;
@@ -44,6 +42,10 @@
   --nk-border: rgba(255,31,110,0.25);
   --nk-gold: #ffd700;
   --nk-gold-dim: rgba(255,215,0,0.15);
+  /* Delivery colors */
+  --delivery-green: #22c55e;
+  --delivery-green-glow: rgba(34,197,94,0.3);
+  --delivery-green-dim: rgba(34,197,94,0.12);
 }
 
 body {
@@ -504,8 +506,6 @@ nav {
   overflow: hidden;
   padding-bottom: 80px;
 }
-
-/* smoky atmospheric background */
 .nk-section::before {
   content: '';
   position: absolute;
@@ -518,8 +518,6 @@ nav {
   pointer-events: none;
   z-index: 0;
 }
-
-/* film grain texture */
 .nk-section::after {
   content: '';
   position: absolute;
@@ -529,7 +527,6 @@ nav {
   z-index: 0;
   opacity: 0.8;
 }
-
 .nk-scanlines {
   position: absolute;
   inset: 0;
@@ -537,8 +534,6 @@ nav {
   pointer-events: none;
   z-index: 1;
 }
-
-/* floating rose petals / particles */
 .nk-particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
 .nk-particle { position: absolute; animation: nkFloat linear infinite; opacity: 0; }
 @keyframes nkFloat {
@@ -547,15 +542,12 @@ nav {
   85%  { opacity: 0.6; }
   100% { transform: translateY(-80px) rotate(360deg); opacity: 0; }
 }
-
-/* ── Header ── */
 .nk-header {
   position: relative;
   z-index: 2;
   text-align: center;
   padding: 56px 24px 24px;
 }
-
 .nk-presenter {
   display: inline-flex;
   align-items: center;
@@ -575,7 +567,6 @@ nav {
   height: 1px;
   background: rgba(255,215,0,0.4);
 }
-
 .nk-presents-txt {
   display: block;
   color: rgba(255,255,255,0.35);
@@ -585,8 +576,6 @@ nav {
   text-transform: uppercase;
   margin-bottom: 8px;
 }
-
-/* Big neon script title */
 .nk-big-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(58px, 10vw, 110px);
@@ -596,7 +585,6 @@ nav {
   position: relative;
   display: inline-block;
 }
-
 .nk-title-line1 {
   display: block;
   color: #fff;
@@ -608,7 +596,6 @@ nav {
   color: rgba(255,255,255,0.5);
   margin-bottom: 4px;
 }
-
 .nk-title-neon {
   display: block;
   color: var(--nk-pink);
@@ -619,7 +606,6 @@ nav {
     0 0 100px rgba(255,31,110,0.25);
   animation: nkFlicker 6s ease-in-out infinite;
 }
-
 @keyframes nkFlicker {
   0%, 95%, 100% { opacity: 1; }
   96% { opacity: 0.85; }
@@ -627,7 +613,6 @@ nav {
   98% { opacity: 0.7; }
   99% { opacity: 1; }
 }
-
 .nk-title-sub {
   display: block;
   font-size: 0.32em;
@@ -639,29 +624,6 @@ nav {
   font-style: italic;
   margin-top: 2px;
 }
-
-.nk-date-badge {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  color: #000;
-  border-radius: 50%;
-  width: 54px;
-  height: 54px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  line-height: 1;
-  margin-left: 12px;
-  vertical-align: middle;
-  flex-shrink: 0;
-  border: 2px solid rgba(255,31,110,0.6);
-}
-.nk-date-day { font-size: 8px; letter-spacing: 1px; color: var(--nk-crimson); }
-.nk-date-num { font-size: 22px; line-height: 1; }
-.nk-date-mo  { font-size: 8px; letter-spacing: 1px; color: var(--nk-crimson); }
-
 .nk-header-bottom {
   display: flex;
   align-items: center;
@@ -670,7 +632,6 @@ nav {
   margin-top: 16px;
   flex-wrap: wrap;
 }
-
 .nk-pill {
   display: inline-flex;
   align-items: center;
@@ -696,8 +657,6 @@ nav {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(0.7); }
 }
-
-/* ── Stats bar ── */
 .nk-stats {
   position: relative;
   z-index: 2;
@@ -722,8 +681,6 @@ nav {
 }
 .nk-stat-l { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-top: 2px; }
 .nk-stat-sep { width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, rgba(255,31,110,0.3), transparent); }
-
-/* ── Ticker tape ── */
 .nk-ticker-wrap {
   position: relative;
   z-index: 2;
@@ -749,8 +706,6 @@ nav {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
-/* ── Cards grid ── */
 .nk-grid {
   position: relative;
   z-index: 2;
@@ -761,7 +716,6 @@ nav {
   max-width: 1200px;
   margin: 0 auto;
 }
-
 .nk-card {
   position: relative;
   background: var(--nk-card);
@@ -776,281 +730,74 @@ nav {
   from { opacity: 0; transform: translateY(28px) scale(0.95); }
   to   { opacity: 1; transform: none; }
 }
-
 .nk-card:hover {
   transform: translateY(-8px) scale(1.02);
   border-color: rgba(255,31,110,0.55);
-  box-shadow:
-    0 20px 60px rgba(0,0,0,0.8),
-    0 0 30px rgba(255,31,110,0.2),
-    inset 0 1px 0 rgba(255,77,141,0.15);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(255,31,110,0.2), inset 0 1px 0 rgba(255,77,141,0.15);
 }
-
-/* top glow bar */
-.nk-card-glow {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--nk-crimson), var(--nk-pink), var(--nk-rose), transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
+.nk-card-glow { height: 2px; background: linear-gradient(90deg, transparent, var(--nk-crimson), var(--nk-pink), var(--nk-rose), transparent); opacity: 0; transition: opacity 0.3s; }
 .nk-card:hover .nk-card-glow { opacity: 1; }
-
-/* corner tag */
 .nk-card-corner {
-  position: absolute;
-  top: 0; right: 0;
-  background: var(--nk-pink);
-  color: #fff;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  font-size: 8px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 4px 9px;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%);
-  z-index: 5;
+  position: absolute; top: 0; right: 0;
+  background: var(--nk-pink); color: #fff;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 4px 9px; clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%); z-index: 5;
 }
-
-.nk-card-num {
-  position: absolute;
-  top: 10px; left: 12px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 9px;
-  color: rgba(255,31,110,0.35);
-  letter-spacing: 2px;
-  z-index: 5;
-}
-
-/* image */
-.nk-img-wrap {
-  position: relative;
-  height: 165px;
-  overflow: hidden;
-  background: #0a000a;
-}
-.nk-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.55) saturate(0.75) contrast(1.15);
-  transition: filter 0.4s, transform 0.5s;
-}
-.nk-card:hover .nk-img-wrap img {
-  filter: brightness(0.82) saturate(1.0) contrast(1.2);
-  transform: scale(1.08);
-}
-.nk-img-ph {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 52px;
-  background: radial-gradient(ellipse at center, #2a000f, #0a000a);
-}
-
-/* red-tinted overlay on image */
-.nk-img-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(135deg, rgba(196,0,66,0.15), transparent 55%),
-    linear-gradient(to top, var(--nk-card) 0%, transparent 55%);
-  pointer-events: none;
-}
-
-/* scanning neon line on hover */
-.nk-img-scan {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255,31,110,0.9), transparent);
-  animation: nkScanDown 2s ease-in-out infinite;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
+.nk-card-num { position: absolute; top: 10px; left: 12px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 9px; color: rgba(255,31,110,0.35); letter-spacing: 2px; z-index: 5; }
+.nk-img-wrap { position: relative; height: 165px; overflow: hidden; background: #0a000a; }
+.nk-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.55) saturate(0.75) contrast(1.15); transition: filter 0.4s, transform 0.5s; }
+.nk-card:hover .nk-img-wrap img { filter: brightness(0.82) saturate(1.0) contrast(1.2); transform: scale(1.08); }
+.nk-img-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 52px; background: radial-gradient(ellipse at center, #2a000f, #0a000a); }
+.nk-img-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(196,0,66,0.15), transparent 55%), linear-gradient(to top, var(--nk-card) 0%, transparent 55%); pointer-events: none; }
+.nk-img-scan { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(255,31,110,0.9), transparent); animation: nkScanDown 2s ease-in-out infinite; opacity: 0; transition: opacity 0.3s; }
 .nk-card:hover .nk-img-scan { opacity: 1; }
-@keyframes nkScanDown {
-  0%   { top: 0%; }
-  100% { top: 100%; }
-}
-
-/* card body */
-.nk-card-body {
-  padding: 14px 14px 16px;
-  position: relative;
-  z-index: 2;
-}
-.nk-card-body::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 14px; right: 14px;
-  height: 1px;
-  background: linear-gradient(90deg, var(--nk-pink), transparent);
-  opacity: 0.2;
-  transition: opacity 0.3s;
-}
+@keyframes nkScanDown { 0% { top: 0%; } 100% { top: 100%; } }
+.nk-card-body { padding: 14px 14px 16px; position: relative; z-index: 2; }
+.nk-card-body::before { content: ''; position: absolute; top: 0; left: 14px; right: 14px; height: 1px; background: linear-gradient(90deg, var(--nk-pink), transparent); opacity: 0.2; transition: opacity 0.3s; }
 .nk-card:hover .nk-card-body::before { opacity: 0.6; }
-
-.nk-item-code {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: rgba(255,31,110,0.4);
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-
-.nk-item-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  letter-spacing: 1px;
-  color: #fff;
-  margin-bottom: 5px;
-  line-height: 1;
-  transition: color 0.3s, text-shadow 0.3s;
-}
-.nk-card:hover .nk-item-name {
-  color: var(--nk-rose);
-  text-shadow: 0 0 20px rgba(255,31,110,0.4);
-}
-
-.nk-item-desc {
-  font-size: 11px;
-  color: rgba(255,255,255,0.22);
-  line-height: 1.5;
-  margin-bottom: 14px;
-}
-
+.nk-item-code { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 3px; color: rgba(255,31,110,0.4); text-transform: uppercase; margin-bottom: 4px; }
+.nk-item-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: #fff; margin-bottom: 5px; line-height: 1; transition: color 0.3s, text-shadow 0.3s; }
+.nk-card:hover .nk-item-name { color: var(--nk-rose); text-shadow: 0 0 20px rgba(255,31,110,0.4); }
+.nk-item-desc { font-size: 11px; color: rgba(255,255,255,0.22); line-height: 1.5; margin-bottom: 14px; }
 .nk-card-footer { display: flex; align-items: center; justify-content: space-between; }
-
-.nk-price {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  color: #fff;
-  line-height: 1;
-}
-.nk-price small {
-  font-family: 'Barlow', sans-serif;
-  font-size: 10px;
-  color: rgba(255,255,255,0.2);
-  font-weight: 400;
-}
-
+.nk-price { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #fff; line-height: 1; }
+.nk-price small { font-family: 'Barlow', sans-serif; font-size: 10px; color: rgba(255,255,255,0.2); font-weight: 400; }
 .nk-add-btn {
-  background: transparent;
-  border: 1px solid rgba(255,31,110,0.35);
-  color: rgba(255,31,110,0.7);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 8px 14px;
-  cursor: pointer;
-  transition: all 0.22s;
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  border-radius: 0;
+  background: transparent; border: 1px solid rgba(255,31,110,0.35); color: rgba(255,31,110,0.7);
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 8px 14px; cursor: pointer; transition: all 0.22s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
 }
-.nk-add-btn:hover {
-  background: rgba(255,31,110,0.15);
-  border-color: var(--nk-pink);
-  color: var(--nk-pink);
-  box-shadow: 0 0 20px rgba(255,31,110,0.3);
-}
-.nk-add-btn.added {
-  background: rgba(255,31,110,0.2);
-  border-color: var(--nk-pink);
-  color: var(--nk-pink);
-  box-shadow: 0 0 24px rgba(255,31,110,0.4);
-}
-
-/* bottom bar */
-.nk-bottom-bar {
-  position: relative;
-  z-index: 2;
-  max-width: 1200px;
-  margin: 28px auto 0;
-  padding: 18px 24px 0;
-  border-top: 1px solid rgba(255,31,110,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.nk-bottom-text {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 10px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: rgba(255,31,110,0.2);
-}
+.nk-add-btn:hover { background: rgba(255,31,110,0.15); border-color: var(--nk-pink); color: var(--nk-pink); box-shadow: 0 0 20px rgba(255,31,110,0.3); }
+.nk-add-btn.added { background: rgba(255,31,110,0.2); border-color: var(--nk-pink); color: var(--nk-pink); box-shadow: 0 0 24px rgba(255,31,110,0.4); }
+.nk-bottom-bar { position: relative; z-index: 2; max-width: 1200px; margin: 28px auto 0; padding: 18px 24px 0; border-top: 1px solid rgba(255,31,110,0.1); display: flex; align-items: center; justify-content: space-between; }
+.nk-bottom-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,31,110,0.2); }
 .nk-bottom-deco { display: flex; gap: 6px; }
 .nk-diamond { width: 7px; height: 7px; border: 1px solid rgba(255,31,110,0.35); transform: rotate(45deg); }
 .nk-diamond:first-child { background: rgba(255,31,110,0.45); }
-
-/* sponsor logos row (decorative) */
-.nk-sponsors {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 16px 24px 8px;
-  opacity: 0.25;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 3px;
-  color: #fff;
-}
+.nk-sponsors { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 20px; padding: 16px 24px 8px; opacity: 0.25; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 3px; color: #fff; }
 .nk-sponsors span { border: 1px solid rgba(255,255,255,0.3); padding: 3px 8px; border-radius: 3px; }
-
 
 /* ═══════════════════════════════════════════════
    BOO! COOL DRINKS
    ═══════════════════════════════════════════════ */
 .boo-section { position: relative; background: #080808; min-height: 100vh; overflow: hidden; padding-bottom: 60px; }
 .boo-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 40% at 15% 30%, rgba(255,69,0,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 35% at 85% 15%, rgba(180,0,200,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 30% at 50% 80%, rgba(0,100,255,0.05) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 15% 30%, rgba(255,69,0,0.07) 0%, transparent 70%), radial-gradient(ellipse 50% 35% at 85% 15%, rgba(180,0,200,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 30% at 50% 80%, rgba(0,100,255,0.05) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
 }
 .boo-particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
 .boo-particle { position: absolute; border-radius: 50%; animation: booFloat linear infinite; opacity: 0; }
-@keyframes booFloat {
-  0%   { transform: translateY(100vh) scale(0.5); opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 0.6; }
-  100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
-}
+@keyframes booFloat { 0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 0.6; } 100% { transform: translateY(-120px) scale(1.2); opacity: 0; } }
 .boo-header { position: relative; z-index: 2; text-align: center; padding: 48px 20px 32px; }
-.boo-new-badge {
-  display: inline-block; background: #ff4500; color: #fff; font-size: 10px; font-weight: 900;
-  letter-spacing: 3px; padding: 4px 12px; border-radius: 3px; text-transform: uppercase;
-  margin-bottom: 12px; animation: booNewPulse 2s ease-in-out infinite;
-}
-@keyframes booNewPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255,69,0,0.5); }
-  50%       { box-shadow: 0 0 0 8px rgba(255,69,0,0); }
-}
+.boo-new-badge { display: inline-block; background: #ff4500; color: #fff; font-size: 10px; font-weight: 900; letter-spacing: 3px; padding: 4px 12px; border-radius: 3px; text-transform: uppercase; margin-bottom: 12px; animation: booNewPulse 2s ease-in-out infinite; }
+@keyframes booNewPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,69,0,0.5); } 50% { box-shadow: 0 0 0 8px rgba(255,69,0,0); } }
 .boo-logo-wrap { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 6px; }
 .boo-logo-b, .boo-logo-exclaim { font-size: 72px; font-weight: 900; color: #fff; font-family: 'Arial Black', 'Bebas Neue', sans-serif; line-height: 1; letter-spacing: -2px; text-shadow: -4px 4px 0 #1a1a1a; }
 .boo-logo-o1 { font-size: 72px; font-weight: 900; color: #ff4500; font-family: 'Arial Black', 'Bebas Neue', sans-serif; line-height: 1; letter-spacing: -2px; text-shadow: -3px 3px 0 #7a1a00, 0 0 30px rgba(255,69,0,0.6); animation: booO1 3s ease-in-out infinite; }
 .boo-logo-o2 { font-size: 72px; font-weight: 900; color: #cc00cc; font-family: 'Arial Black', 'Bebas Neue', sans-serif; line-height: 1; letter-spacing: -2px; text-shadow: -3px 3px 0 #5a005a, 0 0 30px rgba(200,0,200,0.6); animation: booO2 3s ease-in-out infinite 0.3s; }
-@keyframes booO1 {
-  0%, 100% { text-shadow: -3px 3px 0 #7a1a00, 0 0 20px rgba(255,69,0,0.5); }
-  50%       { text-shadow: -3px 3px 0 #7a1a00, 0 0 45px rgba(255,69,0,0.9), 0 0 80px rgba(255,69,0,0.3); }
-}
-@keyframes booO2 {
-  0%, 100% { text-shadow: -3px 3px 0 #5a005a, 0 0 20px rgba(200,0,200,0.5); }
-  50%       { text-shadow: -3px 3px 0 #5a005a, 0 0 45px rgba(200,0,200,0.9), 0 0 80px rgba(200,0,200,0.3); }
-}
+@keyframes booO1 { 0%, 100% { text-shadow: -3px 3px 0 #7a1a00, 0 0 20px rgba(255,69,0,0.5); } 50% { text-shadow: -3px 3px 0 #7a1a00, 0 0 45px rgba(255,69,0,0.9), 0 0 80px rgba(255,69,0,0.3); } }
+@keyframes booO2 { 0%, 100% { text-shadow: -3px 3px 0 #5a005a, 0 0 20px rgba(200,0,200,0.5); } 50% { text-shadow: -3px 3px 0 #5a005a, 0 0 45px rgba(200,0,200,0.9), 0 0 80px rgba(200,0,200,0.3); } }
 .boo-tagline { color: #444; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-top: 6px; font-family: 'Barlow', sans-serif; }
 .boo-ornament { color: #2a2a2a; font-size: 13px; letter-spacing: 6px; margin-top: 10px; }
 .boo-grid { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; padding: 0 24px 32px; max-width: 1100px; margin: 0 auto; }
@@ -1084,12 +831,7 @@ nav {
 .hypnotic-section { position: relative; background: #050508; min-height: 100vh; overflow: hidden; padding-bottom: 60px; }
 .hype-particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
 .hype-particle { position: absolute; animation: hypeFloat linear infinite; }
-@keyframes hypeFloat {
-  0%   { transform: translateY(0) scale(1); opacity: 0; }
-  20%  { opacity: 1; }
-  80%  { opacity: 0.8; }
-  100% { transform: translateY(-80px) scale(1.5); opacity: 0; }
-}
+@keyframes hypeFloat { 0% { transform: translateY(0) scale(1); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 0.8; } 100% { transform: translateY(-80px) scale(1.5); opacity: 0; } }
 .hype-header { position: relative; z-index: 2; text-align: center; padding: 52px 20px 36px; }
 .hype-eye { font-size: 36px; margin-bottom: 12px; animation: hypeEye 4s ease-in-out infinite; }
 @keyframes hypeEye { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px #7b2fff); } 50% { transform: scale(1.15); filter: drop-shadow(0 0 20px #a855f7); } }
@@ -1174,7 +916,157 @@ nav {
 .q-btn { background: #1a1a2e; border: 1px solid #252535; color: var(--off-white); width: 28px; height: 28px; border-radius: 6px; cursor: pointer; font-size: 16px; display: grid; place-items: center; transition: all 0.15s; }
 .q-btn:hover { border-color: var(--purple); color: var(--purple-light); }
 .q-num { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--white); min-width: 20px; text-align: center; }
+
+/* ═══════════════════════════════════════════════
+   🚀 DELIVERY / TAKEAWAY TOGGLE (NEW)
+   ═══════════════════════════════════════════════ */
+.delivery-toggle-wrap {
+  padding: 14px 16px;
+  border-bottom: 1px solid #1a1a2e;
+  background: rgba(0,0,0,0.2);
+}
+.delivery-toggle-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 10px;
+}
+.delivery-toggle-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.dtoggle-btn {
+  background: var(--dark3);
+  border: 1px solid #1a1a2e;
+  color: #555;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.dtoggle-btn.active-takeaway {
+  background: rgba(123,47,255,0.15);
+  border-color: var(--purple);
+  color: var(--purple-light);
+  box-shadow: 0 0 12px rgba(123,47,255,0.2);
+}
+.dtoggle-btn.active-delivery {
+  background: var(--delivery-green-dim);
+  border-color: var(--delivery-green);
+  color: var(--delivery-green);
+  box-shadow: 0 0 12px var(--delivery-green-glow);
+}
+.delivery-fields {
+  margin-top: 12px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+  opacity: 0;
+}
+.delivery-fields.expanded {
+  max-height: 220px;
+  opacity: 1;
+}
+.delivery-field-group { margin-bottom: 10px; }
+.delivery-field-group--spaced { margin-top: 12px; }
+.delivery-field-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 5px;
+}
+.delivery-field-input {
+  width: 100%;
+  background: var(--dark3);
+  border: 1px solid #1a1a2e;
+  border-radius: 8px;
+  color: var(--off-white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.delivery-field-input:focus { border-color: var(--delivery-green); box-shadow: 0 0 0 3px rgba(34,197,94,0.08); }
+.delivery-field-input::placeholder { color: #2a2a3a; }
+
+/* distance row with km unit */
+.dist-input-wrap { display: flex; align-items: stretch; }
+.dist-input-wrap .delivery-field-input { border-radius: 8px 0 0 8px; border-right: none; }
+.dist-suffix {
+  background: #0d0d1a;
+  border: 1px solid #1a1a2e;
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  color: #555;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Delivery charge breakdown */
+.delivery-charge-box {
+  background: rgba(34,197,94,0.06);
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  animation: dcBoxIn 0.3s ease;
+}
+@keyframes dcBoxIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.dc-label { color: var(--delivery-green); font-size: 11px; font-weight: 700; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+.dc-amount { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--delivery-green); letter-spacing: 1px; text-shadow: 0 0 10px var(--delivery-green-glow); }
+.dc-free-badge {
+  background: rgba(34,197,94,0.2);
+  color: var(--delivery-green);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  animation: freePulse 2s ease-in-out infinite;
+}
+@keyframes freePulse { 0%,100%{opacity:1;}50%{opacity:0.6;} }
+.dc-info { font-size: 10px; color: #444; margin-top: 3px; letter-spacing: 0.5px; }
+
+/* Drawer footer enhancements */
 .drawer-foot { padding: 16px 24px 24px; border-top: 1px solid #1a1a2e; }
+.cost-breakdown {
+  background: var(--dark3);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #1a1a2e;
+}
+.cost-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; }
+.cost-label { color: #444; font-size: 12px; }
+.cost-val { color: var(--off-white); font-size: 12px; font-weight: 600; }
+.cost-delivery-val { color: var(--delivery-green); font-size: 12px; font-weight: 700; }
+.cost-row.total .cost-label { font-weight: 700; color: #aaa; }
+.cost-row.total .cost-val { font-size: 15px; font-weight: 800; }
+.cost-divider { height: 1px; background: #1a1a2e; margin: 6px 0; }
 .total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
 .total-label { color: #555; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
 .total-amount { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--white); letter-spacing: 1px; }
@@ -1183,7 +1075,7 @@ nav {
 .order-btn:not(:disabled):hover { background: var(--purple-light); box-shadow: 0 4px 30px rgba(123,47,255,0.6); }
 .secure-note { color: #333; font-size: 11px; text-align: center; letter-spacing: 0.5px; }
 
-/* Modals */
+/* ── MODALS ── */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .modal-overlay.open { opacity: 1; pointer-events: all; }
 .modal-box { background: var(--dark2); border: 1px solid var(--border); border-radius: 20px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 40px rgba(123,47,255,0.15); }
@@ -1199,8 +1091,18 @@ nav {
 .summary-label { color: #555; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
 .summary-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
 .sum-chip { background: var(--purple-dim); border: 1px solid var(--border); color: var(--purple-light); font-size: 11px; padding: 3px 9px; border-radius: 5px; }
+.sum-chip-delivery {
+  background: var(--delivery-green-dim);
+  border: 1px solid rgba(34,197,94,0.3);
+  color: var(--delivery-green);
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 5px;
+}
 .summary-total { color: var(--off-white); font-size: 13px; font-weight: 700; }
 .form-group { margin-bottom: 16px; }
+.modal-delivery-group { margin-bottom: 10px; }
+.modal-delivery-group--compact { margin-bottom: 0; }
 .form-label { display: block; color: #888; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
 .req { color: var(--purple-light); }
 .opt { color: #444; font-weight: 400; text-transform: none; }
@@ -1211,10 +1113,46 @@ nav {
 .input-prefix { background: var(--dark3); border: 1px solid #1a1a2e; border-right: none; border-radius: 8px 0 0 8px; padding: 10px 12px; color: #555; font-size: 13px; flex-shrink: 0; }
 .loc-pre { font-size: 16px; }
 .prefix-input { border-radius: 0 8px 8px 0; }
+.modal-distance-input { border-radius: 8px 0 0 8px; border-right: none; }
 .form-select { appearance: none; cursor: pointer; }
 .form-textarea { resize: vertical; min-height: 64px; }
 .char-count { color: #333; font-size: 10px; text-align: right; margin-top: 4px; }
 .field-err { display: none; color: #ef4444; font-size: 11px; margin-top: 4px; }
+
+/* Delivery address section inside modal */
+.modal-delivery-section {
+  background: rgba(34,197,94,0.04);
+  border: 1px solid rgba(34,197,94,0.15);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  max-height: 0;
+  padding: 0;
+  border-width: 0;
+  transition: max-height 0.35s ease, padding 0.35s ease, border-width 0.3s;
+}
+.modal-delivery-section.expanded {
+  max-height: 600px;
+  padding: 14px;
+  border-width: 1px;
+}
+.modal-delivery-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--delivery-green);
+  margin-bottom: 12px;
+}
+.modal-delivery-title::before {
+  content: '🚴';
+  font-size: 14px;
+}
+
 .modal-foot { padding: 16px 24px 20px; border-top: 1px solid #1a1a2e; display: flex; gap: 10px; }
 .modal-cancel-btn { flex: 1; background: transparent; border: 1px solid #1a1a2e; color: #555; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 700; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
 .modal-cancel-btn:hover { border-color: #333; color: #888; }
@@ -1222,6 +1160,7 @@ nav {
 .modal-confirm-btn:disabled { background: #1a1a2e; color: #333; cursor: not-allowed; }
 .modal-confirm-btn:not(:disabled):hover { background: var(--purple-light); }
 
+/* Success */
 .success-box { background: var(--dark2); border: 1px solid var(--border); border-radius: 20px; padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 40px rgba(123,47,255,0.2); }
 .success-anim { font-size: 52px; margin-bottom: 16px; animation: successPop 0.5s cubic-bezier(0.34,1.56,0.64,1); }
 @keyframes successPop { from { transform: scale(0); } to { transform: scale(1); } }
@@ -1232,8 +1171,22 @@ nav {
 .sc-row { display: flex; justify-content: space-between; padding: 4px 0; }
 .sc-key { color: #555; font-size: 12px; }
 .sc-val { color: var(--off-white); font-size: 12px; font-weight: 600; }
+.sc-delivery-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--delivery-green-dim);
+  color: var(--delivery-green);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid rgba(34,197,94,0.25);
+}
 .success-divider { height: 1px; background: #1a1a2e; margin: 10px 0; }
 .success-item { display: flex; justify-content: space-between; color: #888; font-size: 12px; padding: 3px 0; }
+.success-delivery-row { display: flex; justify-content: space-between; color: var(--delivery-green); font-size: 12px; padding: 3px 0; font-weight: 600; }
 .success-total-row { display: flex; justify-content: space-between; font-weight: 700; font-size: 14px; color: var(--white); margin-top: 8px; padding-top: 8px; border-top: 1px solid #1a1a2e; }
 .success-done-btn { background: var(--purple); border: none; color: #fff; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; padding: 12px 32px; border-radius: 10px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(123,47,255,0.4); }
 .success-done-btn:hover { background: var(--purple-light); }
@@ -1293,7 +1246,7 @@ nav {
     <div class="billboard-meta">
       <span class="meta-fresh">✦ Fresh Today</span>
       <span class="meta-dot"></span>
-      <span>Takeaway Only</span>
+      <span>Takeaway &amp; Delivery</span>
       <span class="meta-dot"></span>
       <span>Madurai</span>
     </div>
@@ -1323,17 +1276,14 @@ nav {
   <div class="brownie-grid" id="brownie-grid"></div>
 </div>
 
-<!-- ════════════════════════════════════════
-     🌹 NIGHTCLUB NEON ROSE — TOPPINGS
-     ════════════════════════════════════════ -->
+<!-- TOPPINGS SECTION -->
 <div class="nk-section hidden" id="normal-grid-section">
   <div class="nk-scanlines"></div>
   <div class="nk-particles" id="nk-particles"></div>
-
   <div class="nk-header">
     <div class="nk-presenter">✦ Choco Cube ✦ Madurai ✦</div>
     <span class="nk-presents-txt">presenta</span>
-    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+    <div class="nk-header-center">
       <div class="nk-big-title">
         <span class="nk-title-line1">Noche de</span>
         <span class="nk-title-neon">Add-Ons</span>
@@ -1346,63 +1296,30 @@ nav {
       <div class="nk-pill"><span class="nk-pill-dot"></span> From ₹15</div>
     </div>
   </div>
-
   <div class="nk-stats">
-    <div class="nk-stat">
-      <div class="nk-stat-n">5</div>
-      <div class="nk-stat-l">Toppings</div>
-    </div>
+    <div class="nk-stat"><div class="nk-stat-n">5</div><div class="nk-stat-l">Toppings</div></div>
     <div class="nk-stat-sep"></div>
-    <div class="nk-stat">
-      <div class="nk-stat-n">₹15</div>
-      <div class="nk-stat-l">Starting At</div>
-    </div>
+    <div class="nk-stat"><div class="nk-stat-n">₹15</div><div class="nk-stat-l">Starting At</div></div>
     <div class="nk-stat-sep"></div>
-    <div class="nk-stat">
-      <div class="nk-stat-n">100%</div>
-      <div class="nk-stat-l">Fresh</div>
-    </div>
+    <div class="nk-stat"><div class="nk-stat-n">100%</div><div class="nk-stat-l">Fresh</div></div>
     <div class="nk-stat-sep"></div>
-    <div class="nk-stat">
-      <div class="nk-stat-n">🌹</div>
-      <div class="nk-stat-l">Premium</div>
-    </div>
+    <div class="nk-stat"><div class="nk-stat-n">🌹</div><div class="nk-stat-l">Premium</div></div>
   </div>
-
   <div class="nk-ticker-wrap">
     <div class="nk-ticker">
       <div class="nk-ticker-inner">
-        <span>♦ DARK CHOCOLATE CHIPS</span><span>♦</span>
-        <span>WHITE CHOCOLATE</span><span>♦</span>
-        <span>OREO COOKIES</span><span>♦</span>
-        <span>NUTS</span><span>♦</span>
-        <span>CHOCOLATE FUDGE</span><span>♦</span>
-        <span>DARK CHOCOLATE CHIPS</span><span>♦</span>
-        <span>WHITE CHOCOLATE</span><span>♦</span>
-        <span>OREO COOKIES</span><span>♦</span>
-        <span>NUTS</span><span>♦</span>
-        <span>CHOCOLATE FUDGE</span><span>♦</span>
+        <span>♦ DARK CHOCOLATE CHIPS</span><span>♦</span><span>WHITE CHOCOLATE</span><span>♦</span>
+        <span>OREO COOKIES</span><span>♦</span><span>NUTS</span><span>♦</span><span>CHOCOLATE FUDGE</span><span>♦</span>
+        <span>DARK CHOCOLATE CHIPS</span><span>♦</span><span>WHITE CHOCOLATE</span><span>♦</span>
+        <span>OREO COOKIES</span><span>♦</span><span>NUTS</span><span>♦</span><span>CHOCOLATE FUDGE</span><span>♦</span>
       </div>
     </div>
   </div>
-
   <div class="nk-grid" id="grid"></div>
-
-  <div class="nk-sponsors">
-    <span>DARK CHOCO</span>
-    <span>WHITE CHOC</span>
-    <span>OREO</span>
-    <span>NUTS</span>
-    <span>FUDGE</span>
-  </div>
-
+  <div class="nk-sponsors"><span>DARK CHOCO</span><span>WHITE CHOC</span><span>OREO</span><span>NUTS</span><span>FUDGE</span></div>
   <div class="nk-bottom-bar">
     <div class="nk-bottom-text">CHOCO CUBE · MADURAI · TOPPINGS</div>
-    <div class="nk-bottom-deco">
-      <div class="nk-diamond"></div>
-      <div class="nk-diamond"></div>
-      <div class="nk-diamond"></div>
-    </div>
+    <div class="nk-bottom-deco"><div class="nk-diamond"></div><div class="nk-diamond"></div><div class="nk-diamond"></div></div>
   </div>
 </div>
 
@@ -1413,9 +1330,7 @@ nav {
   <svg class="decor-blob decor-blob--right" viewBox="0 0 100 80"><ellipse cx="50" cy="35" rx="24" ry="15" fill="#cc00cc" transform="rotate(10,50,35)"/><circle cx="78" cy="20" r="5" fill="#cc00cc"/></svg>
   <div class="boo-header">
     <div class="boo-new-badge">✦ Now Chilling ✦</div>
-    <div class="boo-logo-wrap">
-      <span class="boo-logo-b">B</span><span class="boo-logo-o1">O</span><span class="boo-logo-o2">O</span><span class="boo-logo-exclaim">!</span>
-    </div>
+    <div class="boo-logo-wrap"><span class="boo-logo-b">B</span><span class="boo-logo-o1">O</span><span class="boo-logo-o2">O</span><span class="boo-logo-exclaim">!</span></div>
     <div class="boo-tagline">Cool Drinks · Refreshingly Dark</div>
     <div class="boo-ornament">✦ ━━━━━ 🥤 ━━━━━ ✦</div>
   </div>
@@ -1455,14 +1370,45 @@ nav {
     <div class="drawer-title"><div class="red-line"></div><h2>YOUR CART</h2></div>
     <button class="close-btn" onclick="closeCart()">✕</button>
   </div>
+
+  <!-- ── DELIVERY TOGGLE (NEW) ── -->
+  <div class="delivery-toggle-wrap">
+    <div class="delivery-toggle-label">📦 Order Type</div>
+    <div class="delivery-toggle-btns">
+      <button class="dtoggle-btn active-takeaway" id="btn-takeaway" onclick="setOrderType('takeaway')">
+        🏪 Takeaway
+      </button>
+      <button class="dtoggle-btn" id="btn-delivery" onclick="setOrderType('delivery')">
+        🚴 Delivery
+      </button>
+    </div>
+    <div class="delivery-fields" id="delivery-fields">
+      <div class="delivery-field-group delivery-field-group--spaced">
+        <label class="delivery-field-label">Delivery Address</label>
+        <input class="delivery-field-input" id="delivery-address" type="text" placeholder="Street, area, landmark…" oninput="updateDeliveryCharge()">
+      </div>
+      <div class="delivery-field-group">
+        <label class="delivery-field-label">Distance from our shop</label>
+        <div class="dist-input-wrap">
+          <input class="delivery-field-input" id="delivery-distance" type="number" min="0.1" max="50" step="0.1" placeholder="e.g. 3.5" oninput="updateDeliveryCharge()">
+          <span class="dist-suffix">km</span>
+        </div>
+      </div>
+      <div id="delivery-charge-display"></div>
+    </div>
+  </div>
+
   <div class="drawer-items" id="drawer-items"></div>
+
   <div class="drawer-foot">
-    <div class="total-row">
-      <span class="total-label">Total</span>
-      <span class="total-amount" id="drawer-total">₹0</span>
+    <div class="cost-breakdown" id="cost-breakdown">
+      <div class="cost-row"><span class="cost-label">Subtotal</span><span class="cost-val" id="subtotal-val">₹0</span></div>
+      <div class="cost-row hidden" id="delivery-cost-row"><span class="cost-label">🚴 Delivery charge</span><span class="cost-delivery-val" id="delivery-cost-val">₹0</span></div>
+      <div class="cost-divider"></div>
+      <div class="cost-row total"><span class="cost-label">Total</span><span class="cost-val" id="grand-total-val">₹0</span></div>
     </div>
     <button class="order-btn" id="order-btn" disabled onclick="openCustomerModal()">PLACE ORDER</button>
-    <div class="secure-note">🔒 Takeaway pickup · No delivery charges</div>
+    <div class="secure-note" id="secure-note-txt">🔒 Takeaway pickup · No delivery charges</div>
   </div>
 </div>
 
@@ -1472,12 +1418,31 @@ nav {
     <div class="modal-head">
       <div class="modal-title-wrap">
         <div class="modal-icon">👤</div>
-        <div><h2 class="modal-heading">Your Details</h2><p class="modal-sub">Fill in your info for pickup</p></div>
+        <div><h2 class="modal-heading">Your Details</h2><p class="modal-sub" id="modal-sub-txt">Fill in your info for pickup</p></div>
       </div>
       <button class="modal-close-btn" onclick="closeCustomerModal()">✕</button>
     </div>
     <div class="modal-body">
       <div class="order-summary-strip" id="modal-order-summary"></div>
+
+      <!-- Delivery details section (shown only for delivery) -->
+      <div class="modal-delivery-section" id="modal-delivery-section">
+        <div class="modal-delivery-title">Delivery Details</div>
+        <div class="form-group modal-delivery-group">
+          <label class="form-label">Delivery Address <span class="req">*</span></label>
+          <input class="form-input" type="text" id="modal-del-address" placeholder="Full address for delivery" oninput="validateForm()">
+          <div class="field-err" id="del-address-err">Please enter a delivery address</div>
+        </div>
+        <div class="form-group modal-delivery-group--compact">
+          <label class="form-label">Distance <span class="req">*</span></label>
+          <div class="dist-input-wrap">
+            <input class="form-input modal-distance-input" type="number" id="modal-del-distance" min="0.1" max="50" step="0.1" placeholder="e.g. 3.5" oninput="validateForm();syncModalDelivery()">
+            <span class="dist-suffix">km</span>
+          </div>
+          <div class="field-err" id="del-distance-err">Please enter a valid distance</div>
+        </div>
+      </div>
+
       <div class="form-group">
         <label class="form-label" for="cust-name">Full Name <span class="req">*</span></label>
         <input class="form-input" type="text" id="cust-name" placeholder="e.g. Arjun Kumar" maxlength="60" oninput="validateForm()">
@@ -1499,12 +1464,19 @@ nav {
         </div>
         <div class="field-err" id="location-err">Please enter your area or location</div>
       </div>
-      <div class="form-group">
+      <div class="form-group" id="pickup-group">
         <label class="form-label" for="cust-pickup">Pickup Time <span class="req">*</span></label>
         <select class="form-input form-select" id="cust-pickup" onchange="validateForm()">
           <option value="">— Choose a time slot —</option>
         </select>
         <div class="field-err" id="pickup-err">Please select a pickup time</div>
+      </div>
+      <div class="form-group hidden" id="delivery-time-group">
+        <label class="form-label" for="cust-delivery-time">Preferred Delivery Time <span class="req">*</span></label>
+        <select class="form-input form-select" id="cust-delivery-time" onchange="validateForm()">
+          <option value="">— Choose a time slot —</option>
+        </select>
+        <div class="field-err" id="delivery-time-err">Please select a delivery time</div>
       </div>
       <div class="form-group">
         <label class="form-label" for="cust-note">Special Instructions <span class="opt">(optional)</span></label>
@@ -1524,7 +1496,7 @@ nav {
   <div class="success-box">
     <div class="success-anim">🎉</div>
     <h2 class="success-heading">Order Confirmed!</h2>
-    <p class="success-tagline">We'll have it ready for pickup soon 🍫</p>
+    <p class="success-tagline" id="success-tagline">We'll have it ready for pickup soon 🍫</p>
     <div class="success-details" id="success-details"></div>
     <button type="button" class="success-done-btn" onclick="closeSuccess()">DONE</button>
   </div>
@@ -1558,7 +1530,7 @@ nav {
           <div class="hours-row"><span>Mon – Sat</span><span class="hrs-val">10 AM – 10 PM</span></div>
           <div class="hours-row"><span>Sunday</span><span class="hrs-val">11 AM – 9 PM</span></div>
         </div>
-        <p class="hours-note">Takeaway only · No delivery</p>
+        <p class="hours-note">Takeaway &amp; Delivery · Within Madurai</p>
       </div>
     </div>
   </div>
@@ -1569,7 +1541,25 @@ nav {
 </section>
 
 <script>
+/* ═══════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════ */
 let activeTab = 0, cart = {};
+let orderType = 'takeaway'; // 'takeaway' | 'delivery'
+let deliveryKm = 0;
+
+/* Delivery charge policy:
+   - 0–5 km  → FREE
+   - >5 km   → ₹5 per km (rounded to 1 decimal) for the entire distance
+   Actually: ₹5 per km only for the extra km beyond 5
+   i.e., charge = max(0, (km - 5)) * 5  [ceiling to avoid partial km issues]
+*/
+function calcDeliveryCharge(km) {
+  if (orderType !== 'delivery' || km <= 0) return 0;
+  if (km <= 5) return 0;
+  const extra = km - 5;
+  return Math.ceil(extra) * 5; // ₹5 per km for every km beyond 5
+}
 
 const categories = [
   { label: "Brownies", icon: "🍫", isBrownie: true, items: [
@@ -1597,14 +1587,14 @@ const categories = [
     { name: "Lassi",     price: 50, image: "Lassi.png",     desc: "Thick creamy yogurt drink, sweet or salted to taste.",  booAccent: "#cc00cc", booGlow: "rgba(200,0,200,0.25)",   booBar: "linear-gradient(90deg,#cc00cc,#aa00ff)" },
   ]},
   { label: "Dirty Soda (Mojitos)", icon: "🍹", isMojito: true, items: [
-    { name: "Virgin Mojito",          price: 50, image: "Virgin.png",     desc: "Refreshing blend of mint, lime, and soda.",               spell: "Potion of Clarity" },
-    { name: "Watermelon Mint Cooler", price: 50, image: "Watermelon.png", desc: "Crisp and citrusy classic mojito perfection.",             spell: "Elixir of the Ancients" },
-    { name: "Virgin Blue Mojito",     price: 25, image: "Virgin Blue.png",desc: "Light and zesty lemon-lime soda, crisp and cold.",         spell: "Tropical Paradise Potion" },
-    { name: "Orange Mojito",          price: 60, image: "Orage.png",      desc: "Sweet and tangy orange twist on a classic.",              spell: "Crimson Love Potion" },
-    { name: "Malibu Sunset",          price: 50, image: "Malibu.png",     desc: "Bright and zesty lemon mojito, ultra refreshing.",         spell: "Sunfire Brew" },
-    { name: "Blueberry Mojito",       price: 50, image: "Blue.png",       desc: "Rich blueberry mojito with citrus notes.",                 spell: "Midnight Veil Potion" },
-    { name: "Pineapple Mojito",       price: 50, image: "Pinapple.png",   desc: "Tropical pineapple mojito, sweet and tangy.",              spell: "Golden Enchantment" },
-    { name: "Trabical Wave",          price: 50, image: "Trabical.png",   desc: "Floral Trabical for a premium experience.",                spell: "Dreamweaver Elixir" },
+    { name: "Virgin Mojito",          price: 50, image: "Virgin.png",     desc: "Refreshing blend of mint, lime, and soda.",    spell: "Potion of Clarity" },
+    { name: "Watermelon Mint Cooler", price: 50, image: "Watermelon.png", desc: "Crisp and citrusy classic mojito perfection.", spell: "Elixir of the Ancients" },
+    { name: "Virgin Blue Mojito",     price: 25, image: "Virgin Blue.png",desc: "Light and zesty lemon-lime soda.",             spell: "Tropical Paradise Potion" },
+    { name: "Orange Mojito",          price: 60, image: "Orage.png",      desc: "Sweet and tangy orange twist on a classic.",   spell: "Crimson Love Potion" },
+    { name: "Malibu Sunset",          price: 50, image: "Malibu.png",     desc: "Bright and zesty lemon mojito.",               spell: "Sunfire Brew" },
+    { name: "Blueberry Mojito",       price: 50, image: "Blue.png",       desc: "Rich blueberry mojito with citrus notes.",     spell: "Midnight Veil Potion" },
+    { name: "Pineapple Mojito",       price: 50, image: "Pinapple.png",   desc: "Tropical pineapple mojito.",                   spell: "Golden Enchantment" },
+    { name: "Trabical Wave",          price: 50, image: "Trabical.png",   desc: "Floral Trabical for a premium experience.",    spell: "Dreamweaver Elixir" },
   ]},
 ];
 
@@ -1613,393 +1603,453 @@ const MOJITO_IDX    = categories.findIndex(c => c.isMojito);
 const COOLDRINK_IDX = categories.findIndex(c => c.isCoolDrink);
 const allItems = () => categories.flatMap(c => c.items);
 
-/* ── Brownie renderer ── */
+/* ═══════════════════════════════════════════
+   DELIVERY TOGGLE
+   ═══════════════════════════════════════════ */
+function setOrderType(type) {
+  orderType = type;
+  const btnTakeaway = document.getElementById('btn-takeaway');
+  const btnDelivery = document.getElementById('btn-delivery');
+  const fields      = document.getElementById('delivery-fields');
+
+  if (type === 'delivery') {
+    btnTakeaway.className = 'dtoggle-btn';
+    btnDelivery.className = 'dtoggle-btn active-delivery';
+    fields.classList.add('expanded');
+    document.getElementById('secure-note-txt').textContent = '🚴 Delivery available · Charges based on distance';
+    document.getElementById('delivery-cost-row').style.display = 'flex';
+  } else {
+    btnTakeaway.className = 'dtoggle-btn active-takeaway';
+    btnDelivery.className = 'dtoggle-btn';
+    fields.classList.remove('expanded');
+    deliveryKm = 0;
+    document.getElementById('delivery-distance').value = '';
+    document.getElementById('delivery-address').value = '';
+    document.getElementById('delivery-charge-display').innerHTML = '';
+    document.getElementById('secure-note-txt').textContent = '🔒 Takeaway pickup · No delivery charges';
+    document.getElementById('delivery-cost-row').style.display = 'none';
+  }
+  updateState();
+}
+
+function updateDeliveryCharge() {
+  const km = parseFloat(document.getElementById('delivery-distance').value) || 0;
+  deliveryKm = km;
+  const charge = calcDeliveryCharge(km);
+  const el = document.getElementById('delivery-charge-display');
+
+  if (km <= 0) { el.innerHTML = ''; updateState(); return; }
+
+  if (charge === 0) {
+    el.innerHTML = `
+      <div class="delivery-charge-box">
+        <div class="dc-label">🎉 Delivery charge <span class="dc-free-badge">FREE</span></div>
+        <div class="dc-amount">₹0</div>
+      </div>
+      <div class="dc-info">Free delivery within 5 km · You're only ${km.toFixed(1)} km away!</div>`;
+  } else {
+    const extra = km - 5;
+    el.innerHTML = `
+      <div class="delivery-charge-box">
+        <div class="dc-label">🚴 Delivery charge</div>
+        <div class="dc-amount">₹${charge}</div>
+      </div>
+      <div class="dc-info">₹10/km · ${km.toFixed(1)} km total · Free upto 5 km + ₹${charge} for ${Math.ceil(extra)} extra km</div>`;
+  }
+  updateState();
+}
+
+/* Sync drawer distance field → modal distance field */
+function syncModalDelivery() {
+  const dist = document.getElementById('modal-del-distance').value;
+  deliveryKm = parseFloat(dist) || 0;
+  updateState();
+}
+
+/* ═══════════════════════════════════════════
+   RENDERERS (unchanged)
+   ═══════════════════════════════════════════ */
 function renderBrownieGrid() {
   const cat = categories[BROWNIE_IDX];
   document.getElementById('brownie-grid').innerHTML = cat.items.map((item, idx) => {
     const qty = cart[item.name] || 0;
-    const badgeHtml = item.badge
-      ? `<div class="br-badge ${item.badge}">${item.badge === 'new' ? '✦ NEW' : item.badge === 'best' ? '★ BEST' : '🔥 HOT'}</div>`
-      : '';
-    const tagsHtml = item.tags
-      ? `<div class="br-tags">${item.tags.map(t => `<span class="br-tag">${t}</span>`).join('')}</div>`
-      : '';
-    const imgHtml = item.image
-      ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=br-img-placeholder>🍫</div>'">`
-      : `<div class="br-img-placeholder">🍫</div>`;
-    return `
-    <div class="br-card${item.featured ? ' featured' : ''}" style="animation-delay:${idx * 0.07}s">
-      <div class="br-card-glow-line"></div>
-      ${badgeHtml}
+    const badgeHtml = item.badge ? `<div class="br-badge ${item.badge}">${item.badge==='new'?'✦ NEW':item.badge==='best'?'★ BEST':'🔥 HOT'}</div>` : '';
+    const tagsHtml  = item.tags  ? `<div class="br-tags">${item.tags.map(t=>`<span class="br-tag">${t}</span>`).join('')}</div>` : '';
+    const imgHtml   = item.image ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=br-img-placeholder>🍫</div>'">` : `<div class="br-img-placeholder">🍫</div>`;
+    return `<div class="br-card${item.featured?' featured':''}" style="animation-delay:${idx*0.07}s">
+      <div class="br-card-glow-line"></div>${badgeHtml}
       <div class="br-img-wrap">${imgHtml}<div class="br-img-tint"></div><div class="br-img-fade"></div></div>
       <div class="br-body">
         <div class="br-name">${item.name}</div>
-        <div class="br-desc">${item.desc}</div>
-        ${tagsHtml}
+        <div class="br-desc">${item.desc}</div>${tagsHtml}
         <div class="br-footer">
           <div class="br-price">₹${item.price} <span>/ piece</span></div>
-          <button class="br-add-btn${qty > 0 ? ' added' : ''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}', ${item.price}, this)">
-            ${qty > 0 ? '✓ Added' : '+ Add'}
-          </button>
+          <button class="br-add-btn${qty>0?' added':''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}',${item.price},this)">${qty>0?'✓ Added':'+ Add'}</button>
         </div>
-      </div>
-    </div>`;
+      </div></div>`;
   }).join('');
   spawnBrParticles();
 }
 
 function spawnBrParticles() {
-  const el = document.getElementById('br-particles');
-  if (!el) return;
-  el.innerHTML = '';
+  const el = document.getElementById('br-particles'); if (!el) return; el.innerHTML = '';
   const colors = ['#7b2fff','#a855f7','#c084fc','#6d28d9','#8b5cf6'];
-  for (let i = 0; i < 20; i++) {
-    const p = document.createElement('div');
-    p.className = 'br-particle';
-    const size = 3 + Math.random() * 6;
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    p.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;background:${color};animation-delay:${Math.random()*10}s;animation-duration:${8+Math.random()*10}s;box-shadow:0 0 ${size*3}px ${color};opacity:0;`;
-    el.appendChild(p);
-  }
+  for (let i=0;i<20;i++){const p=document.createElement('div');p.className='br-particle';const size=3+Math.random()*6,color=colors[~~(Math.random()*colors.length)];p.style.cssText=`left:${Math.random()*100}%;width:${size}px;height:${size}px;background:${color};animation-delay:${Math.random()*10}s;animation-duration:${8+Math.random()*10}s;box-shadow:0 0 ${size*3}px ${color};opacity:0;`;el.appendChild(p);}
 }
 
-/* ── Nightclub Toppings renderer ── */
 function renderGrid() {
   const cat = categories[activeTab];
-  document.getElementById('grid').innerHTML = cat.items.map((item, idx) => {
-    const qty = cart[item.name] || 0;
-    const imgHtml = item.image
-      ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=nk-img-ph>${item.emoji || '🌹'}</div><div class=nk-img-overlay></div><div class=nk-img-scan></div>'">`
-      : `<div class="nk-img-ph">${item.emoji || '🌹'}</div>`;
-    return `
-    <div class="nk-card" style="animation-delay:${idx * 0.09}s">
-      <div class="nk-card-glow"></div>
-      <div class="nk-card-corner">${item.tag || 'TOPPING'}</div>
-      <div class="nk-card-num">${item.code || `SBR-00${idx+1}`}</div>
-      <div class="nk-img-wrap">
-        ${imgHtml}
-        <div class="nk-img-overlay"></div>
-        <div class="nk-img-scan"></div>
-      </div>
-      <div class="nk-card-body">
-        <div class="nk-item-code">TOPPING // ADD-ON</div>
-        <div class="nk-item-name">${item.name}</div>
-        <div class="nk-item-desc">${item.desc}</div>
-        <div class="nk-card-footer">
-          <div class="nk-price">₹${item.price} <small>/ piece</small></div>
-          <button class="nk-add-btn${qty > 0 ? ' added' : ''}"
-            onclick="addItem('${item.name.replace(/'/g,"\\'")}', ${item.price}, this)">
-            ${qty > 0 ? '✓ ADDED' : '♦ ADD'}
-          </button>
-        </div>
-      </div>
-    </div>`;
+  document.getElementById('grid').innerHTML = cat.items.map((item,idx)=>{
+    const qty=cart[item.name]||0;
+    const imgHtml=item.image?`<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=nk-img-ph>${item.emoji||'🌹'}</div><div class=nk-img-overlay></div><div class=nk-img-scan></div>'">`:`<div class="nk-img-ph">${item.emoji||'🌹'}</div>`;
+    return `<div class="nk-card" style="animation-delay:${idx*0.09}s">
+      <div class="nk-card-glow"></div><div class="nk-card-corner">${item.tag||'TOPPING'}</div>
+      <div class="nk-card-num">${item.code||`SBR-00${idx+1}`}</div>
+      <div class="nk-img-wrap">${imgHtml}<div class="nk-img-overlay"></div><div class="nk-img-scan"></div></div>
+      <div class="nk-card-body"><div class="nk-item-code">TOPPING // ADD-ON</div><div class="nk-item-name">${item.name}</div><div class="nk-item-desc">${item.desc}</div>
+        <div class="nk-card-footer"><div class="nk-price">₹${item.price} <small>/ piece</small></div>
+          <button class="nk-add-btn${qty>0?' added':''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}',${item.price},this)">${qty>0?'✓ ADDED':'♦ ADD'}</button>
+        </div></div></div>`;
   }).join('');
   spawnNkParticles();
 }
 
 function spawnNkParticles() {
-  const el = document.getElementById('nk-particles');
-  if (!el) return;
-  el.innerHTML = '';
-  const shapes = ['🌹','♦','✦','❤','♥','✿'];
-  for (let i = 0; i < 18; i++) {
-    const p = document.createElement('span');
-    p.className = 'nk-particle';
-    p.textContent = shapes[Math.floor(Math.random() * shapes.length)];
-    const size = 10 + Math.random() * 16;
-    p.style.cssText = `left:${Math.random()*100}%;top:${90+Math.random()*10}%;animation-delay:${Math.random()*10}s;animation-duration:${7+Math.random()*10}s;font-size:${size}px;opacity:0;`;
-    el.appendChild(p);
-  }
+  const el=document.getElementById('nk-particles');if(!el)return;el.innerHTML='';
+  const shapes=['🌹','♦','✦','❤','♥','✿'];
+  for(let i=0;i<18;i++){const p=document.createElement('span');p.className='nk-particle';p.textContent=shapes[~~(Math.random()*shapes.length)];const size=10+Math.random()*16;p.style.cssText=`left:${Math.random()*100}%;top:${90+Math.random()*10}%;animation-delay:${Math.random()*10}s;animation-duration:${7+Math.random()*10}s;font-size:${size}px;opacity:0;`;el.appendChild(p);}
 }
 
-/* ── BOO renderer ── */
 function renderBooGrid() {
-  const cat = categories[COOLDRINK_IDX];
-  document.getElementById('boo-grid').innerHTML = cat.items.map((item, idx) => {
-    const qty = cart[item.name] || 0;
-    const imgHtml = item.image
-      ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=boo-card-thumb-placeholder>🥤</div>'">`
-      : `<div class="boo-card-thumb-placeholder">🥤</div>`;
+  const cat=categories[COOLDRINK_IDX];
+  document.getElementById('boo-grid').innerHTML=cat.items.map((item,idx)=>{
+    const qty=cart[item.name]||0;
+    const imgHtml=item.image?`<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=boo-card-thumb-placeholder>🥤</div>'">`:`<div class="boo-card-thumb-placeholder">🥤</div>`;
     return `<div class="boo-card" style="--boo-accent:${item.booAccent};--boo-glow:${item.booGlow};animation-delay:${idx*0.07}s">
-      <div class="boo-card-accent" style="background:${item.booBar}"></div>
-      <div class="boo-card-new">NEW!</div>
+      <div class="boo-card-accent" style="background:${item.booBar}"></div><div class="boo-card-new">NEW!</div>
       <div class="boo-card-thumb">${imgHtml}</div>
-      <div class="boo-card-body">
-        <div class="boo-card-name">${item.name}</div>
-        <div class="boo-card-desc">${item.desc}</div>
-        <div class="boo-card-footer">
-          <div class="boo-card-price">₹${item.price} <span>/ bottle</span></div>
-          <button class="boo-add-btn${qty > 0 ? ' added' : ''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}',${item.price},this)">${qty > 0 ? '✓ ICED' : '+ ADD'}</button>
-        </div>
-      </div>
-    </div>`;
+      <div class="boo-card-body"><div class="boo-card-name">${item.name}</div><div class="boo-card-desc">${item.desc}</div>
+        <div class="boo-card-footer"><div class="boo-card-price">₹${item.price} <span>/ bottle</span></div>
+          <button class="boo-add-btn${qty>0?' added':''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}',${item.price},this)">${qty>0?'✓ ICED':'+ ADD'}</button>
+        </div></div></div>`;
   }).join('');
-  const el = document.getElementById('boo-particles');
-  if (!el) return;
-  el.innerHTML = '';
-  const colors = ['#ff4500','#cc00cc','#0055ff','#ff8c00','#e0007a','#22c55e'];
-  for (let i = 0; i < 18; i++) {
-    const p = document.createElement('div');
-    p.className = 'boo-particle';
-    const size = 4 + Math.random() * 8;
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    p.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;background:${color};animation-delay:${Math.random()*8}s;animation-duration:${6+Math.random()*8}s;box-shadow:0 0 ${size*2}px ${color};opacity:0;`;
-    el.appendChild(p);
-  }
+  const el=document.getElementById('boo-particles');if(!el)return;el.innerHTML='';
+  const colors=['#ff4500','#cc00cc','#0055ff','#ff8c00','#e0007a','#22c55e'];
+  for(let i=0;i<18;i++){const p=document.createElement('div');p.className='boo-particle';const size=4+Math.random()*8,color=colors[~~(Math.random()*colors.length)];p.style.cssText=`left:${Math.random()*100}%;width:${size}px;height:${size}px;background:${color};animation-delay:${Math.random()*8}s;animation-duration:${6+Math.random()*8}s;box-shadow:0 0 ${size*2}px ${color};opacity:0;`;el.appendChild(p);}
 }
 
-/* ── Hypnotic renderer ── */
-const mojitoGlows = ['#7b2fff','#2979ff','#00e5ff','#d500f9','#64ffda','#aa00ff','#00b0ff'];
+const mojitoGlows=['#7b2fff','#2979ff','#00e5ff','#d500f9','#64ffda','#aa00ff','#00b0ff'];
 function renderHypnoGrid() {
-  const cat = categories[MOJITO_IDX];
-  document.getElementById('hype-grid').innerHTML = cat.items.map((item, idx) => {
-    const qty = cart[item.name] || 0;
-    const glow = mojitoGlows[idx % mojitoGlows.length];
+  const cat=categories[MOJITO_IDX];
+  document.getElementById('hype-grid').innerHTML=cat.items.map((item,idx)=>{
+    const qty=cart[item.name]||0,glow=mojitoGlows[idx%mojitoGlows.length];
     return `<div class="hype-card" style="--glow-color:${glow};animation-delay:${idx*0.07}s">
-      <div class="hype-card-border"></div>
-      <div class="hype-card-inner">
+      <div class="hype-card-border"></div><div class="hype-card-inner">
         <div class="hype-spell-tag">✦ ${item.spell}</div>
-        <div class="hype-img-wrap">
-          ${item.image ? `<img class="hype-img" src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=hype-img-placeholder>🍹</div>'">` : `<div class="hype-img-placeholder">🍹</div>`}
-          <div class="hype-img-fade"></div>
-        </div>
-        <div class="hype-card-body">
-          <div class="hype-item-name">${item.name}</div>
-          <div class="hype-item-desc">${item.desc}</div>
-          <div class="hype-card-footer">
-            <span class="hype-price">₹${item.price}</span>
-            <button class="hype-add-btn${qty > 0 ? ' added' : ''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}',${item.price},this)">${qty > 0 ? '✓ Brewed' : '⚗ Brew'}</button>
-          </div>
-        </div>
-      </div>
-    </div>`;
+        <div class="hype-img-wrap">${item.image?`<img class="hype-img" src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=hype-img-placeholder>🍹</div>'">`:`<div class="hype-img-placeholder">🍹</div>`}<div class="hype-img-fade"></div></div>
+        <div class="hype-card-body"><div class="hype-item-name">${item.name}</div><div class="hype-item-desc">${item.desc}</div>
+          <div class="hype-card-footer"><span class="hype-price">₹${item.price}</span>
+            <button class="hype-add-btn${qty>0?' added':''}" onclick="addItem('${item.name.replace(/'/g,"\\'")}',${item.price},this)">${qty>0?'✓ Brewed':'⚗ Brew'}</button>
+          </div></div></div></div>`;
   }).join('');
-  const el = document.getElementById('hype-particles');
-  if (!el) return;
-  el.innerHTML = '';
-  const symbols = ['✦','★','✧','◆','⬡','👁','⚗'];
-  for (let i = 0; i < 22; i++) {
-    const s = document.createElement('span');
-    s.className = 'hype-particle';
-    s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*6}s;animation-duration:${4+Math.random()*5}s;font-size:${10+Math.random()*14}px;color:${mojitoGlows[Math.floor(Math.random()*mojitoGlows.length)]};opacity:${0.15+Math.random()*0.3}`;
-    el.appendChild(s);
-  }
+  const el=document.getElementById('hype-particles');if(!el)return;el.innerHTML='';
+  const symbols=['✦','★','✧','◆','⬡','👁','⚗'];
+  for(let i=0;i<22;i++){const s=document.createElement('span');s.className='hype-particle';s.textContent=symbols[~~(Math.random()*symbols.length)];s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*6}s;animation-duration:${4+Math.random()*5}s;font-size:${10+Math.random()*14}px;color:${mojitoGlows[~~(Math.random()*mojitoGlows.length)]};opacity:${0.15+Math.random()*0.3}`;el.appendChild(s);}
 }
 
-/* ── Image helpers ── */
 function itemThumbSmall(item) {
   return item.image
     ? `<img class="ci-img" src="${item.image}" alt="${item.name}" onerror="this.outerHTML='<div class=ci-img-placeholder>🍫</div>'">`
     : `<div class="ci-img-placeholder">🍫</div>`;
 }
 
-/* ── Tabs ── */
+/* ═══════════════════════════════════════════
+   TABS
+   ═══════════════════════════════════════════ */
 function renderTabs() {
-  document.getElementById('tabs').innerHTML = categories.map((c, i) =>
+  document.getElementById('tabs').innerHTML = categories.map((c,i)=>
     `<button class="tab${i===activeTab?' active':''}" onclick="setTab(${i})">${c.icon} ${c.label}<span class="tab-count">${c.items.length}</span></button>`
   ).join('');
 }
 
 function setTab(i) {
-  activeTab = i;
-  renderTabs();
-  const isBrownie   = !!categories[i].isBrownie;
-  const isMojito    = !!categories[i].isMojito;
-  const isCoolDrink = !!categories[i].isCoolDrink;
-  const isTopping   = !isBrownie && !isMojito && !isCoolDrink;
-
+  activeTab=i; renderTabs();
+  const isBrownie=!!categories[i].isBrownie,isMojito=!!categories[i].isMojito,isCoolDrink=!!categories[i].isCoolDrink,isTopping=!isBrownie&&!isMojito&&!isCoolDrink;
   document.getElementById('brownie-section').style.display    = isBrownie   ? 'block' : 'none';
-  document.getElementById('normal-grid-section').style.display = isTopping   ? 'block' : 'none';
+  document.getElementById('normal-grid-section').style.display= isTopping   ? 'block' : 'none';
   document.getElementById('hypnotic-section').style.display   = isMojito    ? 'block' : 'none';
   document.getElementById('boo-section').style.display        = isCoolDrink ? 'block' : 'none';
-
   if (isBrownie)        renderBrownieGrid();
   else if (isMojito)    renderHypnoGrid();
   else if (isCoolDrink) renderBooGrid();
   else                  renderGrid();
 }
 
-/* ── Cart logic ── */
+/* ═══════════════════════════════════════════
+   CART LOGIC
+   ═══════════════════════════════════════════ */
 function addItem(name, price, btn) {
-  cart[name] = (cart[name] || 0) + 1;
-  const isMoji      = categories[MOJITO_IDX].items.some(i => i.name === name);
-  const isCoolDrink = categories[COOLDRINK_IDX].items.some(i => i.name === name);
-  const isBrownie   = categories[BROWNIE_IDX].items.some(i => i.name === name);
-  const isTopping   = !isMoji && !isCoolDrink && !isBrownie;
-
-  if (isMoji)           btn.textContent = '✓ Brewed';
-  else if (isCoolDrink) btn.textContent = '✓ ICED';
-  else if (isTopping)   btn.textContent = '✓ ADDED';
-  else                  btn.textContent = '✓ Added';
+  cart[name]=(cart[name]||0)+1;
+  const isMoji=categories[MOJITO_IDX].items.some(i=>i.name===name);
+  const isCoolDrink=categories[COOLDRINK_IDX].items.some(i=>i.name===name);
+  const isBrownie=categories[BROWNIE_IDX].items.some(i=>i.name===name);
+  const isTopping=!isMoji&&!isCoolDrink&&!isBrownie;
+  if(isMoji)           btn.textContent='✓ Brewed';
+  else if(isCoolDrink) btn.textContent='✓ ICED';
+  else if(isTopping)   btn.textContent='✓ ADDED';
+  else                 btn.textContent='✓ Added';
   btn.classList.add('added');
-
-  setTimeout(() => {
-    if (isMoji)           btn.textContent = '⚗ Brew';
-    else if (isCoolDrink) btn.textContent = '+ ADD';
-    else if (isTopping)   btn.textContent = '♦ ADD';
-    else                  btn.textContent = '+ Add';
+  setTimeout(()=>{
+    if(isMoji)           btn.textContent='⚗ Brew';
+    else if(isCoolDrink) btn.textContent='+ ADD';
+    else if(isTopping)   btn.textContent='♦ ADD';
+    else                 btn.textContent='+ Add';
     btn.classList.remove('added');
-  }, 1200);
+  },1200);
   updateState();
 }
 
 function calcTotals() {
-  let count = 0, total = 0;
-  Object.entries(cart).filter(([,q]) => q > 0).forEach(([name, qty]) => {
-    const item = allItems().find(i => i.name === name);
-    if (item) { count += qty; total += item.price * qty; }
+  let count=0,subtotal=0;
+  Object.entries(cart).filter(([,q])=>q>0).forEach(([name,qty])=>{
+    const item=allItems().find(i=>i.name===name);
+    if(item){count+=qty;subtotal+=item.price*qty;}
   });
-  return { count, total };
+  const delivery = calcDeliveryCharge(deliveryKm);
+  return { count, subtotal, delivery, total: subtotal + delivery };
 }
 
 function updateState() {
-  const { count, total } = calcTotals();
+  const { count, subtotal, delivery, total } = calcTotals();
   document.getElementById('cart-count').textContent    = count;
   document.getElementById('bar-count-txt').textContent = count;
   document.getElementById('bar-total-txt').textContent = `₹${total}`;
-  document.getElementById('drawer-total').textContent  = `₹${total}`;
-  document.getElementById('order-btn').disabled        = count === 0;
+  document.getElementById('subtotal-val').textContent  = `₹${subtotal}`;
+  document.getElementById('grand-total-val').textContent = `₹${total}`;
+  document.getElementById('drawer-total') && (document.getElementById('drawer-total').textContent = `₹${total}`);
+
+  // Delivery cost row
+  const dRow = document.getElementById('delivery-cost-row');
+  const dVal  = document.getElementById('delivery-cost-val');
+  if (orderType === 'delivery') {
+    dRow.style.display = 'flex';
+    dVal.textContent = delivery === 0 ? '₹0 (FREE 🎉)' : `₹${delivery}`;
+  } else {
+    dRow.style.display = 'none';
+  }
+
+  document.getElementById('order-btn').disabled = count === 0;
   document.getElementById('cart-bar').classList.toggle('visible', count > 0);
 }
 
 function renderDrawer() {
-  const entries = Object.entries(cart).filter(([,q]) => q > 0);
+  const entries = Object.entries(cart).filter(([,q])=>q>0);
   const el = document.getElementById('drawer-items');
   if (!entries.length) {
-    el.innerHTML = `<div class="empty-state"><div class="e-icon">🛒</div><p>Your cart is empty.<br><strong>Add items from the menu</strong> to get started.</p></div>`;
+    el.innerHTML=`<div class="empty-state"><div class="e-icon">🛒</div><p>Your cart is empty.<br><strong>Add items from the menu</strong> to get started.</p></div>`;
     return;
   }
-  el.innerHTML = entries.map(([name, qty]) => {
-    const item = allItems().find(i => i.name === name);
-    return `<div class="ci"><div class="ci-thumb">${itemThumbSmall(item)}</div><div class="ci-info"><div class="ci-name">${name}</div><div class="ci-sub">₹${item.price} × ${qty} = ₹${item.price * qty}</div></div><div class="qty-ctrl"><button class="q-btn" onclick="changeQty('${name.replace(/'/g,"\\'")}', -1)">−</button><span class="q-num">${qty}</span><button class="q-btn" onclick="changeQty('${name.replace(/'/g,"\\'")}', 1)">+</button></div></div>`;
+  el.innerHTML=entries.map(([name,qty])=>{
+    const item=allItems().find(i=>i.name===name);
+    return `<div class="ci"><div class="ci-thumb">${itemThumbSmall(item)}</div><div class="ci-info"><div class="ci-name">${name}</div><div class="ci-sub">₹${item.price} × ${qty} = ₹${item.price*qty}</div></div><div class="qty-ctrl"><button class="q-btn" onclick="changeQty('${name.replace(/'/g,"\\'")}', -1)">−</button><span class="q-num">${qty}</span><button class="q-btn" onclick="changeQty('${name.replace(/'/g,"\\'")}', 1)">+</button></div></div>`;
   }).join('');
 }
 
-function changeQty(name, delta) {
-  cart[name] = (cart[name] || 0) + delta;
-  if (cart[name] <= 0) delete cart[name];
+function changeQty(name,delta) {
+  cart[name]=(cart[name]||0)+delta;
+  if(cart[name]<=0) delete cart[name];
   updateState(); renderDrawer();
-  if (categories[activeTab].isBrownie)          renderBrownieGrid();
-  else if (categories[activeTab].isMojito)       renderHypnoGrid();
-  else if (categories[activeTab].isCoolDrink)    renderBooGrid();
-  else                                           renderGrid();
+  if(categories[activeTab].isBrownie)       renderBrownieGrid();
+  else if(categories[activeTab].isMojito)   renderHypnoGrid();
+  else if(categories[activeTab].isCoolDrink)renderBooGrid();
+  else                                      renderGrid();
 }
 
-function openCart()  { renderDrawer(); document.getElementById('overlay').classList.add('open'); document.getElementById('drawer').classList.add('open'); }
-function closeCart() { document.getElementById('overlay').classList.remove('open'); document.getElementById('drawer').classList.remove('open'); }
+function openCart() { renderDrawer(); document.getElementById('overlay').classList.add('open'); document.getElementById('drawer').classList.add('open'); }
+function closeCart(){ document.getElementById('overlay').classList.remove('open'); document.getElementById('drawer').classList.remove('open'); }
 
-/* ── Time slots ── */
+/* ═══════════════════════════════════════════
+   TIME SLOTS
+   ═══════════════════════════════════════════ */
 function generateTimeSlots() {
-  const slots = [], now = new Date();
-  let h = now.getHours(), m = now.getMinutes();
-  m = m < 30 ? 30 : 60;
-  if (m === 60) { h++; m = 0; }
-  let count = 0;
-  while (count < 10 && h < 22) {
-    if (h >= 10) {
-      const p = h < 12 ? 'AM' : 'PM';
-      const dh = h > 12 ? h - 12 : (h === 0 ? 12 : h);
-      const dm = m === 0 ? '00' : m;
-      slots.push(`${dh}:${dm} ${p}`);
-      count++;
-    }
-    m += 30;
-    if (m >= 60) { h++; m = 0; }
+  const slots=[],now=new Date();
+  let h=now.getHours(),m=now.getMinutes();
+  m=m<30?30:60; if(m===60){h++;m=0;}
+  let count=0;
+  while(count<10&&h<22){
+    if(h>=10){const p=h<12?'AM':'PM',dh=h>12?h-12:(h===0?12:h),dm=m===0?'00':m;slots.push(`${dh}:${dm} ${p}`);count++;}
+    m+=30; if(m>=60){h++;m=0;}
   }
   return slots;
 }
 
-/* ── Customer modal ── */
+function populateTimeSelect(id) {
+  const sel=document.getElementById(id);
+  sel.innerHTML='<option value="">— Choose a time slot —</option>';
+  generateTimeSlots().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;sel.appendChild(o);});
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOMER MODAL
+   ═══════════════════════════════════════════ */
 function openCustomerModal() {
   closeCart();
-  const entries = Object.entries(cart).filter(([, q]) => q > 0);
-  const { count, total } = calcTotals();
-  document.getElementById('modal-order-summary').innerHTML = `<div class="summary-label">Order Summary</div><div class="summary-chips">${entries.map(([n,q]) => `<span class="sum-chip">${n} ×${q}</span>`).join('')}</div><div class="summary-total">Total: <strong>₹${total}</strong> · ${count} item${count > 1 ? 's' : ''}</div>`;
-  const sel = document.getElementById('cust-pickup');
-  sel.innerHTML = '<option value="">— Choose a time slot —</option>';
-  generateTimeSlots().forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); });
-  ['cust-name','cust-phone','cust-location','cust-note'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('note-chars').textContent = '0 / 200';
-  ['name-err','phone-err','location-err','pickup-err'].forEach(id => document.getElementById(id).style.display = 'none');
+  const entries=Object.entries(cart).filter(([,q])=>q>0);
+  const {subtotal,delivery,total,count}=calcTotals();
+
+  // Summary chips
+  let chips=entries.map(([n,q])=>`<span class="sum-chip">${n} ×${q}</span>`).join('');
+  if(orderType==='delivery'){
+    chips+=`<span class="sum-chip-delivery">🚴 Delivery ${delivery===0?'FREE':'₹'+delivery}</span>`;
+  }
+  document.getElementById('modal-order-summary').innerHTML=`
+    <div class="summary-label">Order Summary</div>
+    <div class="summary-chips">${chips}</div>
+    <div class="summary-total">Subtotal ₹${subtotal}${orderType==='delivery'?` + Delivery ₹${delivery} = <strong>₹${total}</strong>`:` · <strong>₹${total}</strong>`} · ${count} item${count>1?'s':''}</div>`;
+
+  // Show/hide delivery section & time fields
+  const isDelivery = orderType==='delivery';
+  const modalDelSec=document.getElementById('modal-delivery-section');
+  const pickupGroup=document.getElementById('pickup-group');
+  const deliveryTimeGroup=document.getElementById('delivery-time-group');
+  document.getElementById('modal-sub-txt').textContent = isDelivery ? 'Fill in your details for delivery' : 'Fill in your info for pickup';
+
+  if(isDelivery){
+    modalDelSec.classList.add('expanded');
+    pickupGroup.style.display='none';
+    deliveryTimeGroup.style.display='block';
+    populateTimeSelect('cust-delivery-time');
+    // Pre-fill from drawer fields
+    const drawerAddr=document.getElementById('delivery-address').value;
+    const drawerDist=document.getElementById('delivery-distance').value;
+    if(drawerAddr) document.getElementById('modal-del-address').value=drawerAddr;
+    if(drawerDist) document.getElementById('modal-del-distance').value=drawerDist;
+  } else {
+    modalDelSec.classList.remove('expanded');
+    pickupGroup.style.display='block';
+    deliveryTimeGroup.style.display='none';
+    populateTimeSelect('cust-pickup');
+  }
+
+  ['cust-name','cust-phone','cust-location','cust-note'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('note-chars').textContent='0 / 200';
+  ['name-err','phone-err','location-err','pickup-err','delivery-time-err','del-address-err','del-distance-err'].forEach(id=>document.getElementById(id).style.display='none');
   validateForm();
   document.getElementById('modal-overlay').classList.add('open');
-  setTimeout(() => document.getElementById('cust-name').focus(), 200);
+  setTimeout(()=>document.getElementById('cust-name').focus(),200);
 }
-function closeCustomerModal() { document.getElementById('modal-overlay').classList.remove('open'); }
-function handleModalOverlayClick(e) { if (e.target === document.getElementById('modal-overlay')) closeCustomerModal(); }
+
+function closeCustomerModal(){document.getElementById('modal-overlay').classList.remove('open');}
+function handleModalOverlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeCustomerModal();}
 
 function validateForm() {
   const n  = document.getElementById('cust-name').value.trim();
   const p  = document.getElementById('cust-phone').value.trim();
   const l  = document.getElementById('cust-location').value.trim();
-  const pk = document.getElementById('cust-pickup').value;
-  document.getElementById('confirm-order-btn').disabled = !(n.length >= 2 && p.length === 10 && l.length >= 3 && pk !== '');
+  const isDelivery = orderType==='delivery';
+
+  let timeOk, deliveryOk;
+  if(isDelivery){
+    const t=document.getElementById('cust-delivery-time').value;
+    const a=document.getElementById('modal-del-address').value.trim();
+    const d=parseFloat(document.getElementById('modal-del-distance').value)||0;
+    timeOk=t!=='';
+    deliveryOk=a.length>=5&&d>0;
+    deliveryKm=d;
+  } else {
+    const t=document.getElementById('cust-pickup').value;
+    timeOk=t!=='';
+    deliveryOk=true;
+  }
+  document.getElementById('confirm-order-btn').disabled=!(n.length>=2&&p.length===10&&l.length>=3&&timeOk&&deliveryOk);
+  updateState();
 }
 
 async function confirmOrder() {
   const name   = document.getElementById('cust-name').value.trim();
   const phone  = document.getElementById('cust-phone').value.trim();
   const loc    = document.getElementById('cust-location').value.trim();
-  const pickup = document.getElementById('cust-pickup').value;
   const note   = document.getElementById('cust-note').value.trim();
-  if (name.length < 2 || phone.length !== 10 || loc.length < 3 || !pickup) return;
+  const isDelivery = orderType==='delivery';
 
-  const entries = Object.entries(cart).filter(([, q]) => q > 0);
-  const { total } = calcTotals();
+  let time, deliveryAddress='', distanceKm=0;
+  if(isDelivery){
+    time=document.getElementById('cust-delivery-time').value;
+    deliveryAddress=document.getElementById('modal-del-address').value.trim();
+    distanceKm=parseFloat(document.getElementById('modal-del-distance').value)||0;
+    deliveryKm=distanceKm;
+  } else {
+    time=document.getElementById('cust-pickup').value;
+  }
 
-  const payload = {
-    full_name: name, mobile: phone, location: loc, pickup_time: pickup,
-    items: entries.map(([n, q]) => ({ name: n, qty: q })),
-    total: total, special_instructions: note || ""
+  if(name.length<2||phone.length!==10||loc.length<3||!time) return;
+  if(isDelivery&&(!deliveryAddress||distanceKm<=0)) return;
+
+  const entries=Object.entries(cart).filter(([,q])=>q>0);
+  const {subtotal,delivery,total}=calcTotals();
+
+  const payload={
+    full_name:name,mobile:phone,location:loc,
+    order_type:orderType,
+    ...(isDelivery ? {delivery_address:deliveryAddress, distance_km:distanceKm, delivery_charge:delivery, preferred_time:time} : {pickup_time:time}),
+    items:entries.map(([n,q])=>({name:n,qty:q})),
+    subtotal,delivery_charge:delivery,total,
+    special_instructions:note||""
   };
 
-  const confirmBtn = document.getElementById('confirm-order-btn');
-  confirmBtn.disabled = true;
-  confirmBtn.textContent = 'PLACING ORDER...';
+  const confirmBtn=document.getElementById('confirm-order-btn');
+  confirmBtn.disabled=true; confirmBtn.textContent='PLACING ORDER...';
 
   try {
-    const res = await fetch('https://browny-81re.onrender.com/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+    const res=await fetch('https://browny-81re.onrender.com/api/orders',{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)
     });
-    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+    if(!res.ok) throw new Error(`Server error: ${res.status}`);
 
-    document.getElementById('success-details').innerHTML = `
+    // Success details
+    const deliveryBadge = isDelivery
+      ? `<span class="sc-delivery-badge">🚴 Delivery</span>`
+      : `<span class="sc-delivery-badge" style="background:rgba(123,47,255,0.15);color:#a855f7;border-color:rgba(123,47,255,0.25);">🏪 Takeaway</span>`;
+
+    document.getElementById('success-details').innerHTML=`
       <div class="success-customer">
         <div class="sc-row"><span class="sc-key">👤 Name</span><span class="sc-val">${name}</span></div>
         <div class="sc-row"><span class="sc-key">📱 Mobile</span><span class="sc-val">+91 ${phone}</span></div>
         <div class="sc-row"><span class="sc-key">📍 Location</span><span class="sc-val">${loc}</span></div>
-        <div class="sc-row"><span class="sc-key">🕐 Pickup</span><span class="sc-val">${pickup}</span></div>
+        <div class="sc-row"><span class="sc-key">📦 Type</span><span class="sc-val">${deliveryBadge}</span></div>
+        ${isDelivery ? `
+        <div class="sc-row"><span class="sc-key">🏠 Address</span><span class="sc-val">${deliveryAddress}</span></div>
+        <div class="sc-row"><span class="sc-key">📏 Distance</span><span class="sc-val">${distanceKm} km</span></div>
+        <div class="sc-row"><span class="sc-key">🕐 Delivery</span><span class="sc-val">${time}</span></div>
+        ` : `<div class="sc-row"><span class="sc-key">🕐 Pickup</span><span class="sc-val">${time}</span></div>`}
         ${note ? `<div class="sc-row"><span class="sc-key">📝 Note</span><span class="sc-val">${note}</span></div>` : ''}
       </div>
       <div class="success-divider"></div>
-      ${entries.map(([n, q]) => {
-        const it = allItems().find(i => i.name === n);
-        return `<div class="success-item"><span>${n} ×${q}</span><span>₹${it.price * q}</span></div>`;
-      }).join('')}
+      ${entries.map(([n,q])=>{const it=allItems().find(i=>i.name===n);return `<div class="success-item"><span>${n} ×${q}</span><span>₹${it.price*q}</span></div>`;}).join('')}
+      ${isDelivery ? `<div class="success-delivery-row"><span>🚴 Delivery ${distanceKm<=5?'(Free! 🎉)':'charge'}</span><span>${delivery===0?'₹0 FREE':'₹'+delivery}</span></div>` : ''}
       <div class="success-total-row"><span>Total</span><span>₹${total}</span></div>`;
+
+    document.getElementById('success-tagline').textContent = isDelivery
+      ? `Your order is on its way! 🚴 Estimated in 30–45 mins.`
+      : `We'll have it ready for pickup soon 🍫`;
 
     closeCustomerModal();
     document.getElementById('success-overlay').classList.add('open');
-    cart = {}; updateState(); renderDrawer();
-    if (categories[activeTab].isBrownie)          renderBrownieGrid();
-    else if (categories[activeTab].isMojito)       renderHypnoGrid();
-    else if (categories[activeTab].isCoolDrink)    renderBooGrid();
-    else                                           renderGrid();
-
-  } catch (err) {
-    confirmBtn.disabled = false;
-    confirmBtn.style.background = '#ef4444';
-    confirmBtn.textContent = '⚠ Failed — Retry';
-    setTimeout(() => { confirmBtn.style.background = ''; confirmBtn.textContent = 'CONFIRM ORDER'; confirmBtn.disabled = false; }, 3000);
-    console.error('Order failed:', err);
+    cart={}; deliveryKm=0; updateState(); renderDrawer();
+    if(categories[activeTab].isBrownie)       renderBrownieGrid();
+    else if(categories[activeTab].isMojito)   renderHypnoGrid();
+    else if(categories[activeTab].isCoolDrink)renderBooGrid();
+    else                                      renderGrid();
+  } catch(err) {
+    confirmBtn.disabled=false;
+    confirmBtn.style.background='#ef4444';
+    confirmBtn.textContent='⚠ Failed — Retry';
+    setTimeout(()=>{confirmBtn.style.background='';confirmBtn.textContent='CONFIRM ORDER';confirmBtn.disabled=false;},3000);
+    console.error('Order failed:',err);
   }
 }
 
-function closeSuccess() { document.getElementById('success-overlay').classList.remove('open'); }
+function closeSuccess(){document.getElementById('success-overlay').classList.remove('open');}
 
 /* ── Init ── */
 renderTabs();
