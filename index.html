@@ -31,6 +31,19 @@
   --neon-glow: rgba(0,255,65,0.4);
   --cp-dark: #020402;
   --cp-card: #070e07;
+  /* NIGHTCLUB / NEON PINK VARS */
+  --nk-pink: #ff1f6e;
+  --nk-rose: #ff4d8d;
+  --nk-crimson: #c40042;
+  --nk-magenta: #ff006e;
+  --nk-dark: #080008;
+  --nk-card: #120010;
+  --nk-card2: #0d0009;
+  --nk-glow: rgba(255,31,110,0.4);
+  --nk-glow-dim: rgba(255,31,110,0.15);
+  --nk-border: rgba(255,31,110,0.25);
+  --nk-gold: #ffd700;
+  --nk-gold-dim: rgba(255,215,0,0.15);
 }
 
 body {
@@ -482,330 +495,412 @@ nav {
 .br-stat-sep { width: 1px; height: 36px; background: linear-gradient(to bottom, transparent, #2a2a3a, transparent); }
 
 /* ═══════════════════════════════════════════════
-   CYBERPUNK TOPPINGS SECTION
+   🌹 NIGHTCLUB / NEON ROSE — TOPPINGS SECTION
    ═══════════════════════════════════════════════ */
-.cp-section {
+.nk-section {
   position: relative;
-  background: var(--cp-dark);
+  background: var(--nk-dark);
   min-height: 100vh;
   overflow: hidden;
-  padding-bottom: 60px;
+  padding-bottom: 80px;
 }
-.cp-bg-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(0,255,65,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,65,0.035) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-}
-.cp-bg-glow {
+
+/* smoky atmospheric background */
+.nk-section::before {
+  content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 40% at 20% 30%, rgba(0,255,65,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 35% at 80% 70%, rgba(160,255,0,0.05) 0%, transparent 60%);
+    radial-gradient(ellipse 65% 50% at 50% 0%, rgba(196,0,66,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 0% 60%, rgba(255,31,110,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 100% 40%, rgba(255,77,141,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 25% at 50% 100%, rgba(128,0,50,0.15) 0%, transparent 60%);
   pointer-events: none;
+  z-index: 0;
 }
-.cp-scanlines {
+
+/* film grain texture */
+.nk-section::after {
+  content: '';
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.22) 3px, rgba(0,0,0,0.22) 4px);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+.nk-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,31,110,0.015) 3px, rgba(255,31,110,0.015) 4px);
   pointer-events: none;
   z-index: 1;
 }
-.cp-header {
+
+/* floating rose petals / particles */
+.nk-particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.nk-particle { position: absolute; animation: nkFloat linear infinite; opacity: 0; }
+@keyframes nkFloat {
+  0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  85%  { opacity: 0.6; }
+  100% { transform: translateY(-80px) rotate(360deg); opacity: 0; }
+}
+
+/* ── Header ── */
+.nk-header {
   position: relative;
   z-index: 2;
-  padding: 52px 24px 0;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: start;
-  gap: 20px;
-  max-width: 1100px;
-  margin: 0 auto;
+  text-align: center;
+  padding: 56px 24px 24px;
 }
-.cp-eyebrow {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: var(--neon);
-  margin-bottom: 8px;
-  display: flex;
+
+.nk-presenter {
+  display: inline-flex;
   align-items: center;
   gap: 10px;
+  color: rgba(255,215,0,0.7);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
-.cp-eyebrow::before {
+.nk-presenter::before, .nk-presenter::after {
   content: '';
   display: inline-block;
   width: 28px;
-  height: 2px;
-  background: var(--neon);
-  box-shadow: 0 0 8px var(--neon);
+  height: 1px;
+  background: rgba(255,215,0,0.4);
 }
-.cp-big-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(72px, 14vw, 130px);
-  line-height: 0.88;
-  letter-spacing: 2px;
-  color: #fff;
-  position: relative;
-  margin-bottom: 0;
-}
-.cp-big-title .outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(0,255,65,0.6);
-}
-.cp-big-title .filled {
-  color: var(--neon);
-  text-shadow: 0 0 30px rgba(0,255,65,0.5), 0 0 80px rgba(0,255,65,0.2);
-}
-.cp-glitch-wrap {
-  position: relative;
-  display: inline-block;
-}
-.cp-glitch-wrap::before {
-  content: attr(data-text);
-  position: absolute;
-  left: 3px; top: 0;
-  color: var(--neon);
-  clip-path: polygon(0 30%, 100% 30%, 100% 55%, 0 55%);
-  opacity: 0.6;
-  animation: cpGlitch1 5s infinite;
-}
-.cp-glitch-wrap::after {
-  content: attr(data-text);
-  position: absolute;
-  left: -3px; top: 0;
-  color: #ff0080;
-  clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
-  opacity: 0.5;
-  animation: cpGlitch2 5s infinite 0.4s;
-}
-@keyframes cpGlitch1 {
-  0%, 88%, 100% { transform: none; opacity: 0; }
-  90% { transform: translateX(-4px); opacity: 0.7; }
-  93% { transform: translateX(4px); opacity: 0.5; }
-  95% { transform: none; opacity: 0; }
-}
-@keyframes cpGlitch2 {
-  0%, 85%, 100% { transform: none; opacity: 0; }
-  87% { transform: translateX(4px); opacity: 0.6; }
-  91% { transform: translateX(-2px); opacity: 0.4; }
-  93% { transform: none; opacity: 0; }
-}
-.cp-kanji-block { text-align: right; padding-top: 10px; }
-.cp-kanji {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 52px;
-  line-height: 1.1;
-  color: rgba(255,255,255,0.07);
-  letter-spacing: 4px;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  display: inline-block;
-  border-right: 1px solid rgba(0,255,65,0.15);
-  padding-right: 12px;
-}
-.cp-kanji .k-accent { color: rgba(0,255,65,0.22); }
-.cp-subtitle-row {
-  position: relative;
-  z-index: 2;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 16px 24px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  border-bottom: 1px solid rgba(0,255,65,0.12);
-  padding-bottom: 16px;
-}
-.cp-tag-line {
+
+.nk-presents-txt {
+  display: block;
+  color: rgba(255,255,255,0.35);
   font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
   font-size: 11px;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
+  margin-bottom: 8px;
 }
-.cp-stats-row { display: flex; gap: 28px; }
-.cp-stat { text-align: right; }
-.cp-stat-n {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  color: var(--neon);
-  letter-spacing: 1px;
-  line-height: 1;
-  text-shadow: 0 0 16px rgba(0,255,65,0.6);
-}
-.cp-stat-l { font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,0.25); text-transform: uppercase; }
 
-/* Ticker */
-.cp-ticker-wrap {
+/* Big neon script title */
+.nk-big-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(58px, 10vw, 110px);
+  letter-spacing: 3px;
+  line-height: 0.92;
+  margin-bottom: 4px;
+  position: relative;
+  display: inline-block;
+}
+
+.nk-title-line1 {
+  display: block;
+  color: #fff;
+  font-size: 0.38em;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}
+
+.nk-title-neon {
+  display: block;
+  color: var(--nk-pink);
+  text-shadow:
+    0 0 10px var(--nk-pink),
+    0 0 30px var(--nk-pink),
+    0 0 60px rgba(255,31,110,0.5),
+    0 0 100px rgba(255,31,110,0.25);
+  animation: nkFlicker 6s ease-in-out infinite;
+}
+
+@keyframes nkFlicker {
+  0%, 95%, 100% { opacity: 1; }
+  96% { opacity: 0.85; }
+  97% { opacity: 1; }
+  98% { opacity: 0.7; }
+  99% { opacity: 1; }
+}
+
+.nk-title-sub {
+  display: block;
+  font-size: 0.32em;
+  letter-spacing: 5px;
+  color: rgba(255,215,0,0.85);
+  text-shadow: 0 0 15px rgba(255,215,0,0.5);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.nk-date-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #000;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  line-height: 1;
+  margin-left: 12px;
+  vertical-align: middle;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,31,110,0.6);
+}
+.nk-date-day { font-size: 8px; letter-spacing: 1px; color: var(--nk-crimson); }
+.nk-date-num { font-size: 22px; line-height: 1; }
+.nk-date-mo  { font-size: 8px; letter-spacing: 1px; color: var(--nk-crimson); }
+
+.nk-header-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.nk-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,31,110,0.1);
+  border: 1px solid rgba(255,31,110,0.3);
+  color: var(--nk-rose);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+.nk-pill-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--nk-pink);
+  box-shadow: 0 0 6px var(--nk-pink);
+  animation: nkDotPulse 1.5s ease-in-out infinite;
+}
+@keyframes nkDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* ── Stats bar ── */
+.nk-stats {
   position: relative;
   z-index: 2;
-  max-width: 1100px;
+  max-width: 900px;
   margin: 0 auto;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0 24px 32px;
+  border-bottom: 1px solid rgba(255,31,110,0.12);
+  margin-bottom: 8px;
 }
-.cp-ticker {
-  background: var(--neon);
-  padding: 7px 0;
+.nk-stat { text-align: center; flex: 1; padding: 8px; }
+.nk-stat-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 2px;
+  color: var(--nk-pink);
+  text-shadow: 0 0 20px rgba(255,31,110,0.6);
+  line-height: 1;
+}
+.nk-stat-l { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-top: 2px; }
+.nk-stat-sep { width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, rgba(255,31,110,0.3), transparent); }
+
+/* ── Ticker tape ── */
+.nk-ticker-wrap {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+.nk-ticker {
+  background: linear-gradient(90deg, var(--nk-crimson), var(--nk-pink), var(--nk-crimson));
+  padding: 8px 0;
   overflow: hidden;
   white-space: nowrap;
 }
-.cp-ticker-inner {
+.nk-ticker-inner {
   display: inline-flex;
-  gap: 48px;
-  animation: cpTicker 22s linear infinite;
+  gap: 40px;
+  animation: nkTicker 20s linear infinite;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 13px;
   letter-spacing: 3px;
-  color: #020402;
+  color: rgba(255,255,255,0.9);
 }
-@keyframes cpTicker {
+@keyframes nkTicker {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* Cards grid */
-.cp-grid {
+/* ── Cards grid ── */
+.nk-grid {
   position: relative;
   z-index: 2;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2px 24px 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 2px;
+  gap: 16px;
+  padding: 24px 24px 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.cp-card {
+
+.nk-card {
   position: relative;
-  background: var(--cp-card);
-  border: 1px solid rgba(0,255,65,0.07);
+  background: var(--nk-card);
+  border-radius: 12px;
   overflow: hidden;
+  border: 1px solid rgba(255,31,110,0.15);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-  animation: cpCardIn 0.5s ease both;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, box-shadow 0.3s;
+  animation: nkCardIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
 }
-@keyframes cpCardIn {
-  from { opacity: 0; transform: translateY(24px); }
+@keyframes nkCardIn {
+  from { opacity: 0; transform: translateY(28px) scale(0.95); }
   to   { opacity: 1; transform: none; }
 }
-.cp-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(0,255,65,0.04), transparent 50%);
+
+.nk-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255,31,110,0.55);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.8),
+    0 0 30px rgba(255,31,110,0.2),
+    inset 0 1px 0 rgba(255,77,141,0.15);
+}
+
+/* top glow bar */
+.nk-card-glow {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--nk-crimson), var(--nk-pink), var(--nk-rose), transparent);
   opacity: 0;
   transition: opacity 0.3s;
-  pointer-events: none;
-  z-index: 1;
 }
-.cp-card:hover {
-  border-color: rgba(0,255,65,0.45);
-  transform: scale(1.025);
-  box-shadow: 0 0 0 1px rgba(0,255,65,0.25), 0 20px 50px rgba(0,0,0,0.85), inset 0 0 30px rgba(0,255,65,0.03);
-  z-index: 5;
-}
-.cp-card:hover::before { opacity: 1; }
-.cp-card-corner-tag {
+.nk-card:hover .nk-card-glow { opacity: 1; }
+
+/* corner tag */
+.nk-card-corner {
   position: absolute;
   top: 0; right: 0;
-  background: var(--neon);
-  color: #020402;
+  background: var(--nk-pink);
+  color: #fff;
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
   font-size: 8px;
   letter-spacing: 2px;
   text-transform: uppercase;
   padding: 4px 9px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%);
   z-index: 5;
 }
-.cp-card-num {
+
+.nk-card-num {
   position: absolute;
   top: 10px; left: 12px;
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 9px;
-  color: rgba(0,255,65,0.3);
+  color: rgba(255,31,110,0.35);
   letter-spacing: 2px;
   z-index: 5;
 }
-.cp-img-wrap {
+
+/* image */
+.nk-img-wrap {
   position: relative;
-  height: 170px;
+  height: 165px;
   overflow: hidden;
-  background: #040a04;
+  background: #0a000a;
 }
-.cp-img-wrap img {
+.nk-img-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.5) saturate(0.5) contrast(1.2);
+  filter: brightness(0.55) saturate(0.75) contrast(1.15);
   transition: filter 0.4s, transform 0.5s;
 }
-.cp-card:hover .cp-img-wrap img {
-  filter: brightness(0.75) saturate(0.85) contrast(1.3);
-  transform: scale(1.1);
+.nk-card:hover .nk-img-wrap img {
+  filter: brightness(0.82) saturate(1.0) contrast(1.2);
+  transform: scale(1.08);
 }
-.cp-img-ph {
+.nk-img-ph {
   width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
   font-size: 52px;
-  background: #040a04;
+  background: radial-gradient(ellipse at center, #2a000f, #0a000a);
 }
-.cp-img-overlay {
+
+/* red-tinted overlay on image */
+.nk-img-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, rgba(0,255,65,0.1), transparent 60%),
-    linear-gradient(to top, var(--cp-card) 0%, transparent 55%);
+    linear-gradient(135deg, rgba(196,0,66,0.15), transparent 55%),
+    linear-gradient(to top, var(--nk-card) 0%, transparent 55%);
   pointer-events: none;
 }
-.cp-img-scan {
+
+/* scanning neon line on hover */
+.nk-img-scan {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(0,255,65,0.9), transparent);
-  animation: cpScanDown 2.5s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent, rgba(255,31,110,0.9), transparent);
+  animation: nkScanDown 2s ease-in-out infinite;
   opacity: 0;
   transition: opacity 0.3s;
 }
-.cp-card:hover .cp-img-scan { opacity: 1; }
-@keyframes cpScanDown {
+.nk-card:hover .nk-img-scan { opacity: 1; }
+@keyframes nkScanDown {
   0%   { top: 0%; }
   100% { top: 100%; }
 }
-.cp-card-body {
+
+/* card body */
+.nk-card-body {
   padding: 14px 14px 16px;
   position: relative;
   z-index: 2;
 }
-.cp-card-body::before {
+.nk-card-body::before {
   content: '';
   position: absolute;
   top: 0; left: 14px; right: 14px;
   height: 1px;
-  background: linear-gradient(90deg, var(--neon), transparent);
-  opacity: 0.18;
+  background: linear-gradient(90deg, var(--nk-pink), transparent);
+  opacity: 0.2;
   transition: opacity 0.3s;
 }
-.cp-card:hover .cp-card-body::before { opacity: 0.55; }
-.cp-item-code {
+.nk-card:hover .nk-card-body::before { opacity: 0.6; }
+
+.nk-item-code {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 9px;
   letter-spacing: 3px;
-  color: rgba(0,255,65,0.35);
+  color: rgba(255,31,110,0.4);
   text-transform: uppercase;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
-.cp-item-name {
+
+.nk-item-name {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 22px;
   letter-spacing: 1px;
@@ -814,34 +909,37 @@ nav {
   line-height: 1;
   transition: color 0.3s, text-shadow 0.3s;
 }
-.cp-card:hover .cp-item-name {
-  color: var(--neon);
-  text-shadow: 0 0 20px rgba(0,255,65,0.4);
+.nk-card:hover .nk-item-name {
+  color: var(--nk-rose);
+  text-shadow: 0 0 20px rgba(255,31,110,0.4);
 }
-.cp-item-desc {
+
+.nk-item-desc {
   font-size: 11px;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.22);
   line-height: 1.5;
   margin-bottom: 14px;
 }
-.cp-card-footer { display: flex; align-items: center; justify-content: space-between; }
-.cp-price {
+
+.nk-card-footer { display: flex; align-items: center; justify-content: space-between; }
+
+.nk-price {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 28px;
   color: #fff;
   line-height: 1;
-  letter-spacing: 1px;
 }
-.cp-price small {
+.nk-price small {
   font-family: 'Barlow', sans-serif;
   font-size: 10px;
-  color: rgba(255,255,255,0.22);
+  color: rgba(255,255,255,0.2);
   font-weight: 400;
 }
-.cp-add-btn {
+
+.nk-add-btn {
   background: transparent;
-  border: 1px solid rgba(0,255,65,0.28);
-  color: rgba(0,255,65,0.65);
+  border: 1px solid rgba(255,31,110,0.35);
+  color: rgba(255,31,110,0.7);
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
   font-size: 11px;
@@ -849,43 +947,64 @@ nav {
   text-transform: uppercase;
   padding: 8px 14px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.22s;
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  border-radius: 0;
 }
-.cp-add-btn:hover {
-  background: rgba(0,255,65,0.12);
-  border-color: var(--neon);
-  color: var(--neon);
-  box-shadow: 0 0 20px rgba(0,255,65,0.25);
+.nk-add-btn:hover {
+  background: rgba(255,31,110,0.15);
+  border-color: var(--nk-pink);
+  color: var(--nk-pink);
+  box-shadow: 0 0 20px rgba(255,31,110,0.3);
 }
-.cp-add-btn.added {
-  background: rgba(0,255,65,0.18);
-  border-color: var(--neon);
-  color: var(--neon);
-  box-shadow: 0 0 24px rgba(0,255,65,0.35);
+.nk-add-btn.added {
+  background: rgba(255,31,110,0.2);
+  border-color: var(--nk-pink);
+  color: var(--nk-pink);
+  box-shadow: 0 0 24px rgba(255,31,110,0.4);
 }
-.cp-bottom-bar {
+
+/* bottom bar */
+.nk-bottom-bar {
   position: relative;
   z-index: 2;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 28px auto 0;
   padding: 18px 24px 0;
-  border-top: 1px solid rgba(0,255,65,0.1);
+  border-top: 1px solid rgba(255,31,110,0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.cp-bottom-text {
+.nk-bottom-text {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 10px;
   letter-spacing: 5px;
   text-transform: uppercase;
-  color: rgba(0,255,65,0.18);
+  color: rgba(255,31,110,0.2);
 }
-.cp-bottom-deco { display: flex; gap: 5px; }
-.cp-dot { width: 6px; height: 6px; border: 1px solid rgba(0,255,65,0.3); transform: rotate(45deg); }
-.cp-dot:first-child { background: rgba(0,255,65,0.4); }
+.nk-bottom-deco { display: flex; gap: 6px; }
+.nk-diamond { width: 7px; height: 7px; border: 1px solid rgba(255,31,110,0.35); transform: rotate(45deg); }
+.nk-diamond:first-child { background: rgba(255,31,110,0.45); }
+
+/* sponsor logos row (decorative) */
+.nk-sponsors {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 16px 24px 8px;
+  opacity: 0.25;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: #fff;
+}
+.nk-sponsors span { border: 1px solid rgba(255,255,255,0.3); padding: 3px 8px; border-radius: 3px; }
+
 
 /* ═══════════════════════════════════════════════
    BOO! COOL DRINKS
@@ -1102,9 +1221,6 @@ nav {
 .modal-confirm-btn { flex: 2; background: var(--purple); border: none; color: #fff; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; padding: 12px; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
 .modal-confirm-btn:disabled { background: #1a1a2e; color: #333; cursor: not-allowed; }
 .modal-confirm-btn:not(:disabled):hover { background: var(--purple-light); }
-.packing-options { display: flex; gap: 10px; margin-top: 4px; }
-.pack-btn { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #1a1a2e; background: var(--dark3); color: #555; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-.pack-btn:hover { border-color: var(--purple); color: var(--purple-light); }
 
 .success-box { background: var(--dark2); border: 1px solid var(--border); border-radius: 20px; padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 40px rgba(123,47,255,0.2); }
 .success-anim { font-size: 52px; margin-bottom: 16px; animation: successPop 0.5s cubic-bezier(0.34,1.56,0.64,1); }
@@ -1208,60 +1324,84 @@ nav {
 </div>
 
 <!-- ════════════════════════════════════════
-     CYBERPUNK TOPPINGS SECTION
+     🌹 NIGHTCLUB NEON ROSE — TOPPINGS
      ════════════════════════════════════════ -->
-<div class="cp-section hidden" id="normal-grid-section">
-  <div class="cp-bg-grid"></div>
-  <div class="cp-bg-glow"></div>
-  <div class="cp-scanlines"></div>
+<div class="nk-section hidden" id="normal-grid-section">
+  <div class="nk-scanlines"></div>
+  <div class="nk-particles" id="nk-particles"></div>
 
-  <div class="cp-header">
-    <div>
-      <div class="cp-eyebrow">LEVEL UP YOUR ORDER</div>
-      <div class="cp-big-title">
-        <div class="cp-glitch-wrap" data-text="DARK">DARK</div><br>
-        <span class="outline">ADD</span><span class="filled">-ONS</span>
+  <div class="nk-header">
+    <div class="nk-presenter">✦ Choco Cube ✦ Madurai ✦</div>
+    <span class="nk-presents-txt">presenta</span>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+      <div class="nk-big-title">
+        <span class="nk-title-line1">Noche de</span>
+        <span class="nk-title-neon">Add-Ons</span>
+        <span class="nk-title-sub">Show de Sabores</span>
       </div>
     </div>
-    <div class="cp-kanji-block">
-      <div class="cp-kanji">添<span class="k-accent">加</span>物</div>
+    <div class="nk-header-bottom">
+      <div class="nk-pill"><span class="nk-pill-dot"></span> Now Serving</div>
+      <div class="nk-pill"><span class="nk-pill-dot"></span> 5 Varieties</div>
+      <div class="nk-pill"><span class="nk-pill-dot"></span> From ₹15</div>
     </div>
   </div>
 
-  <div class="cp-subtitle-row">
-    <div class="cp-tag-line">TOPPINGS · UPGRADES · ENHANCEMENTS</div>
-    <div class="cp-stats-row">
-      <div class="cp-stat"><div class="cp-stat-n">5</div><div class="cp-stat-l">Flavours</div></div>
-      <div class="cp-stat"><div class="cp-stat-n">₹15</div><div class="cp-stat-l">From</div></div>
-      <div class="cp-stat"><div class="cp-stat-n">100%</div><div class="cp-stat-l">Fresh</div></div>
+  <div class="nk-stats">
+    <div class="nk-stat">
+      <div class="nk-stat-n">5</div>
+      <div class="nk-stat-l">Toppings</div>
+    </div>
+    <div class="nk-stat-sep"></div>
+    <div class="nk-stat">
+      <div class="nk-stat-n">₹15</div>
+      <div class="nk-stat-l">Starting At</div>
+    </div>
+    <div class="nk-stat-sep"></div>
+    <div class="nk-stat">
+      <div class="nk-stat-n">100%</div>
+      <div class="nk-stat-l">Fresh</div>
+    </div>
+    <div class="nk-stat-sep"></div>
+    <div class="nk-stat">
+      <div class="nk-stat-n">🌹</div>
+      <div class="nk-stat-l">Premium</div>
     </div>
   </div>
 
-  <div class="cp-ticker-wrap">
-    <div class="cp-ticker">
-      <div class="cp-ticker-inner">
-        <span>DARK CHOCOLATE CHIPS</span><span>✦</span>
-        <span>WHITE CHOCOLATE</span><span>✦</span>
-        <span>OREO COOKIES</span><span>✦</span>
-        <span>NUTS</span><span>✦</span>
-        <span>CHOCOLATE FUDGE</span><span>✦</span>
-        <span>DARK CHOCOLATE CHIPS</span><span>✦</span>
-        <span>WHITE CHOCOLATE</span><span>✦</span>
-        <span>OREO COOKIES</span><span>✦</span>
-        <span>NUTS</span><span>✦</span>
-        <span>CHOCOLATE FUDGE</span><span>✦</span>
+  <div class="nk-ticker-wrap">
+    <div class="nk-ticker">
+      <div class="nk-ticker-inner">
+        <span>♦ DARK CHOCOLATE CHIPS</span><span>♦</span>
+        <span>WHITE CHOCOLATE</span><span>♦</span>
+        <span>OREO COOKIES</span><span>♦</span>
+        <span>NUTS</span><span>♦</span>
+        <span>CHOCOLATE FUDGE</span><span>♦</span>
+        <span>DARK CHOCOLATE CHIPS</span><span>♦</span>
+        <span>WHITE CHOCOLATE</span><span>♦</span>
+        <span>OREO COOKIES</span><span>♦</span>
+        <span>NUTS</span><span>♦</span>
+        <span>CHOCOLATE FUDGE</span><span>♦</span>
       </div>
     </div>
   </div>
 
-  <div class="cp-grid" id="grid"></div>
+  <div class="nk-grid" id="grid"></div>
 
-  <div class="cp-bottom-bar">
-    <div class="cp-bottom-text">CHOCO CUBE · MADURAI · TOPPINGS</div>
-    <div class="cp-bottom-deco">
-      <div class="cp-dot"></div>
-      <div class="cp-dot"></div>
-      <div class="cp-dot"></div>
+  <div class="nk-sponsors">
+    <span>DARK CHOCO</span>
+    <span>WHITE CHOC</span>
+    <span>OREO</span>
+    <span>NUTS</span>
+    <span>FUDGE</span>
+  </div>
+
+  <div class="nk-bottom-bar">
+    <div class="nk-bottom-text">CHOCO CUBE · MADURAI · TOPPINGS</div>
+    <div class="nk-bottom-deco">
+      <div class="nk-diamond"></div>
+      <div class="nk-diamond"></div>
+      <div class="nk-diamond"></div>
     </div>
   </div>
 </div>
@@ -1441,12 +1581,12 @@ const categories = [
     { name: "Classic Brownies",        price: 30, image: "classic.png",  desc: "The timeless original — fudgy, rich, perfectly sweet.",badge: null,   tags: ["OG", "Sweet"],        featured: false },
     { name: "Peanut Butter Brownies",  price: 35, image: "Peanut.png",   desc: "Extra creamy brownie with smooth peanut butter swirl.",badge: null,   tags: ["Nutty", "Creamy"],    featured: false },
   ]},
-  { label: "Toppings", icon: "🍫", items: [
-    { name: "Dark Chocolate Chips",  price: 15, image: "Dark.png",  emoji: "🍫", tag: "SHADOW", code: "TPC-001", desc: "Rich cocoa depth from the shadow groves. Pure intense darkness." },
-    { name: "White Chocolate Chips", price: 25, image: "white.png", emoji: "🤍", tag: "LUNAR",  code: "TPC-002", desc: "Pale moonlit sweetness. Creamy, smooth, hypnotic." },
-    { name: "Oreo Cookies",          price: 30, image: "oreo.png",  emoji: "⬛", tag: "VOID",   code: "TPC-003", desc: "Crumbled night relics. Dark cookie crushed to perfection." },
-    { name: "Nuts",                  price: 20, image: "Nuts.png",  emoji: "🌰", tag: "WILD",   code: "TPC-004", desc: "Sun-kissed crunch. Harvested raw from the forest grove." },
-    { name: "Chocolate Fudge",       price: 35, image: "Fudge.png", emoji: "💛", tag: "GOLD",   code: "TPC-005", desc: "Liquid gold drizzle. A gilded finishing spell." },
+  { label: "Toppings", icon: "🌹", items: [
+    { name: "Dark Chocolate Chips",  price: 15, image: "Dark.png",  emoji: "🍫", tag: "OSCURA",  code: "SBR-001", desc: "Rich cocoa depth — intensely dark, bittersweet perfection." },
+    { name: "White Chocolate Chips", price: 25, image: "white.png", emoji: "🤍", tag: "BLANCA",  code: "SBR-002", desc: "Pale moonlit sweetness. Creamy, smooth, irresistibly silky." },
+    { name: "Oreo Cookies",          price: 30, image: "oreo.png",  emoji: "⬛", tag: "NOCHE",   code: "SBR-003", desc: "Crumbled midnight velvet. Dark cookie crushed to seduction." },
+    { name: "Nuts",                  price: 20, image: "Nuts.png",  emoji: "🌰", tag: "SALVAJE", code: "SBR-004", desc: "Wild harvested crunch — sun-kissed and deeply satisfying." },
+    { name: "Chocolate Fudge",       price: 35, image: "Fudge.png", emoji: "💛", tag: "ORO",     code: "SBR-005", desc: "Liquid gold drizzle — a gilded finish to any desire." },
   ]},
   { label: "Cool Drinks", icon: "🥤", isCoolDrink: true, items: [
     { name: "String",    price: 20, image: "String.jpg",    desc: "Refreshing and fizzy cola to complement your brownies.", booAccent: "#ff4500", booGlow: "rgba(255,69,0,0.25)",   booBar: "linear-gradient(90deg,#ff4500,#ff8c00)" },
@@ -1523,37 +1663,54 @@ function spawnBrParticles() {
   }
 }
 
-/* ── Cyberpunk Toppings renderer ── */
+/* ── Nightclub Toppings renderer ── */
 function renderGrid() {
   const cat = categories[activeTab];
   document.getElementById('grid').innerHTML = cat.items.map((item, idx) => {
     const qty = cart[item.name] || 0;
     const imgHtml = item.image
-      ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=cp-img-ph>${item.emoji || '🍫'}</div><div class=cp-img-overlay></div><div class=cp-img-scan></div>'">`
-      : `<div class="cp-img-ph">${item.emoji || '🍫'}</div>`;
+      ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=nk-img-ph>${item.emoji || '🌹'}</div><div class=nk-img-overlay></div><div class=nk-img-scan></div>'">`
+      : `<div class="nk-img-ph">${item.emoji || '🌹'}</div>`;
     return `
-    <div class="cp-card" style="animation-delay:${idx * 0.08}s">
-      <div class="cp-card-corner-tag">${item.tag || 'ADD-ON'}</div>
-      <div class="cp-card-num">${item.code || `TPC-00${idx+1}`}</div>
-      <div class="cp-img-wrap">
+    <div class="nk-card" style="animation-delay:${idx * 0.09}s">
+      <div class="nk-card-glow"></div>
+      <div class="nk-card-corner">${item.tag || 'TOPPING'}</div>
+      <div class="nk-card-num">${item.code || `SBR-00${idx+1}`}</div>
+      <div class="nk-img-wrap">
         ${imgHtml}
-        <div class="cp-img-overlay"></div>
-        <div class="cp-img-scan"></div>
+        <div class="nk-img-overlay"></div>
+        <div class="nk-img-scan"></div>
       </div>
-      <div class="cp-card-body">
-        <div class="cp-item-code">TOPPING // ADD-ON</div>
-        <div class="cp-item-name">${item.name}</div>
-        <div class="cp-item-desc">${item.desc}</div>
-        <div class="cp-card-footer">
-          <div class="cp-price">₹${item.price} <small>/ piece</small></div>
-          <button class="cp-add-btn${qty > 0 ? ' added' : ''}"
+      <div class="nk-card-body">
+        <div class="nk-item-code">TOPPING // ADD-ON</div>
+        <div class="nk-item-name">${item.name}</div>
+        <div class="nk-item-desc">${item.desc}</div>
+        <div class="nk-card-footer">
+          <div class="nk-price">₹${item.price} <small>/ piece</small></div>
+          <button class="nk-add-btn${qty > 0 ? ' added' : ''}"
             onclick="addItem('${item.name.replace(/'/g,"\\'")}', ${item.price}, this)">
-            ${qty > 0 ? '✓ ADDED' : '+ ADD'}
+            ${qty > 0 ? '✓ ADDED' : '♦ ADD'}
           </button>
         </div>
       </div>
     </div>`;
   }).join('');
+  spawnNkParticles();
+}
+
+function spawnNkParticles() {
+  const el = document.getElementById('nk-particles');
+  if (!el) return;
+  el.innerHTML = '';
+  const shapes = ['🌹','♦','✦','❤','♥','✿'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('span');
+    p.className = 'nk-particle';
+    p.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+    const size = 10 + Math.random() * 16;
+    p.style.cssText = `left:${Math.random()*100}%;top:${90+Math.random()*10}%;animation-delay:${Math.random()*10}s;animation-duration:${7+Math.random()*10}s;font-size:${size}px;opacity:0;`;
+    el.appendChild(p);
+  }
 }
 
 /* ── BOO renderer ── */
@@ -1681,7 +1838,7 @@ function addItem(name, price, btn) {
   setTimeout(() => {
     if (isMoji)           btn.textContent = '⚗ Brew';
     else if (isCoolDrink) btn.textContent = '+ ADD';
-    else if (isTopping)   btn.textContent = '+ ADD';
+    else if (isTopping)   btn.textContent = '♦ ADD';
     else                  btn.textContent = '+ Add';
     btn.classList.remove('added');
   }, 1200);
@@ -1757,7 +1914,7 @@ function generateTimeSlots() {
 /* ── Customer modal ── */
 function openCustomerModal() {
   closeCart();
-  const entries = Object.entries(cart).filter(([,q]) => q > 0);
+  const entries = Object.entries(cart).filter(([, q]) => q > 0);
   const { count, total } = calcTotals();
   document.getElementById('modal-order-summary').innerHTML = `<div class="summary-label">Order Summary</div><div class="summary-chips">${entries.map(([n,q]) => `<span class="sum-chip">${n} ×${q}</span>`).join('')}</div><div class="summary-total">Total: <strong>₹${total}</strong> · ${count} item${count > 1 ? 's' : ''}</div>`;
   const sel = document.getElementById('cust-pickup');
